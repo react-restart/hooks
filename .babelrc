@@ -1,0 +1,3 @@
+{
+  "presets": [["jason", { "modules": "commonjs", "runtime": false }]]
+}

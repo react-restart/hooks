@@ -1,0 +1,32 @@
+{
+  "name": "react-common-hooks",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jquense/react-common-hooks.git",
+  "author": "Jason Quense <monastic.panic@gmail.com>",
+  "license": "MIT",
+  "jest": {
+    "setupTestFrameworkScriptFile": "./test/setup.js",
+    "roots": [
+      "<rootDir>/test"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-preset-jason": "^6.0.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "eslint": "^5.7.0",
+    "eslint-config-jason": "^4.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "husky": "^1.1.2",
+    "jest": "^23.6.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3",
+    "react": "^16.7.0-alpha.0",
+    "react-dom": "^16.7.0-alpha.0"
+  }
+}
