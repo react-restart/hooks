@@ -9,7 +9,8 @@
   "scripts": {
     "test": "jest",
     "tdd": "jest --watch",
-    "build": "4c build src"
+    "build": "4c build src",
+    "prepublishOnly": "4c build src"
   },
   "jest": {
     "preset": "@4c",
