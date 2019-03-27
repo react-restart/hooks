@@ -6,7 +6,6 @@ describe('useMergeStateFromProps', () => {
   it('should adjust state when props change', () => {
     const updates = []
     const getDerivedStateFromProps = (nextProps, prevState) => {
-      // console.log('getDerivedStateFromProps', nextProps, prevState)
       if (nextProps.foo === prevState.lastFoo) return null
 
       return { bar: 3, lastFoo: nextProps.foo }
@@ -43,10 +42,9 @@ describe('useMergeStateFromProps', () => {
     expect(updates).toHaveLength(6)
   })
 
-  it.only('should adjust state when props change', () => {
+  it('should adjust state when props change', () => {
     const updates = []
     const getDerivedStateFromProps = (nextProps, prevState, prevProps) => {
-      console.log(nextProps, prevProps)
       if (nextProps.foo === prevState.lastFoo) return null
 
       return { bar: 3, lastFoo: nextProps.foo }
