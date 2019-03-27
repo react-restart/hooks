@@ -1,6 +1,8 @@
 import { useLayoutEffect, useRef } from 'react'
 
-function useCommittedRef<TValue>(value: TValue): React.RefObject<TValue> {
+function useCommittedRef<TValue>(
+  value: TValue
+): React.MutableRefObject<TValue> {
   const ref = useRef(value)
   useLayoutEffect(
     () => {
