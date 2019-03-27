@@ -1,3 +1,14 @@
+## [0.1.6](https://github.com/jquense/react-common-hooks/compare/v0.1.5...v0.1.6) (2019-03-27)
+
+
+### Features
+
+* better globalListener types ([b0ae1ed](https://github.com/jquense/react-common-hooks/commit/b0ae1ed))
+
+
+
+
+
 ## [0.1.5](https://github.com/jquense/react-common-hooks/compare/v0.1.4...v0.1.5) (2019-03-26)
 
 
