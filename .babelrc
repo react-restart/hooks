@@ -1,3 +1,8 @@
 {
-  "presets": ["@4c/4catalyzer", "@babel/preset-typescript"]
+  "presets": [
+    ["@4c", {
+      "targets": {}
+    }],
+    "@babel/typescript"
+  ]
 }
