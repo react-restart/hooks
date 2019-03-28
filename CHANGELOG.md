@@ -1,3 +1,14 @@
+## [0.2.3](https://github.com/jquense/react-common-hooks/compare/v0.2.2...v0.2.3) (2019-03-28)
+
+
+### Features
+
+* allow return null from useMergeState updater function ([c14a4e5](https://github.com/jquense/react-common-hooks/commit/c14a4e5))
+
+
+
+
+
 ## [0.2.2](https://github.com/jquense/react-common-hooks/compare/v0.2.1...v0.2.2) (2019-03-28)
 
 
