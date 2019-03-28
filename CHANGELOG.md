@@ -1,3 +1,27 @@
+# [0.2.0](https://github.com/jquense/react-common-hooks/compare/v0.1.6...v0.2.0) (2019-03-28)
+
+
+### Bug Fixes
+
+* Target ES5 in build ([#1](https://github.com/jquense/react-common-hooks/issues/1)) ([1f49c80](https://github.com/jquense/react-common-hooks/commit/1f49c80))
+
+
+### Features
+
+* add use*Interval overloads ([94dea26](https://github.com/jquense/react-common-hooks/commit/94dea26))
+* add useEventListener ([bc3f520](https://github.com/jquense/react-common-hooks/commit/bc3f520))
+* useEffect over LayoutEffect ([95c3416](https://github.com/jquense/react-common-hooks/commit/95c3416))
+
+
+### BREAKING CHANGES
+
+* changed arg order around on useInterval and useRafInterval
+* useCommittedRef fires latter now on useEffect
+
+
+
+
+
 ## [0.1.6](https://github.com/jquense/react-common-hooks/compare/v0.1.5...v0.1.6) (2019-03-27)
 
 
