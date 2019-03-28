@@ -1,7 +1,6 @@
-# react-common-hooks
+# @restart/hooks [![npm][npm-badge]][npm]
 
-A set of utility and general purpose react hooks
-
+A set of utility and general-purpose React hooks.
 
 ## Install
 
@@ -15,6 +14,7 @@ npm install @restart/hooks
 import useInterval from '@restart/hooks/useInterval'
 
 useInterval(() => loop(), false, 300)
-
 ```
 
+[npm-badge]: https://img.shields.io/npm/v/@restart/hooks.svg
+[npm]: https://www.npmjs.org/package/@restart/hooks
