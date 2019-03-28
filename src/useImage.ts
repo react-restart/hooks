@@ -5,7 +5,7 @@ type State = {
   error: unknown | null
 }
 
-export default function useImage(url: string, crossOrigin: string) {
+export default function useImage(url: string, crossOrigin?: string) {
   const [state, setState] = useState<State>({
     image: null,
     error: null,
