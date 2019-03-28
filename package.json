@@ -3,6 +3,7 @@
   "version": "0.1.6",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "module": "lib/es/index.js",
   "repository": "https://github.com/jquense/react-common-hooks.git",
   "author": "Jason Quense <monastic.panic@gmail.com>",
   "license": "MIT",
