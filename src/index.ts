@@ -8,6 +8,7 @@ import useMergeState from './useMergeState'
 import useMergeStateFromProps from './useMergeStateFromProps'
 import useMounted from './useMounted'
 import usePrevious from './usePrevious'
+import useImage from './useImage'
 
 export {
   useCommittedRef,
@@ -20,4 +21,5 @@ export {
   useMergeStateFromProps,
   useMounted,
   usePrevious,
+  useImage,
 }
