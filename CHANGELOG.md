@@ -1,3 +1,14 @@
+## [0.2.2](https://github.com/jquense/react-common-hooks/compare/v0.2.1...v0.2.2) (2019-03-28)
+
+
+### Bug Fixes
+
+* optional crossOrigin on useImage ([2e08a7d](https://github.com/jquense/react-common-hooks/commit/2e08a7d))
+
+
+
+
+
 ## [0.2.1](https://github.com/jquense/react-common-hooks/compare/v0.2.0...v0.2.1) (2019-03-28)
 
 
