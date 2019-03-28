@@ -1,10 +1,10 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 function useCommittedRef<TValue>(
   value: TValue
 ): React.MutableRefObject<TValue> {
   const ref = useRef(value)
-  useLayoutEffect(
+  useEffect(
     () => {
       ref.current = value
     },
