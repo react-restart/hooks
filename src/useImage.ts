@@ -5,38 +5,49 @@ type State = {
   error: unknown | null
 }
 
-export default function useImage(url: string, crossOrigin?: string) {
+export default function useImage(
+  imageOrUrl: string | HTMLImageElement,
+  crossOrigin?: string
+) {
   const [state, setState] = useState<State>({
     image: null,
     error: null,
   })
 
-  useEffect(
-    () => {
-      if (!url) return undefined
+  useEffect(() => {
+    if (!imageOrUrl) return undefined
 
-      const image = new Image()
-      image.src = url
+    let image: HTMLImageElement
+
+    if (typeof imageOrUrl === 'string') {
+      image = new Image()
+      image.src = imageOrUrl
       if (crossOrigin) image.crossOrigin = crossOrigin
+    } else {
+      image = imageOrUrl
 
-      function onLoad() {
+      if (image.complete && image.naturalHeight > 0) {
         setState({ image, error: null })
+        return
       }
+    }
 
-      function onError(error: ErrorEvent) {
-        setState({ image, error })
-      }
+    function onLoad() {
+      setState({ image, error: null })
+    }
 
-      image.addEventListener('load', onLoad)
-      image.addEventListener('error', onError)
+    function onError(error: ErrorEvent) {
+      setState({ image, error })
+    }
 
-      return () => {
-        image.removeEventListener('load', onLoad)
-        image.removeEventListener('error', onError)
-      }
-    },
-    [url, crossOrigin]
-  )
+    image.addEventListener('load', onLoad)
+    image.addEventListener('error', onError)
+
+    return () => {
+      image.removeEventListener('load', onLoad)
+      image.removeEventListener('error', onError)
+    }
+  }, [imageOrUrl, crossOrigin])
 
   return state
 }
