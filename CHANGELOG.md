@@ -1,3 +1,14 @@
+## [0.2.5](https://github.com/jquense/react-common-hooks/compare/v0.2.3...v0.2.5) (2019-04-10)
+
+
+### Features
+
+* support Images directly in useImage ([f16210b](https://github.com/jquense/react-common-hooks/commit/f16210b))
+
+
+
+
+
 ## [0.2.3](https://github.com/jquense/react-common-hooks/compare/v0.2.2...v0.2.3) (2019-03-28)
 
 
