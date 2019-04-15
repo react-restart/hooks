@@ -1,3 +1,9 @@
+## [0.2.6](https://github.com/jquense/react-common-hooks/compare/v0.2.5...v0.2.6) (2019-04-15)
+
+
+
+
+
 ## [0.2.5](https://github.com/jquense/react-common-hooks/compare/v0.2.3...v0.2.5) (2019-04-10)
 
 
