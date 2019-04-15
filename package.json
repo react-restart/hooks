@@ -10,8 +10,8 @@
   "scripts": {
     "test": "jest",
     "tdd": "jest --watch",
-    "build": "4c build src",
-    "prepublishOnly": "4c build src"
+    "build": "4c build src -- --ignore '**/*.d.ts'",
+    "prepublishOnly": "yarn build"
   },
   "jest": {
     "preset": "@4c",
