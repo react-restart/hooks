@@ -1,3 +1,15 @@
+## [0.2.7](https://github.com/jquense/react-common-hooks/compare/v0.2.6...v0.2.7) (2019-04-16)
+
+
+### Bug Fixes
+
+* **types:** allow null or undefined for useImage ([6806fd4](https://github.com/jquense/react-common-hooks/commit/6806fd4))
+* **useResizeObserver:** allow element to be null or undefined ([d441fa2](https://github.com/jquense/react-common-hooks/commit/d441fa2))
+
+
+
+
+
 ## [0.2.6](https://github.com/jquense/react-common-hooks/compare/v0.2.5...v0.2.6) (2019-04-15)
 
 
