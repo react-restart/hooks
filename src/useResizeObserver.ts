@@ -25,11 +25,13 @@ function getResizeObserver() {
 }
 
 export default function useResizeObserver<TElement extends Element>(
-  element: TElement
+  element: TElement | null | undefined
 ): Rect | null {
   const [rect, setRect] = useState<Rect | null>(null)
 
   useLayoutEffect(() => {
+    if (!element) return
+
     getResizeObserver().observe(element)
 
     setRect(element.getBoundingClientRect())
