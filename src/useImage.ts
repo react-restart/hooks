@@ -6,7 +6,7 @@ type State = {
 }
 
 export default function useImage(
-  imageOrUrl: string | HTMLImageElement,
+  imageOrUrl?: string | HTMLImageElement | null | undefined,
   crossOrigin?: string
 ) {
   const [state, setState] = useState<State>({
