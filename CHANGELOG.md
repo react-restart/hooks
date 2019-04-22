@@ -1,3 +1,14 @@
+## [0.2.8](https://github.com/jquense/react-common-hooks/compare/v0.2.7...v0.2.8) (2019-04-22)
+
+
+### Features
+
+* add useCallbackRef ([722f6f5](https://github.com/jquense/react-common-hooks/commit/722f6f5))
+
+
+
+
+
 ## [0.2.7](https://github.com/jquense/react-common-hooks/compare/v0.2.6...v0.2.7) (2019-04-16)
 
 
