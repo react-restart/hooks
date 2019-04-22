@@ -2,24 +2,24 @@ import React, { useEffect } from 'react'
 import { mount } from 'enzyme'
 import useCommittedRef from '../src/useCommittedRef'
 
-describe('useMergeStateFromProps', () => {
+describe('useCommittedRef', () => {
   it('should use fresh value', () => {
-    function Foo({ fn }: any) {
+    function Foo({ fn }) {
       const fnRef = useCommittedRef(fn)
 
       useEffect(() => {
         fnRef.current()
-      }, [])
+      })
 
       return null
     }
 
-    const spyA = jest.fb()
-    const spyB = jest.fb()
+    const spyA = jest.fn()
+    const spyB = jest.fn()
     const wrapper = mount(<Foo fn={spyA} />)
 
     wrapper.setProps({ fn: spyB })
-    expect(spyA).toHaveBeenCalled(1)
-    expect(spyB).toHaveBeenCalled(1)
+    expect(spyA).toHaveBeenCalledTimes(1)
+    expect(spyB).toHaveBeenCalledTimes(1)
   })
 })

@@ -29,12 +29,12 @@ function getResizeObserver() {
  * and polyfills are needed in older browsers.
  *
  * ```ts
- * const ref = useRef(null);
+ * const [ref, attachRef] = useCallbackRef(null);
  *
  * const rect = useResizeObserver(ref);
  *
  * return (
- *  <div ref={ref}>
+ *  <div ref={attachRef}>
  *    {JSON.stringify(rect)}
  *  </div>
  * )

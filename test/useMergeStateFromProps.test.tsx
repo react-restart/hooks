@@ -4,19 +4,21 @@ import useMergeStateFromProps from '../src/useMergeStateFromProps'
 
 describe('useMergeStateFromProps', () => {
   it('should adjust state when props change', () => {
-    const updates = []
-    const getDerivedStateFromProps = (nextProps, prevState) => {
+    const updates = [] as Array<{ props: any; state: any }>
+
+    const getDerivedStateFromProps = (
+      nextProps: { foo: any },
+      prevState: { lastFoo: any }
+    ) => {
       if (nextProps.foo === prevState.lastFoo) return null
 
       return { bar: 3, lastFoo: nextProps.foo }
     }
 
-    function Foo(props) {
-      const [state, setState] = useMergeStateFromProps(
-        props,
-        getDerivedStateFromProps,
-        { lastFoo: props.foo }
-      )
+    function Foo(props: { foo: any }) {
+      const [state] = useMergeStateFromProps(props, getDerivedStateFromProps, {
+        lastFoo: props.foo,
+      })
 
       updates.push({ props, state })
       return <div>{JSON.stringify(state)}</div>
@@ -43,17 +45,18 @@ describe('useMergeStateFromProps', () => {
   })
 
   it('should adjust state when props change', () => {
+    type Props = { foo: number }
+    type State = { lastFoo: number }
     const updates = []
-    const getDerivedStateFromProps = (nextProps, prevState, prevProps) => {
-      if (nextProps.foo === prevState.lastFoo) return null
 
-      return { bar: 3, lastFoo: nextProps.foo }
-    }
-
-    function Foo(props) {
-      const [state, setState] = useMergeStateFromProps(
+    function Foo(props: { foo: any }) {
+      const [state, setState] = useMergeStateFromProps<Props, State>(
         props,
-        getDerivedStateFromProps,
+        (nextProps, prevState, prevProps: any) => {
+          if (nextProps.foo === prevState.lastFoo) return null
+
+          return { bar: 3, lastFoo: nextProps.foo }
+        },
         { lastFoo: props.foo }
       )
 
