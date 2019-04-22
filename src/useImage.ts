@@ -5,9 +5,15 @@ type State = {
   error: unknown | null
 }
 
+/**
+ * Fetch and load an image for programatic use such as in a `<canvas>` element.
+ *
+ * @param imageOrUrl The `HtmlImageElement` or image url to load
+ * @param crossOrigin The `crossorigin` attribute to set
+ */
 export default function useImage(
   imageOrUrl?: string | HTMLImageElement | null | undefined,
-  crossOrigin?: string
+  crossOrigin?: 'anonymous' | 'use-credentials' | string
 ) {
   const [state, setState] = useState<State>({
     image: null,

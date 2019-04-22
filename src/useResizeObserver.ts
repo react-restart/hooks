@@ -24,6 +24,24 @@ function getResizeObserver() {
     }))
 }
 
+/**
+ * Efficiently observe size changes on an element. Depends on the `ResizeObserver` api,
+ * and polyfills are needed in older browsers.
+ *
+ * ```ts
+ * const ref = useRef(null);
+ *
+ * const rect = useResizeObserver(ref);
+ *
+ * return (
+ *  <div ref={ref}>
+ *    {JSON.stringify(rect)}
+ *  </div>
+ * )
+ * ```
+ *
+ * @param element The DOM element to observe
+ */
 export default function useResizeObserver<TElement extends Element>(
   element: TElement | null | undefined
 ): Rect | null {
