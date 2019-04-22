@@ -1,3 +1,4 @@
+import useCallbackRef from './useCallbackRef'
 import useCommittedRef from './useCommittedRef'
 import useEventCallback from './useEventCallback'
 import useEventListener from './useEventListener'
@@ -12,6 +13,7 @@ import useImage from './useImage'
 import useResizeObserver from './useResizeObserver'
 
 export {
+  useCallbackRef,
   useCommittedRef,
   useEventCallback,
   useEventListener,
