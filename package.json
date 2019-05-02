@@ -1,6 +1,6 @@
 {
   "name": "@restart/hooks",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "module": "lib/es/index.js",

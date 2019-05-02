@@ -1,3 +1,14 @@
+## [0.2.11](https://github.com/jquense/react-common-hooks/compare/v0.2.10...v0.2.11) (2019-05-02)
+
+
+### Bug Fixes
+
+* allow nullable handlers in event callback ([c423cb8](https://github.com/jquense/react-common-hooks/commit/c423cb8))
+
+
+
+
+
 ## [0.2.10](https://github.com/jquense/react-common-hooks/compare/v0.2.9...v0.2.10) (2019-05-02)
 
 
