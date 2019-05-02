@@ -1,3 +1,17 @@
+## [0.2.10](https://github.com/jquense/react-common-hooks/compare/v0.2.9...v0.2.10) (2019-05-02)
+
+
+### Features
+
+* add useFocusManager() ([1cbeb66](https://github.com/jquense/react-common-hooks/commit/1cbeb66))
+* add useTimeout() ([4cb8fa1](https://github.com/jquense/react-common-hooks/commit/4cb8fa1))
+* add useUpdatedRef ([79b3a49](https://github.com/jquense/react-common-hooks/commit/79b3a49))
+* add useWillUnmount() ([ab3e4df](https://github.com/jquense/react-common-hooks/commit/ab3e4df))
+
+
+
+
+
 ## [0.2.9](https://github.com/jquense/react-common-hooks/compare/v0.2.8...v0.2.9) (2019-04-22)
 
 
