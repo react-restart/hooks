@@ -31,9 +31,9 @@
   },
   "devDependencies": {
     "@4c/babel-preset": "^5.1.0",
-    "@4c/cli": "^0.7.9",
+    "@4c/cli": "^0.7.12",
     "@4c/jest-preset": "^1.4.2",
-    "@4c/rollout": "^1.3.3",
+    "@4c/rollout": "^1.3.4",
     "@4c/tsconfig": "^0.1.2",
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.4.0",
