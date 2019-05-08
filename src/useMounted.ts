@@ -6,14 +6,28 @@ import { useRef, useEffect } from 'react'
  * but helpful in cases where that isn't feasible, such as a `Promise` resolution.
  *
  * @returns a function that returns the current isMounted state of the component
+ *
+ * ```ts
+ * const [data, setData] = useState(null)
+ * const isMounted = useMounted()
+ *
+ * useEffect(() => {
+ *   fetchdata().then((newData) => {
+ *      if (isMounted()) {
+ *        setData(newData);
+ *      }
+ *   })
+ * })
+ * ```
  */
-export default function useMounted() {
+export default function useMounted(): () => boolean {
   const mounted = useRef(true)
+  const isMounted = useRef(() => mounted.current)
   useEffect(
     () => () => {
       mounted.current = false
     },
     []
   )
-  return () => mounted.current
+  return isMounted.current
 }
