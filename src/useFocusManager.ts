@@ -8,17 +8,17 @@ export interface FocusManagerOptions {
    * A callback fired when focus shifts. returning `false` will prevent
    * handling the focus event
    */
-  willHandle(focused: boolean, event: React.FocusEvent): boolean | void
+  willHandle?(focused: boolean, event: React.FocusEvent): boolean | void
 
   /**
    * A callback fired after focus is handled but before onChange is called
    */
-  didHandle(focused: boolean, event: React.FocusEvent): void
+  didHandle?(focused: boolean, event: React.FocusEvent): void
 
   /**
    * A callback fired after focus has changed
    */
-  onChange(focused: boolean, event: React.FocusEvent): void
+  onChange?(focused: boolean, event: React.FocusEvent): void
 
   /**
    * When true, the event handlers will not report focus changes
