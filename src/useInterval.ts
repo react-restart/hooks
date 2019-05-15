@@ -15,6 +15,7 @@ function useInterval(fn: () => void, ms: number): void
  * @param ms The milliseconds duration of the interval
  * @param paused Whether or not the interval is currently running
  */
+function useInterval(fn: () => void, ms: number, paused: boolean): void
 function useInterval(
   fn: () => void,
   ms: number,
