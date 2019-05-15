@@ -1,3 +1,14 @@
+## [0.2.13](https://github.com/jquense/react-common-hooks/compare/v0.2.12...v0.2.13) (2019-05-15)
+
+
+### Bug Fixes
+
+* **types:** useInterval overloads ([f592102](https://github.com/jquense/react-common-hooks/commit/f592102))
+
+
+
+
+
 ## [0.2.12](https://github.com/jquense/react-common-hooks/compare/v0.2.11...v0.2.12) (2019-05-08)
 
 
