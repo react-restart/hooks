@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { mount } from 'enzyme'
 
-import useRequestAnimationFrame from '../src/useRequestAnimationFrame'
+import useAnimationFrame from '../src/useAnimationFrame'
 
-describe('useRequestAnimationFrame', () => {
+describe('useAnimationFrame', () => {
   let rafSpy, rafCancelSpy
 
   beforeAll(() => {
@@ -29,17 +29,17 @@ describe('useRequestAnimationFrame', () => {
     jest.useFakeTimers()
 
     let spy = jest.fn()
-    let timeout: ReturnType<typeof useRequestAnimationFrame>
+    let animationFrame: ReturnType<typeof useAnimationFrame>
 
     function Wrapper() {
-      timeout = useRequestAnimationFrame()
+      animationFrame = useAnimationFrame()
 
       return <span />
     }
 
     mount(<Wrapper />)
 
-    timeout!.request(spy)
+    animationFrame!.request(spy)
 
     expect(spy).not.toHaveBeenCalled()
 
@@ -52,19 +52,19 @@ describe('useRequestAnimationFrame', () => {
     jest.useFakeTimers()
 
     let spy = jest.fn()
-    let timeout: ReturnType<typeof useRequestAnimationFrame>
+    let animationFrame: ReturnType<typeof useAnimationFrame>
 
     function Wrapper() {
-      timeout = useRequestAnimationFrame()
+      animationFrame = useAnimationFrame()
 
       return <span />
     }
 
     mount(<Wrapper />)
 
-    timeout!.request(spy)
+    animationFrame!.request(spy)
 
-    timeout!.cancel()
+    animationFrame!.cancel()
 
     jest.runAllTimers()
 
@@ -75,17 +75,17 @@ describe('useRequestAnimationFrame', () => {
     jest.useFakeTimers()
 
     let spy = jest.fn()
-    let timeout: ReturnType<typeof useRequestAnimationFrame>
+    let animationFrame: ReturnType<typeof useAnimationFrame>
 
     function Wrapper() {
-      timeout = useRequestAnimationFrame()
+      animationFrame = useAnimationFrame()
 
       return <span />
     }
 
     const wrapper = mount(<Wrapper />)
 
-    timeout!.request(spy)
+    animationFrame!.request(spy)
 
     wrapper.unmount()
 
