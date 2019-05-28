@@ -1,3 +1,19 @@
+# [0.3.0](https://github.com/jquense/react-common-hooks/compare/v0.2.14...v0.3.0) (2019-05-28)
+
+
+### Features
+
+* better name ([dca4d54](https://github.com/jquense/react-common-hooks/commit/dca4d54))
+
+
+### BREAKING CHANGES
+
+* useRequestAnimationFrame -> useAnimationFrame
+
+
+
+
+
 ## [0.2.14](https://github.com/jquense/react-common-hooks/compare/v0.2.13...v0.2.14) (2019-05-28)
 
 
