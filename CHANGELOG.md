@@ -1,3 +1,14 @@
+## [0.2.14](https://github.com/jquense/react-common-hooks/compare/v0.2.13...v0.2.14) (2019-05-28)
+
+
+### Features
+
+* add useRequestAnimationFrame ([5c8dff1](https://github.com/jquense/react-common-hooks/commit/5c8dff1))
+
+
+
+
+
 ## [0.2.13](https://github.com/jquense/react-common-hooks/compare/v0.2.12...v0.2.13) (2019-05-15)
 
 
