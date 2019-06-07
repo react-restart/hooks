@@ -31,13 +31,14 @@ export default function useMergeState<TState extends {}>(
 
   const updater = (update: Updater<TState> | Partial<TState> | null) => {
     if (update === null) return
-    if (typeof update === 'function')
+    if (typeof update === 'function') {
       setState(state => {
         const nextState = update(state)
         return nextState == null ? state : { ...state, ...nextState }
       })
-
-    setState(state => ({ ...state, ...update }))
+    } else {
+      setState(state => ({ ...state, ...update }))
+    }
   }
 
   return [state, updater]
