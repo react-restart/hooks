@@ -1,3 +1,14 @@
+## [0.3.1](https://github.com/jquense/react-common-hooks/compare/v0.3.0...v0.3.1) (2019-06-07)
+
+
+### Bug Fixes
+
+* **useMergeState:** calling setState twice ([#4](https://github.com/jquense/react-common-hooks/issues/4)) ([ec7d569](https://github.com/jquense/react-common-hooks/commit/ec7d569))
+
+
+
+
+
 # [0.3.0](https://github.com/jquense/react-common-hooks/compare/v0.2.14...v0.3.0) (2019-05-28)
 
 
