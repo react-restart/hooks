@@ -4,5 +4,15 @@
       "targets": {}
     }],
     "@babel/typescript"
-  ]
+  ],
+  "env": {
+    "esm": {
+      "presets": [
+        ["@4c", {
+          "targets": {},
+          "modules": false
+        }]
+      ]
+    }
+  }
 }
