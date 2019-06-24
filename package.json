@@ -11,7 +11,7 @@
     "test": "jest",
     "tdd": "jest --watch",
     "build:pick": "cherry-pick --name=@restart/hooks --cwd=lib --input-dir=../src --cjs-dir=cjs --esm-dir=esm",
-    "build": "4c build src && yarn build:pick",
+    "build": "rimraf lib && 4c build src && yarn build:pick",
     "prepublishOnly": "yarn build"
   },
   "jest": {
@@ -43,7 +43,7 @@
     "@types/jest": "^24.0.13",
     "@types/react": "^16.8.19",
     "babel-jest": "^24.8.0",
-    "cherry-pick": "^0.3.0",
+    "cherry-pick": "^0.4.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",
     "eslint": "^5.16.0",
@@ -53,6 +53,7 @@
     "prettier": "^1.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3",
     "rollout": "^0.1.0",
     "typescript": "^3.4.5"
   }
