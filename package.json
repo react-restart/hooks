@@ -1,16 +1,17 @@
 {
   "name": "@restart/hooks",
   "version": "0.3.1",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "module": "lib/es/index.js",
+  "main": "lib/cjs/index.js",
+  "types": "lib/cjs/index.d.ts",
+  "module": "lib/esm/index.js",
   "repository": "https://github.com/jquense/react-common-hooks.git",
   "author": "Jason Quense <monastic.panic@gmail.com>",
   "license": "MIT",
   "scripts": {
     "test": "jest",
     "tdd": "jest --watch",
-    "build": "4c build src ",
+    "build:pick": "cherry-pick --name=@restart/hooks --cwd=lib --input-dir=../src --cjs-dir=cjs --esm-dir=esm",
+    "build": "rimraf lib && 4c build src && yarn build:pick",
     "prepublishOnly": "yarn build"
   },
   "jest": {
@@ -42,6 +43,7 @@
     "@types/jest": "^24.0.13",
     "@types/react": "^16.8.19",
     "babel-jest": "^24.8.0",
+    "cherry-pick": "^0.4.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",
     "eslint": "^5.16.0",
@@ -51,6 +53,7 @@
     "prettier": "^1.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3",
     "rollout": "^0.1.0",
     "typescript": "^3.4.5"
   }
