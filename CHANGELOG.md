@@ -1,3 +1,15 @@
+## [0.3.2](https://github.com/jquense/react-common-hooks/compare/v0.3.1...v0.3.2) (2019-06-26)
+
+
+### Features
+
+* add esm support ([#5](https://github.com/jquense/react-common-hooks/issues/5)) ([ec456c1](https://github.com/jquense/react-common-hooks/commit/ec456c1))
+* useEventListener allows a function, useGlobalListener works in SSR ([c67b9bc](https://github.com/jquense/react-common-hooks/commit/c67b9bc))
+
+
+
+
+
 ## [0.3.1](https://github.com/jquense/react-common-hooks/compare/v0.3.0...v0.3.1) (2019-06-07)
 
 
