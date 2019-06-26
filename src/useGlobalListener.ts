@@ -1,4 +1,5 @@
 import useEventListener from './useEventListener'
+import { useCallback } from 'react'
 
 type DocumentEventHandler<K extends keyof DocumentEventMap> = (
   this: Document,
@@ -24,5 +25,7 @@ export default function useGlobalListener<K extends keyof DocumentEventMap>(
   handler: DocumentEventHandler<K>,
   capture: boolean = false
 ) {
-  return useEventListener(document, event, handler, capture)
+  const documentTarget = useCallback(() => document, [])
+
+  return useEventListener(documentTarget, event, handler, capture)
 }

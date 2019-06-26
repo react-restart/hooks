@@ -20,7 +20,7 @@ export default function useEventListener<
   T extends Element | Document | Window,
   K extends keyof DocumentEventMap
 >(
-  element: T,
+  eventTarget: T | (() => T),
   event: K,
   listener: EventHandler<T, K>,
   capture: boolean = false
@@ -28,7 +28,10 @@ export default function useEventListener<
   const handler = useEventCallback(listener)
 
   useEffect(() => {
-    element.addEventListener(event, handler, capture)
-    return () => element.removeEventListener(event, handler, capture)
-  }, [])
+    const target =
+      typeof eventTarget === 'function' ? eventTarget() : eventTarget
+
+    target.addEventListener(event, handler, capture)
+    return () => target.removeEventListener(event, handler, capture)
+  }, [eventTarget])
 }
