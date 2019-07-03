@@ -1,3 +1,23 @@
+## [0.3.3](https://github.com/jquense/react-common-hooks/compare/v0.3.2...v0.3.3) (2019-07-03)
+
+
+### Bug Fixes
+
+* **useEventListener:** correct listener options type ([96503dc](https://github.com/jquense/react-common-hooks/commit/96503dc))
+
+
+### Features
+
+* **useAnimationFrame:** add the ability to not clear previous callbacks ([541b82c](https://github.com/jquense/react-common-hooks/commit/541b82c))
+* **useIntersectionObserver:** add an IntersectionObserver hook ([5791b22](https://github.com/jquense/react-common-hooks/commit/5791b22))
+* **useIsomorphicEffect:** add hook to avoid SSR warning with useLayoutEffect ([6e6b5fa](https://github.com/jquense/react-common-hooks/commit/6e6b5fa))
+* **useResizeObserver:** use with isomorphic safe effect ([4a5d976](https://github.com/jquense/react-common-hooks/commit/4a5d976))
+* **useStableMemo:** add useStableMemo for a stable...useMemo ([ff981fb](https://github.com/jquense/react-common-hooks/commit/ff981fb))
+
+
+
+
+
 ## [0.3.2](https://github.com/jquense/react-common-hooks/compare/v0.3.1...v0.3.2) (2019-06-26)
 
 
