@@ -1,4 +1,5 @@
-import { useLayoutEffect, useState } from 'react'
+import { useState } from 'react'
+import useEffect from './useIsomorphicEffect'
 
 export interface Rect {
   width: number
@@ -47,7 +48,7 @@ export default function useResizeObserver<TElement extends Element>(
 ): Rect | null {
   const [rect, setRect] = useState<Rect | null>(null)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!element) return
 
     getResizeObserver().observe(element)
