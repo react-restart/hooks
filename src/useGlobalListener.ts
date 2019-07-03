@@ -23,7 +23,7 @@ type DocumentEventHandler<K extends keyof DocumentEventMap> = (
 export default function useGlobalListener<K extends keyof DocumentEventMap>(
   event: K,
   handler: DocumentEventHandler<K>,
-  capture: boolean = false
+  capture: boolean | AddEventListenerOptions = false
 ) {
   const documentTarget = useCallback(() => document, [])
 

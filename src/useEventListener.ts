@@ -23,7 +23,7 @@ export default function useEventListener<
   eventTarget: T | (() => T),
   event: K,
   listener: EventHandler<T, K>,
-  capture: boolean = false
+  capture: boolean | AddEventListenerOptions = false
 ) {
   const handler = useEventCallback(listener)
 
