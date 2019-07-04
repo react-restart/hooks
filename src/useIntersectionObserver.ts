@@ -17,13 +17,15 @@ export default function useIntersectionObserver<TElement extends Element>(
   const [entries, setEntry] = useState<IntersectionObserverEntry[] | null>(null)
 
   const observer = useStableMemo(
-    () => new IntersectionObserver(setEntry, { threshold, root, rootMargin }),
+    () =>
+      typeof IntersectionObserver !== 'undefined' &&
+      new IntersectionObserver(setEntry, { threshold, root, rootMargin }),
 
     [root, rootMargin, threshold && JSON.stringify(threshold)]
   )
 
   useEffect(() => {
-    if (!element) return
+    if (!element || !observer) return
 
     observer.observe(element)
     return () => {
