@@ -1,3 +1,19 @@
+## [0.3.5](https://github.com/jquense/react-common-hooks/compare/v0.3.4...v0.3.5) (2019-07-06)
+
+
+### Bug Fixes
+
+* **useIntersectionObserver:** return an array consistently ([ad3bb35](https://github.com/jquense/react-common-hooks/commit/ad3bb35))
+
+
+### Features
+
+* add useMediaQuery and useBreakpoint ([0d165ec](https://github.com/jquense/react-common-hooks/commit/0d165ec))
+
+
+
+
+
 ## [0.3.4](https://github.com/jquense/react-common-hooks/compare/v0.3.3...v0.3.4) (2019-07-04)
 
 
