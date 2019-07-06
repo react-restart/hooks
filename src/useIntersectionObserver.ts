@@ -28,10 +28,11 @@ export default function useIntersectionObserver<TElement extends Element>(
     if (!element || !observer) return
 
     observer.observe(element)
+
     return () => {
       observer.unobserve(element)
     }
   }, [observer, element])
 
-  return entries
+  return entries || []
 }
