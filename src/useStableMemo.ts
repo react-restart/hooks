@@ -17,7 +17,10 @@ type DepsCache<T> = {
   result: T
 }
 
-export function useStableMemo<T>(factory: () => T, deps?: DependencyList): T {
+export default function useStableMemo<T>(
+  factory: () => T,
+  deps?: DependencyList
+): T {
   let isValid: boolean = true
 
   const valueRef = useRef<DepsCache<T>>()

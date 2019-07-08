@@ -8,6 +8,7 @@ const isReactNative =
   global.navigator.product === 'ReactNative'
 
 const isDOM = typeof document !== 'undefined'
+
 /**
  * Is `useLayoutEffect` in a DOM or React Native environment, otherwise resolves to useEffect
  * Only useful to avoid the console warning.

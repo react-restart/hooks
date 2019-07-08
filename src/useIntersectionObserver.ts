@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useStableMemo } from './useStableMemo'
+import useStableMemo from './useStableMemo'
 import useEffect from './useIsomorphicEffect'
 
 /**
