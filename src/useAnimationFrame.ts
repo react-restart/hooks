@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import useWillUnmount from './useWillUnmount'
 import useMounted from './useMounted'
+import useStableMemo from './useStableMemo'
 
 export interface UseAnimationFrameReturn {
   cancel(): void
@@ -54,19 +55,22 @@ export default function useAnimationFrame(): UseAnimationFrameReturn {
 
   useWillUnmount(cancel)
 
-  return {
-    request(
-      cancelPrevious: boolean | FrameRequestCallback,
-      fn?: FrameRequestCallback
-    ) {
-      if (!isMounted()) return
+  return useStableMemo(
+    () => ({
+      request(
+        cancelPrevious: boolean | FrameRequestCallback,
+        fn?: FrameRequestCallback
+      ) {
+        if (!isMounted()) return
 
-      if (cancelPrevious) cancel()
+        if (cancelPrevious) cancel()
 
-      handle.current = requestAnimationFrame(
-        fn || (cancelPrevious as FrameRequestCallback)
-      )
-    },
-    cancel,
-  }
+        handle.current = requestAnimationFrame(
+          fn || (cancelPrevious as FrameRequestCallback)
+        )
+      },
+      cancel,
+    }),
+    []
+  )
 }
