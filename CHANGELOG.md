@@ -1,3 +1,15 @@
+## [0.3.6](https://github.com/jquense/react-common-hooks/compare/v0.3.5...v0.3.6) (2019-07-08)
+
+
+### Bug Fixes
+
+* wrong useStableMemo export ([16bda32](https://github.com/jquense/react-common-hooks/commit/16bda32))
+* **useAnimationFrame:** stable return value ([5cca2d4](https://github.com/jquense/react-common-hooks/commit/5cca2d4))
+
+
+
+
+
 ## [0.3.5](https://github.com/jquense/react-common-hooks/compare/v0.3.4...v0.3.5) (2019-07-06)
 
 
