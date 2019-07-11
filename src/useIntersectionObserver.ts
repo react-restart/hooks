@@ -19,7 +19,11 @@ export default function useIntersectionObserver<TElement extends Element>(
   const observer = useStableMemo(
     () =>
       typeof IntersectionObserver !== 'undefined' &&
-      new IntersectionObserver(setEntry, { threshold, root, rootMargin }),
+      new IntersectionObserver(entries => setEntry(entries), {
+        threshold,
+        root,
+        rootMargin,
+      }),
 
     [root, rootMargin, threshold && JSON.stringify(threshold)]
   )
