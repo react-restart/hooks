@@ -1,3 +1,14 @@
+## [0.3.7](https://github.com/jquense/react-common-hooks/compare/v0.3.6...v0.3.7) (2019-07-11)
+
+
+### Bug Fixes
+
+* **useIntersectionObserver:** fix internal set state call triggering warnings ([7bc1d0c](https://github.com/jquense/react-common-hooks/commit/7bc1d0c))
+
+
+
+
+
 ## [0.3.6](https://github.com/jquense/react-common-hooks/compare/v0.3.5...v0.3.6) (2019-07-08)
 
 
