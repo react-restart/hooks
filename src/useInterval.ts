@@ -38,7 +38,7 @@ function useInterval(
   }
 
   useEffect(() => {
-    tick()
+    schedule()
     return () => clearTimeout(handle)
   }, [paused])
 }
