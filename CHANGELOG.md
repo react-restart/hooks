@@ -1,3 +1,14 @@
+## [0.3.8](https://github.com/jquense/react-common-hooks/compare/v0.3.7...v0.3.8) (2019-07-18)
+
+
+### Bug Fixes
+
+* **useInterval:** don't call callback in useEffect ([#7](https://github.com/jquense/react-common-hooks/issues/7)) ([264fbeb](https://github.com/jquense/react-common-hooks/commit/264fbeb))
+
+
+
+
+
 ## [0.3.7](https://github.com/jquense/react-common-hooks/compare/v0.3.6...v0.3.7) (2019-07-11)
 
 
