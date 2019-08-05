@@ -1,3 +1,14 @@
+## [0.3.9](https://github.com/jquense/react-common-hooks/compare/v0.3.8...v0.3.9) (2019-08-05)
+
+
+### Features
+
+* add useForceUpdate() ([ba91b5f](https://github.com/jquense/react-common-hooks/commit/ba91b5f))
+
+
+
+
+
 ## [0.3.8](https://github.com/jquense/react-common-hooks/compare/v0.3.7...v0.3.8) (2019-07-18)
 
 
