@@ -1,4 +1,4 @@
-import { useCallback, useState, useReducer } from 'react'
+import { useReducer } from 'react'
 
 /**
  * Returns a function that triggers a component update. the hook equivalent to
