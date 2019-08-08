@@ -1,43 +1,31 @@
 import useForceUpdate from './useForceUpdate'
-import { useRef } from 'react'
-import useWillUnmount from './useWillUnmount'
+import useStableMemo from './useStableMemo'
 
 export class ObservableSet<V> extends Set<V> {
-  private readonly listeners = new Set<Function>()
-
-  observe(listener: (map: this) => void): () => void {
-    this.listeners.add(listener)
-    return () => {
-      this.listeners.delete(listener)
-    }
-  }
-
-  unobserve() {
-    this.listeners.clear()
-  }
-
-  private emit() {
-    // the ctor init will call set() so the listener Set isn't set up yet
-    if (!this.listeners) return
-
-    this.listeners.forEach(fn => fn(this))
+  constructor(
+    private readonly listener: (map: ObservableSet<V>) => void,
+    init?: Iterable<V>
+  ) {
+    super(init)
   }
 
   add(value: V): this {
     super.add(value)
-    this.emit()
+    // When initializing the Set, the base Set calls this.add() before the
+    // listener is assigned so it will be undefined
+    if (this.listener) this.listener(this)
     return this
   }
 
   delete(value: V): boolean {
     const result = super.delete(value)
-    this.emit()
+    this.listener(this)
     return result
   }
 
   clear(): void {
     super.clear()
-    this.emit()
+    this.listener(this)
   }
 }
 
@@ -62,18 +50,7 @@ export class ObservableSet<V> extends Set<V> {
  */
 function useSet<V>(init?: Iterable<V>) {
   const forceUpdate = useForceUpdate()
-  const set = useRef<ObservableSet<V>>()
-  if (!set.current) {
-    set.current = new ObservableSet<V>(init)
-    set.current.observe(forceUpdate)
-  }
-  useWillUnmount(() => {
-    if (set.current) {
-      set.current.unobserve()
-    }
-  })
-
-  return set.current
+  return useStableMemo(() => new ObservableSet<V>(forceUpdate, init), [])
 }
 
 export default useSet

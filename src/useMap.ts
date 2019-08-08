@@ -1,43 +1,31 @@
 import useForceUpdate from './useForceUpdate'
-import { useRef } from 'react'
-import useWillUnmount from './useWillUnmount'
+import useStableMemo from './useStableMemo'
 
 export class ObservableMap<K, V> extends Map<K, V> {
-  private readonly listeners = new Set<Function>()
-
-  observe(listener: (map: this) => void): () => void {
-    this.listeners.add(listener)
-    return () => {
-      this.listeners.delete(listener)
-    }
-  }
-
-  unobserve() {
-    this.listeners.clear()
-  }
-
-  private emit() {
-    // the ctor init will call set() so the listener Set isn't set up yet
-    if (!this.listeners) return
-
-    this.listeners.forEach(fn => fn(this))
+  constructor(
+    private readonly listener: (map: ObservableMap<K, V>) => void,
+    init?: Iterable<readonly [K, V]>
+  ) {
+    super(init as any)
   }
 
   set(key: K, value: V): this {
     super.set(key, value)
-    this.emit()
+    // When initializing the Map, the base Map calls this.set() before the
+    // listener is assigned so it will be undefined
+    if (this.listener) this.listener(this)
     return this
   }
 
   delete(key: K): boolean {
     let result = super.delete(key)
-    this.emit()
+    this.listener(this)
     return result
   }
 
   clear(): void {
     super.clear()
-    this.emit()
+    this.listener(this)
   }
 }
 
@@ -65,19 +53,8 @@ export class ObservableMap<K, V> extends Map<K, V> {
  */
 function useMap<K, V>(init?: Iterable<readonly [K, V]>) {
   const forceUpdate = useForceUpdate()
-  const set = useRef<ObservableMap<K, V>>()
-  if (!set.current) {
-    set.current = new ObservableMap<K, V>(init as any)
-    set.current.observe(forceUpdate)
-  }
 
-  useWillUnmount(() => {
-    if (set.current) {
-      set.current.unobserve()
-    }
-  })
-
-  return set.current
+  return useStableMemo(() => new ObservableMap<K, V>(forceUpdate, init), [])
 }
 
 export default useMap

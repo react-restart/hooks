@@ -8,7 +8,7 @@ import useMap, { ObservableMap } from '../src/useMap'
 describe('useMap', () => {
   describe('ObservableMap', () => {
     it('should implement a Map', () => {
-      const map = new ObservableMap([['baz', false]])
+      const map = new ObservableMap(() => {}, [['baz', false]])
 
       expect(map.size).toEqual(1)
 
@@ -42,10 +42,8 @@ describe('useMap', () => {
     })
 
     it('should be observable', () => {
-      const map = new ObservableMap()
       const spy = jest.fn()
-
-      map.observe(spy)
+      const map = new ObservableMap(spy)
 
       map.set('foo', true)
       expect(spy).toHaveBeenCalledTimes(1)
@@ -58,37 +56,6 @@ describe('useMap', () => {
 
       map.clear()
       expect(spy).toHaveBeenCalledTimes(4)
-    })
-
-    it('should return an unobserve fn', () => {
-      const map = new ObservableMap()
-      const spy = jest.fn()
-
-      const fn = map.observe(spy)
-
-      fn()
-
-      map.set({}, true)
-      expect(spy).not.toBeCalled()
-    })
-
-    it('should clear all listeners', () => {
-      const map = new ObservableMap()
-      const spy = jest.fn()
-      const spyB = jest.fn()
-
-      map.observe(spy)
-      map.observe(spyB)
-
-      map.set({}, true)
-      expect(spy).toHaveBeenCalledTimes(1)
-      expect(spyB).toHaveBeenCalledTimes(1)
-
-      map.unobserve()
-      map.set('baz', 3)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-      expect(spyB).toHaveBeenCalledTimes(1)
     })
   })
 

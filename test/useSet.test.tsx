@@ -8,7 +8,7 @@ import useSet, { ObservableSet } from '../src/useSet'
 describe('useSet', () => {
   describe('ObservableSet', () => {
     it('should implement a Set', () => {
-      const set = new ObservableSet(['baz'])
+      const set = new ObservableSet(() => {}, ['baz'])
 
       expect(set.size).toEqual(1)
 
@@ -41,10 +41,8 @@ describe('useSet', () => {
     })
 
     it('should be observable', () => {
-      const set = new ObservableSet()
       const spy = jest.fn()
-
-      set.observe(spy)
+      const set = new ObservableSet(spy)
 
       set.add('foo')
       expect(spy).toHaveBeenCalledTimes(1)
@@ -57,37 +55,6 @@ describe('useSet', () => {
 
       set.clear()
       expect(spy).toHaveBeenCalledTimes(4)
-    })
-
-    it('should return an unobserve fn', () => {
-      const set = new ObservableSet()
-      const spy = jest.fn()
-
-      const fn = set.observe(spy)
-
-      fn()
-
-      set.add({})
-      expect(spy).not.toBeCalled()
-    })
-
-    it('should clear all listeners', () => {
-      const set = new ObservableSet()
-      const spy = jest.fn()
-      const spyB = jest.fn()
-
-      set.observe(spy)
-      set.observe(spyB)
-
-      set.add({})
-      expect(spy).toHaveBeenCalledTimes(1)
-      expect(spyB).toHaveBeenCalledTimes(1)
-
-      set.unobserve()
-      set.add('baz')
-
-      expect(spy).toHaveBeenCalledTimes(1)
-      expect(spyB).toHaveBeenCalledTimes(1)
     })
   })
 
