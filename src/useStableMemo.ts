@@ -1,5 +1,4 @@
-import { useCommittedRef } from '.'
-import { DependencyList, useMemo, useState, useRef, useEffect } from 'react'
+import { DependencyList, useRef, useEffect } from 'react'
 
 function isEqual(a: DependencyList, b: DependencyList) {
   if (a.length !== b.length) return false
