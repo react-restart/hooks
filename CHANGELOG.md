@@ -1,3 +1,14 @@
+## [0.3.11](https://github.com/jquense/react-common-hooks/compare/v0.3.10...v0.3.11) (2019-08-09)
+
+
+### Features
+
+* add useMergedRef ([#9](https://github.com/jquense/react-common-hooks/issues/9)) ([83bd6e1](https://github.com/jquense/react-common-hooks/commit/83bd6e1))
+
+
+
+
+
 ## [0.3.10](https://github.com/jquense/react-common-hooks/compare/v0.3.9...v0.3.10) (2019-08-09)
 
 
