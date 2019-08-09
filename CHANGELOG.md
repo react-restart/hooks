@@ -1,3 +1,14 @@
+## [0.3.10](https://github.com/jquense/react-common-hooks/compare/v0.3.9...v0.3.10) (2019-08-09)
+
+
+### Features
+
+* add useMap and useSet ([#8](https://github.com/jquense/react-common-hooks/issues/8)) ([c21429c](https://github.com/jquense/react-common-hooks/commit/c21429c))
+
+
+
+
+
 ## [0.3.9](https://github.com/jquense/react-common-hooks/compare/v0.3.8...v0.3.9) (2019-08-05)
 
 
