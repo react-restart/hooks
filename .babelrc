@@ -1,17 +1,14 @@
 {
-  "presets": [
-    ["@4c", {
-      "targets": {}
-    }],
-    "@babel/typescript"
-  ],
+  "presets": [["@4c"], "@babel/typescript"],
   "env": {
     "esm": {
       "presets": [
-        ["@4c", {
-          "targets": {},
-          "modules": false
-        }]
+        [
+          "@4c",
+          {
+            "modules": false
+          }
+        ]
       ]
     }
   }

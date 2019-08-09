@@ -6,7 +6,7 @@ export class ObservableSet<V> extends Set<V> {
     private readonly listener: (map: ObservableSet<V>) => void,
     init?: Iterable<V>
   ) {
-    super(init)
+    super(init as any)
   }
 
   add(value: V): this {

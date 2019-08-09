@@ -4,7 +4,7 @@ import useStableMemo from './useStableMemo'
 export class ObservableMap<K, V> extends Map<K, V> {
   constructor(
     private readonly listener: (map: ObservableMap<K, V>) => void,
-    init?: Iterable<readonly [K, V]>
+    init?: Iterable<Readonly<[K, V]>>
   ) {
     super(init as any)
   }
@@ -51,7 +51,7 @@ export class ObservableMap<K, V> extends Map<K, V> {
  *
  * @param init initial Map entries
  */
-function useMap<K, V>(init?: Iterable<readonly [K, V]>) {
+function useMap<K, V>(init?: Iterable<Readonly<[K, V]>>) {
   const forceUpdate = useForceUpdate()
 
   return useStableMemo(() => new ObservableMap<K, V>(forceUpdate, init), [])
