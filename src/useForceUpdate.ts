@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useReducer } from 'react'
 
 /**
  * Returns a function that triggers a component update. the hook equivalent to
@@ -17,8 +17,8 @@ import { useCallback, useState } from 'react'
  * ```
  */
 export default function useForceUpdate() {
-  const [, setState] = useState<boolean>(false)
   // The toggling state value is designed to defeat React optimizations for skipping
   // updates when they are stricting equal to the last state value
-  return useCallback(() => setState(value => !value), [])
+  const [, dispatch] = useReducer((state: boolean) => !state, false)
+  return dispatch as () => void
 }
