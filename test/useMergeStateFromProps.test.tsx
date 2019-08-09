@@ -8,7 +8,7 @@ describe('useMergeStateFromProps', () => {
 
     const getDerivedStateFromProps = (
       nextProps: { foo: any },
-      prevState: { lastFoo: any }
+      prevState: { lastFoo: any },
     ) => {
       if (nextProps.foo === prevState.lastFoo) return null
 
@@ -57,7 +57,7 @@ describe('useMergeStateFromProps', () => {
 
           return { bar: 3, lastFoo: nextProps.foo }
         },
-        { lastFoo: props.foo }
+        { lastFoo: props.foo },
       )
 
       updates.push({ props, state })

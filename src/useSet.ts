@@ -4,7 +4,7 @@ import useStableMemo from './useStableMemo'
 export class ObservableSet<V> extends Set<V> {
   constructor(
     private readonly listener: (map: ObservableSet<V>) => void,
-    init?: Iterable<V>
+    init?: Iterable<V>,
   ) {
     super(init as any)
   }

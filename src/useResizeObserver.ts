@@ -44,7 +44,7 @@ function getResizeObserver() {
  * @param element The DOM element to observe
  */
 export default function useResizeObserver<TElement extends Element>(
-  element: TElement | null | undefined
+  element: TElement | null | undefined,
 ): Rect | null {
   const [rect, setRect] = useState<Rect | null>(null)
 

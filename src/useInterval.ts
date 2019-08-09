@@ -19,7 +19,7 @@ function useInterval(fn: () => void, ms: number, paused: boolean): void
 function useInterval(
   fn: () => void,
   ms: number,
-  paused: boolean = false
+  paused: boolean = false,
 ): void {
   let handle: number
   const fnRef = useCommittedRef(fn)

@@ -27,7 +27,7 @@ export default function useMounted(): () => boolean {
     () => () => {
       mounted.current = false
     },
-    []
+    [],
   )
   return isMounted.current
 }

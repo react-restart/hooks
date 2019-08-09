@@ -9,6 +9,6 @@ export default function useEventCallback<
     function(...args: any[]) {
       return ref.current && ref.current(...args)
     },
-    [ref]
+    [ref],
   ) as any
 }

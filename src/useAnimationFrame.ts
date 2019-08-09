@@ -59,18 +59,18 @@ export default function useAnimationFrame(): UseAnimationFrameReturn {
     () => ({
       request(
         cancelPrevious: boolean | FrameRequestCallback,
-        fn?: FrameRequestCallback
+        fn?: FrameRequestCallback,
       ) {
         if (!isMounted()) return
 
         if (cancelPrevious) cancel()
 
         handle.current = requestAnimationFrame(
-          fn || (cancelPrevious as FrameRequestCallback)
+          fn || (cancelPrevious as FrameRequestCallback),
         )
       },
       cancel,
     }),
-    []
+    [],
   )
 }

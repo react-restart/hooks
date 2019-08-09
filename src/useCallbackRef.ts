@@ -24,7 +24,7 @@ import { useState } from 'react'
  */
 export default function useCallbackRef<TValue = unknown>(): [
   TValue | null,
-  (ref: TValue | null) => void
+  (ref: TValue | null) => void,
 ] {
   return useState<TValue | null>(null)
 }

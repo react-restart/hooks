@@ -12,7 +12,7 @@ import useEffect from './useIsomorphicEffect'
  */
 export default function useIntersectionObserver<TElement extends Element>(
   element: TElement | null | undefined,
-  { threshold, root, rootMargin }: IntersectionObserverInit = {}
+  { threshold, root, rootMargin }: IntersectionObserverInit = {},
 ) {
   const [entries, setEntry] = useState<IntersectionObserverEntry[] | null>(null)
 
@@ -25,7 +25,7 @@ export default function useIntersectionObserver<TElement extends Element>(
         rootMargin,
       }),
 
-    [root, rootMargin, threshold && JSON.stringify(threshold)]
+    [root, rootMargin, threshold && JSON.stringify(threshold)],
   )
 
   useEffect(() => {

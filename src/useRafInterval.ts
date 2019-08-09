@@ -6,7 +6,7 @@ function useRafInterval(fn: () => void, ms: number): void
 function useRafInterval(
   fn: () => void,
   ms: number,
-  paused: boolean = false
+  paused: boolean = false,
 ): void {
   let handle: number
   let start = new Date().getTime()

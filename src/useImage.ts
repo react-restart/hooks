@@ -32,7 +32,7 @@ type State = {
  */
 export default function useImage(
   imageOrUrl?: string | HTMLImageElement | null | undefined,
-  crossOrigin?: 'anonymous' | 'use-credentials' | string
+  crossOrigin?: 'anonymous' | 'use-credentials' | string,
 ) {
   const [state, setState] = useState<State>({
     image: null,

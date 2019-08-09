@@ -26,7 +26,7 @@ type DepsCache<T> = {
  */
 export default function useStableMemo<T>(
   factory: () => T,
-  deps?: DependencyList
+  deps?: DependencyList,
 ): T {
   let isValid: boolean = true
 

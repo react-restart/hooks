@@ -25,7 +25,7 @@ describe('useCallbackRef', () => {
 
     expect(wrapper.children().type()).toEqual('span')
     expect(effectSpy).toHaveBeenLastCalledWith(
-      expect.objectContaining({ tagName: 'SPAN' })
+      expect.objectContaining({ tagName: 'SPAN' }),
     )
 
     act(() => {
@@ -34,7 +34,7 @@ describe('useCallbackRef', () => {
 
     expect(wrapper.children().type()).toEqual('div')
     expect(effectSpy).toHaveBeenLastCalledWith(
-      expect.objectContaining({ tagName: 'DIV' })
+      expect.objectContaining({ tagName: 'DIV' }),
     )
   })
 })

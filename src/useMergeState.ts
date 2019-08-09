@@ -6,7 +6,7 @@ type Updater<TState> = (state: TState) => Partial<TState> | null
  * Updates state, partial updates are merged into existing state values
  */
 export type MergeStateSetter<TState> = (
-  update: Updater<TState> | Partial<TState> | null
+  update: Updater<TState> | Partial<TState> | null,
 ) => void
 
 /**
@@ -25,7 +25,7 @@ export type MergeStateSetter<TState> = (
  * @param initialState The initial state object
  */
 export default function useMergeState<TState extends {}>(
-  initialState: TState
+  initialState: TState,
 ): [TState, MergeStateSetter<TState>] {
   const [state, setState] = useState<TState>(initialState)
 

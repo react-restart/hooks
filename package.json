@@ -20,6 +20,11 @@
       "./test/setup.js"
     ]
   },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "all"
+  },
   "publishConfig": {
     "access": "public"
   },

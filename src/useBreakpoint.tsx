@@ -35,7 +35,7 @@ type BreakpointMap<TKey extends string> = Partial<
  * @param breakpointValues A object hash of names to breakpoint dimensions
  */
 export function createBreakpointHook<TKey extends string>(
-  breakpointValues: Record<TKey, string | number>
+  breakpointValues: Record<TKey, string | number>,
 ) {
   const names = Object.keys(breakpointValues) as TKey[]
 
@@ -98,11 +98,11 @@ export function createBreakpointHook<TKey extends string>(
    */
   function useBreakpoint(
     breakpoint: TKey,
-    direction?: BreakpointDirection
+    direction?: BreakpointDirection,
   ): boolean
   function useBreakpoint(
     breakpointOrMap: TKey | BreakpointMap<TKey>,
-    direction: BreakpointDirection = true
+    direction: BreakpointDirection = true,
   ): boolean {
     let breakpointMap: BreakpointMap<TKey>
 
@@ -128,9 +128,9 @@ export function createBreakpointHook<TKey extends string>(
 
             return query
           },
-          ''
+          '',
         ),
-      [JSON.stringify(breakpointMap)]
+      [JSON.stringify(breakpointMap)],
     )
 
     return useMediaQuery(query)

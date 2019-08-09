@@ -4,7 +4,7 @@ import useEventCallback from './useEventCallback'
 
 type EventHandler<T, K extends keyof DocumentEventMap> = (
   this: T,
-  ev: DocumentEventMap[K]
+  ev: DocumentEventMap[K],
 ) => any
 
 /**
@@ -23,7 +23,7 @@ export default function useEventListener<
   eventTarget: T | (() => T),
   event: K,
   listener: EventHandler<T, K>,
-  capture: boolean | AddEventListenerOptions = false
+  capture: boolean | AddEventListenerOptions = false,
 ) {
   const handler = useEventCallback(listener)
 

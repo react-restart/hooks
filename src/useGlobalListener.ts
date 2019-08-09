@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 
 type DocumentEventHandler<K extends keyof DocumentEventMap> = (
   this: Document,
-  ev: DocumentEventMap[K]
+  ev: DocumentEventMap[K],
 ) => any
 
 /**
@@ -23,7 +23,7 @@ type DocumentEventHandler<K extends keyof DocumentEventMap> = (
 export default function useGlobalListener<K extends keyof DocumentEventMap>(
   event: K,
   handler: DocumentEventHandler<K>,
-  capture: boolean | AddEventListenerOptions = false
+  capture: boolean | AddEventListenerOptions = false,
 ) {
   const documentTarget = useCallback(() => document, [])
 

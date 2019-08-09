@@ -82,21 +82,21 @@ export default function useFocusManager(opts: FocusManagerOptions) {
         }
       })
     },
-    [isMounted, willHandle, didHandle, onChange, lastFocused]
+    [isMounted, willHandle, didHandle, onChange, lastFocused],
   )
 
   const handleBlur = useCallback(
     event => {
       if (!isDisabled()) handleFocusChange(false, event)
     },
-    [handleFocusChange, isDisabled]
+    [handleFocusChange, isDisabled],
   )
 
   const handleFocus = useCallback(
     event => {
       if (!isDisabled()) handleFocusChange(true, event)
     },
-    [handleFocusChange, isDisabled]
+    [handleFocusChange, isDisabled],
   )
 
   return { onBlur: handleBlur, onFocus: handleFocus }

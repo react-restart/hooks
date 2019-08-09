@@ -4,7 +4,7 @@ import useStableMemo from './useStableMemo'
 export class ObservableMap<K, V> extends Map<K, V> {
   constructor(
     private readonly listener: (map: ObservableMap<K, V>) => void,
-    init?: Iterable<Readonly<[K, V]>>
+    init?: Iterable<Readonly<[K, V]>>,
   ) {
     super(init as any)
   }

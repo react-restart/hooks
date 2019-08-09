@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react'
  * @param value The `Ref` value
  */
 function useCommittedRef<TValue>(
-  value: TValue
+  value: TValue,
 ): React.MutableRefObject<TValue> {
   const ref = useRef(value)
   useEffect(() => {

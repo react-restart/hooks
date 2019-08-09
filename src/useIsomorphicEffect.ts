@@ -15,4 +15,4 @@ const isDOM = typeof document !== 'undefined'
  *
  * PREFER `useEffect` UNLESS YOU KNOW WHAT YOU ARE DOING.
  */
-export default (isDOM || isReactNative ? useLayoutEffect : useEffect)
+export default isDOM || isReactNative ? useLayoutEffect : useEffect
