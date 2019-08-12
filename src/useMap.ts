@@ -2,11 +2,15 @@ import useForceUpdate from './useForceUpdate'
 import useStableMemo from './useStableMemo'
 
 export class ObservableMap<K, V> extends Map<K, V> {
+  private readonly listener: (map: ObservableMap<K, V>) => void
+
   constructor(
-    private readonly listener: (map: ObservableMap<K, V>) => void,
+    listener: (map: ObservableMap<K, V>) => void,
     init?: Iterable<Readonly<[K, V]>>,
   ) {
     super(init as any)
+
+    this.listener = listener
   }
 
   set(key: K, value: V): this {

@@ -1,14 +1,9 @@
 import useMediaQuery from './useMediaQuery'
 import { useMemo } from 'react'
 
-export interface AliasedScale<T> {
-  [idx: number]: T
-  [alias: string]: T
-}
+export type BreakpointDirection = 'up' | 'down' | true
 
-type BreakpointDirection = 'up' | 'down' | true
-
-type BreakpointMap<TKey extends string> = Partial<
+export type BreakpointMap<TKey extends string> = Partial<
   Record<TKey, BreakpointDirection>
 >
 
@@ -40,7 +35,9 @@ export function createBreakpointHook<TKey extends string>(
   const names = Object.keys(breakpointValues) as TKey[]
 
   function and(query: string, next: string) {
-    if (query === next || typeof next === 'boolean') return next
+    if (query === next) {
+      return next
+    }
     return query ? `${query} and ${next}` : next
   }
 
@@ -53,7 +50,7 @@ export function createBreakpointHook<TKey extends string>(
     let value = breakpointValues[next]
 
     if (typeof value === 'number') value = `${value - 0.2}px`
-    else value = `calc$(${value} - 0.2px)`
+    else value = `calc(${value} - 0.2px)`
 
     return `(max-width: ${value})`
   }
@@ -139,7 +136,8 @@ export function createBreakpointHook<TKey extends string>(
   return useBreakpoint
 }
 
-type DefaultBreakpoints = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type DefaultBreakpoints = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type DefaultBreakpointMap = BreakpointMap<DefaultBreakpoints>
 
 const useBreakpoint = createBreakpointHook<DefaultBreakpoints>({
   xs: 0,

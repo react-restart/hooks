@@ -2,11 +2,12 @@ import useForceUpdate from './useForceUpdate'
 import useStableMemo from './useStableMemo'
 
 export class ObservableSet<V> extends Set<V> {
-  constructor(
-    private readonly listener: (map: ObservableSet<V>) => void,
-    init?: Iterable<V>,
-  ) {
+  private readonly listener: (map: ObservableSet<V>) => void
+
+  constructor(listener: (map: ObservableSet<V>) => void, init?: Iterable<V>) {
     super(init as any)
+
+    this.listener = listener
   }
 
   add(value: V): this {

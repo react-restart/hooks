@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
-import { act } from 'react-dom/test-utils'
-
-import { mount } from 'enzyme'
-
 import useMap, { ObservableMap } from '../src/useMap'
+
+import React from 'react'
+import { act } from 'react-dom/test-utils'
+import { mount } from 'enzyme'
 
 describe('useMap', () => {
   describe('ObservableMap', () => {
