@@ -1,3 +1,14 @@
+## [0.3.12](https://github.com/jquense/react-common-hooks/compare/v0.3.11...v0.3.12) (2019-08-12)
+
+
+### Bug Fixes
+
+* **useMediaQuery:** matches immediately in a DOM environment ([#11](https://github.com/jquense/react-common-hooks/issues/11)) ([5d1053d](https://github.com/jquense/react-common-hooks/commit/5d1053d))
+
+
+
+
+
 ## [0.3.11](https://github.com/jquense/react-common-hooks/compare/v0.3.10...v0.3.11) (2019-08-09)
 
 
