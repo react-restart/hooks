@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - stable
+
+cache: yarn
+
+after_script:
+  - node_modules/.bin/codecov
+
+branches:
+  only:
+    - master

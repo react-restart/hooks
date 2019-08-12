@@ -1,12 +1,27 @@
-import { useState } from 'react'
 import useEffect from './useIsomorphicEffect'
+import { useState } from 'react'
 
 interface RefCountedMediaQueryList extends MediaQueryList {
   refCount: number
 }
 
+const isBool = (a: any): a is boolean => typeof a === 'boolean'
+
 const matchers = new Map<string, RefCountedMediaQueryList>()
 
+const getMatcher = (
+  query: string | null,
+): RefCountedMediaQueryList | undefined => {
+  if (!query || typeof window == 'undefined') return undefined
+
+  let mql = matchers.get(query)
+  if (!mql) {
+    mql = window.matchMedia(query) as RefCountedMediaQueryList
+    mql.refCount = 0
+    matchers.set(mql.media, mql)
+  }
+  return mql
+}
 /**
  * Match a media query and get updates as the match changes. The media string is
  * passed directly to `window.matchMedia` and run as a Layout Effect, so initial
@@ -25,19 +40,15 @@ const matchers = new Map<string, RefCountedMediaQueryList>()
  *
  * @param query A media query
  */
-export default function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false)
+export default function useMediaQuery(query: string | null) {
+  const mql = getMatcher(query)
+
+  const [matches, setMatches] = useState(() => (mql ? mql.matches : false))
 
   useEffect(() => {
-    if (typeof query === 'boolean') {
-      return setMatches(query)
-    }
-
-    let mql = matchers.get(query)
+    let mql = getMatcher(query)
     if (!mql) {
-      mql = window.matchMedia(query) as RefCountedMediaQueryList
-      mql.refCount = 0
-      matchers.set(mql.media, mql)
+      return setMatches(false)
     }
 
     const handleChange = () => {
@@ -50,11 +61,10 @@ export default function useMediaQuery(query: string) {
     handleChange()
 
     return () => {
-      if (!mql) return
-      mql.removeListener(handleChange)
-      mql.refCount--
-      if (mql.refCount <= 0) {
-        matchers.delete(mql.media)
+      mql!.removeListener(handleChange)
+      mql!.refCount--
+      if (mql!.refCount <= 0) {
+        matchers.delete(mql!.media)
       }
       mql = undefined
     }
