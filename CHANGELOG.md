@@ -1,3 +1,14 @@
+## [0.3.13](https://github.com/jquense/react-common-hooks/compare/v0.3.12...v0.3.13) (2019-09-06)
+
+
+### Bug Fixes
+
+* useStableMemo infinite loop ([ad6fc5a](https://github.com/jquense/react-common-hooks/commit/ad6fc5a))
+
+
+
+
+
 ## [0.3.12](https://github.com/jquense/react-common-hooks/compare/v0.3.11...v0.3.12) (2019-08-12)
 
 

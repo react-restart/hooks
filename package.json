@@ -1,11 +1,17 @@
 {
   "name": "@restart/hooks",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "main": "lib/cjs/index.js",
   "types": "lib/cjs/index.d.ts",
   "module": "lib/esm/index.js",
-  "repository": "https://github.com/jquense/react-common-hooks.git",
-  "author": "Jason Quense <monastic.panic@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jquense/react-common-hooks.git"
+  },
+  "author": {
+    "name": "Jason Quense",
+    "email": "monastic.panic@gmail.com"
+  },
   "license": "MIT",
   "scripts": {
     "test": "jest --coverage",
@@ -63,5 +69,11 @@
     "rimraf": "^2.6.3",
     "rollout": "^0.1.0",
     "typescript": "^3.5.3"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/jquense/react-common-hooks/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "homepage": "https://github.com/jquense/react-common-hooks#readme",
+  "_id": "@restart/hooks@0.3.12"
 }
