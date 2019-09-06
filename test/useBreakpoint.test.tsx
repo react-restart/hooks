@@ -50,7 +50,7 @@ describe('useBreakpoint', () => {
         return null
       }
       mount(<Wrapper />).unmount()
-      expect(actual).toEqual(expected)
+      expect(actual!).toEqual(expected)
     },
   )
 

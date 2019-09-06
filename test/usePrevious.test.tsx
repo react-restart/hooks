@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react'
-
-import { act } from 'react-dom/test-utils'
+import React from 'react'
 import { mount } from 'enzyme'
 import usePrevious from '../src/usePrevious'
 
@@ -18,6 +16,7 @@ describe('usePrevious', () => {
     expect(prevFoo).toEqual(null)
 
     wrapper.setProps({ foo: false })
+
     expect(prevFoo).toEqual(true)
   })
 })
