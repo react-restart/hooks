@@ -26,10 +26,10 @@
     "trailingComma": "all"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "lib"
   },
   "release": {
-    "publishDir": "lib",
     "conventionalCommits": true
   },
   "peerDependencies": {
