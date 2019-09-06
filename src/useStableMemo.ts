@@ -1,4 +1,4 @@
-import { DependencyList, useRef, useEffect } from 'react'
+import { DependencyList, useEffect, useRef } from 'react'
 
 function isEqual(a: DependencyList, b: DependencyList) {
   if (a.length !== b.length) return false
@@ -47,10 +47,8 @@ export default function useStableMemo<T>(
   }
 
   const cache = isValid ? valueRef.current : { deps, result: factory() }
-
-  useEffect(() => {
-    valueRef.current = cache
-  })
+  // must update immediately so any sync renders here don't cause an infinite loop
+  valueRef.current = cache
 
   return cache.result
 }
