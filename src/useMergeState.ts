@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 type Updater<TState> = (state: TState) => Partial<TState> | null
 
@@ -29,17 +29,20 @@ export default function useMergeState<TState extends {}>(
 ): [TState, MergeStateSetter<TState>] {
   const [state, setState] = useState<TState>(initialState)
 
-  const updater = (update: Updater<TState> | Partial<TState> | null) => {
-    if (update === null) return
-    if (typeof update === 'function') {
-      setState(state => {
-        const nextState = update(state)
-        return nextState == null ? state : { ...state, ...nextState }
-      })
-    } else {
-      setState(state => ({ ...state, ...update }))
-    }
-  }
+  const updater = useCallback(
+    (update: Updater<TState> | Partial<TState> | null) => {
+      if (update === null) return
+      if (typeof update === 'function') {
+        setState(state => {
+          const nextState = update(state)
+          return nextState == null ? state : { ...state, ...nextState }
+        })
+      } else {
+        setState(state => ({ ...state, ...update }))
+      }
+    },
+    [setState],
+  )
 
   return [state, updater]
 }
