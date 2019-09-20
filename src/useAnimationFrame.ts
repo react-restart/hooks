@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import useWillUnmount from './useWillUnmount'
 import useMounted from './useMounted'
 import useStableMemo from './useStableMemo'
+import useWillUnmount from './useWillUnmount'
 
 export interface UseAnimationFrameReturn {
   cancel(): void
@@ -22,7 +22,7 @@ export interface UseAnimationFrameReturn {
  * Returns a controller object for requesting and cancelling an animation freame that is properly cleaned up
  * once the component unmounts. New requests cancel and replace existing ones.
  *
- * ```tsx
+ * ```ts
  * const [style, setStyle] = useState({});
  * const animationFrame = useAnimationFrame();
  *

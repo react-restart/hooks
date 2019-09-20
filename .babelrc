@@ -1,5 +1,5 @@
 {
-  "presets": [["@4c", {}], "@babel/typescript"],
+  "presets": ["@4c", "@babel/typescript"],
   "env": {
     "esm": {
       "presets": [
@@ -12,7 +12,7 @@
       ]
     },
     "test": {
-      "presets": [["@4c", { "development": true, "debug": true }]]
+      "presets": [["@4c", { "development": true }]]
     }
   }
 }

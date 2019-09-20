@@ -22,7 +22,7 @@
   },
   "jest": {
     "preset": "@4c",
-    "setupFiles": [
+    "setupFilesAfterEnv": [
       "./test/setup.js"
     ]
   },
