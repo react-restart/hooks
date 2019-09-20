@@ -1,6 +1,6 @@
 {
   "name": "@restart/hooks",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "main": "lib/cjs/index.js",
   "types": "lib/cjs/index.d.ts",
   "module": "lib/esm/index.js",
@@ -75,5 +75,5 @@
   },
   "readme": "ERROR: No README data found!",
   "homepage": "https://github.com/jquense/react-common-hooks#readme",
-  "_id": "@restart/hooks@0.3.12"
+  "_id": "@restart/hooks@0.3.13"
 }

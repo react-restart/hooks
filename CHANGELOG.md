@@ -1,3 +1,14 @@
+## [0.3.14](https://github.com/jquense/react-common-hooks/compare/v0.3.13...v0.3.14) (2019-09-20)
+
+
+### Features
+
+* add useAsyncSetState ([#12](https://github.com/jquense/react-common-hooks/issues/12)) ([0db4bb4](https://github.com/jquense/react-common-hooks/commit/0db4bb4))
+
+
+
+
+
 ## [0.3.13](https://github.com/jquense/react-common-hooks/compare/v0.3.12...v0.3.13) (2019-09-06)
 
 
