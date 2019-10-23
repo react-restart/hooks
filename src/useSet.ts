@@ -33,7 +33,7 @@ export class ObservableSet<V> extends Set<V> {
 /**
  * Create and return a [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) that triggers rerenders when it's updated.
  *
- * ```tsx
+ * ```ts
  * const ids = useSet<number>([1,2,3,4]);
  *
  * return (
