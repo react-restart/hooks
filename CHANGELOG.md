@@ -1,3 +1,14 @@
+## [0.3.15](https://github.com/jquense/react-common-hooks/compare/v0.3.14...v0.3.15) (2019-10-23)
+
+
+### Features
+
+* add useSafeState ([#13](https://github.com/jquense/react-common-hooks/issues/13)) ([88c53cb](https://github.com/jquense/react-common-hooks/commit/88c53cb))
+
+
+
+
+
 ## [0.3.14](https://github.com/jquense/react-common-hooks/compare/v0.3.13...v0.3.14) (2019-09-20)
 
 
