@@ -55,4 +55,21 @@ describe('useTimeout', () => {
     jest.runOnlyPendingTimers()
     expect(spy).not.toHaveBeenCalled()
   })
+
+  it('should stop running on unmount', () => {
+    jest.useFakeTimers()
+    let spy = jest.fn()
+
+    function Wrapper() {
+      useInterval(spy, 100);
+
+      return <span />
+    }
+
+    const wrapper = mount(<Wrapper />)
+    wrapper.unmount()
+
+    jest.runOnlyPendingTimers()
+    expect(spy).not.toHaveBeenCalled()
+  })
 })
