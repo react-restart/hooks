@@ -8,18 +8,32 @@ import useCommittedRef from './useCommittedRef'
  * @param ms The milliseconds duration of the interval
  */
 function useInterval(fn: () => void, ms: number): void
+
 /**
- * Creates a pasuable `setInterval` that is properly cleaned up when a component unmounted
+ * Creates a pausable `setInterval` that is properly cleaned up when a component unmounted
  *
  * @param fn an function run on each interval
  * @param ms The milliseconds duration of the interval
  * @param paused Whether or not the interval is currently running
  */
 function useInterval(fn: () => void, ms: number, paused: boolean): void
+
+/**
+ * Creates a pausable `setInterval` that is properly cleaned up when a component unmounted
+ *
+ * @param fn an function run on each interval
+ * @param ms The milliseconds duration of the interval
+ * @param paused Whether or not the interval is currently running
+ * @param runImmediately Whether to run the function immediately on mount or unpause
+ * rather than waiting for the first interval to elapse
+ */
+function useInterval(fn: () => void, ms: number, paused: boolean, runImmediately: boolean): void
+
 function useInterval(
   fn: () => void,
   ms: number,
   paused: boolean = false,
+  runImmediately: boolean = false,
 ): void {
   let handle: number
   const fnRef = useCommittedRef(fn)
@@ -38,7 +52,11 @@ function useInterval(
   }
 
   useEffect(() => {
-    schedule()
+    if (runImmediately) {
+      tick()
+    } else {
+      schedule()
+    }
     return () => clearTimeout(handle)
   }, [paused])
 }

@@ -13,7 +13,7 @@ npm install @restart/hooks
 ```js
 import useInterval from '@restart/hooks/useInterval'
 
-useInterval(() => loop(), false, 300)
+useInterval(() => loop(), 300, false)
 ```
 
 [npm-badge]: https://img.shields.io/npm/v/@restart/hooks.svg
