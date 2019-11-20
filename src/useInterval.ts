@@ -58,7 +58,7 @@ function useInterval(
       schedule()
     }
     return () => clearTimeout(handle)
-  }, [paused])
+  }, [paused, runImmediately])
 }
 
 export default useInterval

@@ -4,7 +4,7 @@ import { mount } from 'enzyme'
 
 import useTimeout from '../src/useTimeout'
 
-describe('useTimeout', () => {
+describe('useTimeoue', () => {
   it('should set a timeout', () => {
     jest.useFakeTimers()
 
