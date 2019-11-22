@@ -1,3 +1,14 @@
+## [0.3.18](https://github.com/jquense/react-common-hooks/compare/v0.3.17...v0.3.18) (2019-11-22)
+
+
+### Bug Fixes
+
+* Fix React peer dependency ([ea56c3d](https://github.com/jquense/react-common-hooks/commit/ea56c3d9f37f45a85d18e7b6d4092faf459bfef8))
+
+
+
+
+
 ## [0.3.17](https://github.com/jquense/react-common-hooks/compare/v0.3.16...v0.3.17) (2019-11-22)
 
 
