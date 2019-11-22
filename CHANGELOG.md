@@ -1,3 +1,14 @@
+## [0.3.16](https://github.com/jquense/react-common-hooks/compare/v0.3.15...v0.3.16) (2019-11-22)
+
+
+### Features
+
+* add useImmediateUpdateEffect ([#14](https://github.com/jquense/react-common-hooks/issues/14)) ([b6f5870](https://github.com/jquense/react-common-hooks/commit/b6f5870))
+
+
+
+
+
 ## [0.3.15](https://github.com/jquense/react-common-hooks/compare/v0.3.14...v0.3.15) (2019-10-23)
 
 
