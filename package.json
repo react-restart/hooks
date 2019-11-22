@@ -39,7 +39,7 @@
     "conventionalCommits": true
   },
   "peerDependencies": {
-    "react": "^16.8.0-0"
+    "react": "^16.8.0"
   },
   "devDependencies": {
     "@4c/babel-preset": "^6.0.3",
@@ -67,13 +67,6 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "rimraf": "^2.6.3",
-    "rollout": "^0.1.0",
     "typescript": "^3.5.3"
-  },
-  "bugs": {
-    "url": "https://github.com/jquense/react-common-hooks/issues"
-  },
-  "readme": "ERROR: No README data found!",
-  "homepage": "https://github.com/jquense/react-common-hooks#readme",
-  "_id": "@restart/hooks@0.3.14"
+  }
 }
