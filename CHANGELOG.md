@@ -1,3 +1,14 @@
+## [0.3.17](https://github.com/jquense/react-common-hooks/compare/v0.3.16...v0.3.17) (2019-11-22)
+
+
+### Bug Fixes
+
+* Clean up package.json ([#16](https://github.com/jquense/react-common-hooks/issues/16)) ([d167136](https://github.com/jquense/react-common-hooks/commit/d1671360eed0b8137d8ca32271bef7c498b5faef))
+
+
+
+
+
 ## [0.3.16](https://github.com/jquense/react-common-hooks/compare/v0.3.15...v0.3.16) (2019-11-22)
 
 
