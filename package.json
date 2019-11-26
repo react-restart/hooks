@@ -1,6 +1,6 @@
 {
   "name": "@restart/hooks",
-  "version": "0.3.18",
+  "version": "0.3.19",
   "main": "lib/cjs/index.js",
   "types": "lib/cjs/index.d.ts",
   "module": "lib/esm/index.js",
@@ -74,5 +74,5 @@
     "typescript": "^3.7.2"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "@restart/hooks@0.3.17"
+  "_id": "@restart/hooks@0.3.18"
 }

@@ -1,3 +1,14 @@
+## [0.3.19](https://github.com/jquense/react-common-hooks/compare/v0.3.18...v0.3.19) (2019-11-26)
+
+
+### Features
+
+* Add option in useInterval to run immediately ([#15](https://github.com/jquense/react-common-hooks/issues/15)) ([899369f](https://github.com/jquense/react-common-hooks/commit/899369febaaff7f60ed449b07838ef199a35b5c1))
+
+
+
+
+
 ## [0.3.18](https://github.com/jquense/react-common-hooks/compare/v0.3.17...v0.3.18) (2019-11-22)
 
 
