@@ -1,6 +1,16 @@
-import { useRef } from 'react'
-import useWillUnmount from './useWillUnmount'
+import { useMemo, useRef } from 'react'
 import useMounted from './useMounted'
+import useWillUnmount from './useWillUnmount'
+
+/*
+ * Browsers including Internet Explorer, Chrome, Safari, and Firefox store the
+ * delay as a 32-bit signed integer internally. This causes an integer overflow
+ * when using delays larger than 2,147,483,647 ms (about 24.8 days),
+ * resulting in the timeout being executed immediately.
+ *
+ * via: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
+ */
+const MAX_DELAY_MS = 2 ** 31 - 1
 
 /**
  * Returns a controller object for setting a timeout that is properly cleaned up
@@ -8,19 +18,28 @@ import useMounted from './useMounted'
  */
 export default function useTimeout() {
   const isMounted = useMounted()
-  const handle = useRef<number | undefined>()
+  // types are confused between node and web here IDK
+  const handle = useRef<any>()
 
-  const clear = () => clearTimeout(handle.current)
+  useWillUnmount(() => clearTimeout(handle.current))
 
-  useWillUnmount(clear)
+  return useMemo(() => {
+    const clear = () => clearTimeout(handle.current)
 
-  return {
-    set(fn: () => void, ms?: number) {
+    function set(fn: () => void, ms = 0): void {
       if (!isMounted()) return
+      const leftMs = ms - MAX_DELAY_MS
 
       clear()
-      handle.current = setTimeout(fn, ms)
-    },
-    clear,
-  }
+      handle.current =
+        ms > MAX_DELAY_MS
+          ? setTimeout(() => set(fn, leftMs), MAX_DELAY_MS)
+          : setTimeout(fn, ms)
+    }
+
+    return {
+      set,
+      clear,
+    }
+  }, [])
 }

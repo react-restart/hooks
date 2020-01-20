@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
-
 import { mount } from 'enzyme'
-
+import React, { useEffect } from 'react'
 import useTimeout from '../src/useTimeout'
 
 describe('useTimeout', () => {
@@ -17,7 +15,7 @@ describe('useTimeout', () => {
       return <span />
     }
 
-    const wrapper = mount(<Wrapper />)
+    mount(<Wrapper />)
 
     timeout!.set(spy, 100)
 
@@ -72,5 +70,31 @@ describe('useTimeout', () => {
     jest.runAllTimers()
 
     expect(spy).toHaveBeenCalledTimes(0)
+  })
+
+  it('should handle very large timeouts', () => {
+    jest.useFakeTimers()
+
+    let spy = jest.fn()
+    let timeout: ReturnType<typeof useTimeout>
+
+    function Wrapper() {
+      timeout = useTimeout()
+
+      return <span />
+    }
+
+    mount(<Wrapper />)
+    const MAX = 2 ** 31 - 1
+
+    timeout!.set(spy, MAX + 100)
+    // some time to check that it didn't overflow and fire immediately
+    jest.runTimersToTime(100)
+
+    expect(spy).toHaveBeenCalledTimes(0)
+
+    jest.runAllTimers()
+
+    expect(spy).toHaveBeenCalledTimes(1)
   })
 })
