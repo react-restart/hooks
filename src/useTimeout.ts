@@ -28,12 +28,16 @@ export default function useTimeout() {
 
     function set(fn: () => void, ms = 0): void {
       if (!isMounted()) return
+      const maxAt = Date.now() + MAX_DELAY_MS
       const leftMs = ms - MAX_DELAY_MS
 
       clear()
       handle.current =
         ms > MAX_DELAY_MS
-          ? setTimeout(() => set(fn, leftMs), MAX_DELAY_MS)
+          ? setTimeout(
+              () => set(fn, leftMs - (Date.now() - maxAt)),
+              MAX_DELAY_MS,
+            )
           : setTimeout(fn, ms)
     }
 

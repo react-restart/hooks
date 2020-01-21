@@ -85,9 +85,11 @@ describe('useTimeout', () => {
     }
 
     mount(<Wrapper />)
+
     const MAX = 2 ** 31 - 1
 
     timeout!.set(spy, MAX + 100)
+
     // some time to check that it didn't overflow and fire immediately
     jest.runTimersToTime(100)
 
