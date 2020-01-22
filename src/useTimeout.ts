@@ -12,33 +12,45 @@ import useWillUnmount from './useWillUnmount'
  */
 const MAX_DELAY_MS = 2 ** 31 - 1
 
+function setChainedTimeout(handleRef, fn, timeoutAtMs) {
+  const delayMs = timeoutAtMs - Date.now()
+
+  handleRef.current =
+    delayMs <= MAX_DELAY_MS
+      ? setTimeout(fn, delayMs)
+      : setTimeout(
+          () => setChainedTimeout(handleRef, fn, timeoutAtMs),
+          MAX_DELAY_MS,
+        )
+}
+
 /**
  * Returns a controller object for setting a timeout that is properly cleaned up
  * once the component unmounts. New timeouts cancel and replace existing ones.
  */
 export default function useTimeout() {
   const isMounted = useMounted()
-  // types are confused between node and web here IDK
-  const handle = useRef<any>()
 
-  useWillUnmount(() => clearTimeout(handle.current))
+  // types are confused between node and web here IDK
+  const handleRef = useRef<any>()
+
+  useWillUnmount(() => clearTimeout(handleRef.current))
 
   return useMemo(() => {
-    const clear = () => clearTimeout(handle.current)
+    const clear = () => clearTimeout(handleRef.current)
 
-    function set(fn: () => void, ms = 0): void {
+    function set(fn: () => void, delayMs = 0): void {
       if (!isMounted()) return
-      const maxAt = Date.now() + MAX_DELAY_MS
-      const leftMs = ms - MAX_DELAY_MS
 
       clear()
-      handle.current =
-        ms > MAX_DELAY_MS
-          ? setTimeout(
-              () => set(fn, leftMs - (Date.now() - maxAt)),
-              MAX_DELAY_MS,
-            )
-          : setTimeout(fn, ms)
+
+      if (delayMs <= MAX_DELAY_MS) {
+        // For simplicity, if the timeout is short, just set a normal timeout.
+        handleRef.current = setTimeout(fn, delayMs)
+      } else {
+        setChainedTimeout(handleRef, fn, Date.now() + delayMs)
+      }
+
     }
 
     return {
