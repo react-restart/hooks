@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react'
+import { MutableRefObject, useMemo, useRef } from 'react'
 import useMounted from './useMounted'
 import useWillUnmount from './useWillUnmount'
 
@@ -12,7 +12,11 @@ import useWillUnmount from './useWillUnmount'
  */
 const MAX_DELAY_MS = 2 ** 31 - 1
 
-function setChainedTimeout(handleRef, fn, timeoutAtMs) {
+function setChainedTimeout(
+  handleRef: MutableRefObject<any>,
+  fn: () => void,
+  timeoutAtMs: number,
+) {
   const delayMs = timeoutAtMs - Date.now()
 
   handleRef.current =
@@ -50,7 +54,6 @@ export default function useTimeout() {
       } else {
         setChainedTimeout(handleRef, fn, Date.now() + delayMs)
       }
-
     }
 
     return {
