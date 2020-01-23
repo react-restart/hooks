@@ -1,3 +1,14 @@
+## [0.3.20](https://github.com/jquense/react-common-hooks/compare/v0.3.19...v0.3.20) (2020-01-23)
+
+
+### Features
+
+* **useTimeout:** handle large delays ([#21](https://github.com/jquense/react-common-hooks/issues/21)) ([32d6951](https://github.com/jquense/react-common-hooks/commit/32d69518295b6a620afad8c495ee357a35ffeb1f))
+
+
+
+
+
 ## [0.3.19](https://github.com/jquense/react-common-hooks/compare/v0.3.18...v0.3.19) (2019-11-26)
 
 
