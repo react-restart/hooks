@@ -1,7 +1,6 @@
 import { useCallback, useRef } from 'react'
-
-import useMounted from './useMounted'
 import useEventCallback from './useEventCallback'
+import useMounted from './useMounted'
 
 export interface FocusManagerOptions {
   /**
@@ -26,13 +25,17 @@ export interface FocusManagerOptions {
   isDisabled: () => boolean
 }
 
+export interface FocusController {
+  onBlur: (event: any) => void
+  onFocus: (event: any) => void
+}
 /**
  * useFocusManager provides a way to track and manage focus as it moves around
  * a container element. An `onChange` is fired when focus enters or leaves the
  * element, but not when it moves around inside the element, similar to
  * `pointerenter` and `pointerleave` DOM events.
  *
- * ```ts
+ * ```tsx
  * const [focused, setFocusState] = useState(false)
  *
  * const { onBlur, onFocus } = useFocusManager({
@@ -49,10 +52,10 @@ export interface FocusManagerOptions {
  *   </div>
  * ```
  *
- * @param opts Options
- * @returns FocusController a set of paired focus and blur event handlers
  */
-export default function useFocusManager(opts: FocusManagerOptions) {
+export default function useFocusManager(
+  opts: FocusManagerOptions,
+): FocusController {
   const isMounted = useMounted()
 
   const lastFocused = useRef<boolean | undefined>()
