@@ -14,5 +14,7 @@ const isDOM = typeof document !== 'undefined'
  * Only useful to avoid the console warning.
  *
  * PREFER `useEffect` UNLESS YOU KNOW WHAT YOU ARE DOING.
+ *
+ * @category effects
  */
 export default isDOM || isReactNative ? useLayoutEffect : useEffect

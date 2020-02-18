@@ -14,6 +14,8 @@ import useStableMemo from './useStableMemo'
  *     setValue(value)
  *   }, [value])
  * ```
+ *
+ * @category effects
  */
 function useImmediateUpdateEffect(effect: () => void, deps: DependencyList) {
   const firstRef = useRef(true)
