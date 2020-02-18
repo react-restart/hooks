@@ -2,7 +2,7 @@ import useImmediateUpdateEffect from '../src/useImmediateUpdateEffect'
 import { renderHook } from './helpers'
 
 describe('useImmediateUpdateEffect', () => {
-  it('should return a function that returns mount state', () => {
+  it('should run update after value changes', () => {
     const spy = jest.fn()
 
     const [, wrapper] = renderHook(

@@ -33,6 +33,7 @@ export function mergeRefs<T>(refA?: Ref<T> | null, refB?: Ref<T> | null) {
  *
  * @param refA A Callback or mutable Ref
  * @param refB A Callback or mutable Ref
+ * @category refs
  */
 function useMergedRefs<T>(refA?: Ref<T> | null, refB?: Ref<T> | null) {
   return useMemo(() => mergeRefs(refA, refB), [refA, refB])

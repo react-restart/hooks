@@ -21,6 +21,8 @@ import { useState } from 'react'
  *
  * return <div ref={attachRef} />
  * ```
+ *
+ * @category refs
  */
 export default function useCallbackRef<TValue = unknown>(): [
   TValue | null,
