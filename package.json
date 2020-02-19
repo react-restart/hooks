@@ -59,7 +59,7 @@
     "@types/react": "^16.9.12",
     "babel-jest": "^24.9.0",
     "cherry-pick": "^0.5.0",
-    "codecov": "^3.6.1",
+    "codecov": "^3.6.5",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.7.0",
