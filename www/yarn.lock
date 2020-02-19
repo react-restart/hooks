@@ -1227,10 +1227,8 @@
   optionalDependencies:
     fibers "^4.0.1"
 
-"@docpocalypse/gatsby-theme@^0.9.4":
+"@docpocalypse/gatsby-theme@file:../../docpocalypse/packages/theme":
   version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@docpocalypse/gatsby-theme/-/gatsby-theme-0.9.4.tgz#48a54e13e5d08abbda74dabc32419ab86543b495"
-  integrity sha512-21NpeQP22ywrf9robgPrkGpnM5u6nvjlbinjfRjjyTDSIxt+APaDo9KAYYe+PtVNO14SQq3csHo5gm+hCSlZaA==
   dependencies:
     "@docpocalypse/code-live" "^0.3.8"
     "@docpocalypse/gatsby-theme-core" "^0.7.2"

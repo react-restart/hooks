@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   siteMetadata: {
     title: '@restart/hooks',
@@ -11,6 +13,13 @@ module.exports = {
         getImportName(docNode) {
           return `import { ${docNode.name} } from '${docNode.packageName}'`
         },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-typedoc',
+      options: {
+        debugRaw: true,
+        projects: [path.resolve(__dirname, '../src')],
       },
     },
   ],

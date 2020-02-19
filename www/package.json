@@ -7,8 +7,9 @@
     "build": "gatsby build"
   },
   "dependencies": {
-    "@docpocalypse/gatsby-theme": "^0.9.4",
+    "@docpocalypse/gatsby-theme": "file:../../docpocalypse/packages/theme",
     "gatsby": "^2.19.18",
+    "gatsby-plugin-typedoc": "^0.3.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   }
