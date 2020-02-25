@@ -1,3 +1,16 @@
+## [0.3.21](https://github.com/jquense/react-common-hooks/compare/v0.3.20...v0.3.21) (2020-02-25)
+
+
+### Features
+
+* add useMountEffect ([f4c4753](https://github.com/jquense/react-common-hooks/commit/f4c4753f15691b4ff6f44afd2b0a8e0e8e5b28e1))
+* add useRefWithInitialValueFactory ([31188e2](https://github.com/jquense/react-common-hooks/commit/31188e28dc5b68fb6e030b855ce0491fbc0c1a70))
+* add useUpdateEffect ([a0d17b1](https://github.com/jquense/react-common-hooks/commit/a0d17b1dcbb4f910468bd9ae60256318fe218ecc))
+
+
+
+
+
 ## [0.3.20](https://github.com/jquense/react-common-hooks/compare/v0.3.19...v0.3.20) (2020-01-23)
 
 
