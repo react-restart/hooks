@@ -1,4 +1,4 @@
-import { DependencyList, useEffect, useRef } from 'react'
+import { DependencyList, useRef } from 'react'
 
 function isEqual(a: DependencyList, b: DependencyList) {
   if (a.length !== b.length) return false
