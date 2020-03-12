@@ -12,7 +12,7 @@ export type CustomEffectOptions<TDeps> = {
 /**
  * a useEffect() hook with customized depedency comparision
  *
- * @param effect THe effect callback
+ * @param effect The effect callback
  * @param dependencies A list of dependencies
  * @param isEqual A function comparing the next and previous dependencyLists
  */
@@ -24,7 +24,7 @@ function useCustomEffect<TDeps extends DependencyList = DependencyList>(
 /**
  * a useEffect() hook with customized depedency comparision
  *
- * @param effect THe effect callback
+ * @param effect The effect callback
  * @param dependencies A list of dependencies
  * @param options
  * @param options.isEqual A function comparing the next and previous dependencyLists

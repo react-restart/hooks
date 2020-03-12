@@ -56,8 +56,10 @@
     "@babel/preset-typescript": "^7.7.2",
     "@types/enzyme": "^3.10.5",
     "@types/jest": "^25.1.4",
+    "@types/lodash": "^4.14.149",
     "@types/react": "^16.9.23",
     "babel-jest": "^25.1.0",
+    "babel-plugin-transform-rename-import": "^2.3.0",
     "cherry-pick": "^0.5.0",
     "codecov": "^3.6.5",
     "enzyme": "^3.10.0",
@@ -73,6 +75,8 @@
     "rimraf": "^3.0.2",
     "typescript": "^3.8.3"
   },
-  "readme": "ERROR: No README data found!",
-  "_id": "@restart/hooks@0.3.20"
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "lodash-es": "^4.17.15"
+  }
 }

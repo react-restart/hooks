@@ -1,8 +1,18 @@
-import useEffect from './useIsomorphicEffect'
+import useCustomEffect, { IsEqual } from './useCustomEffect'
+import isEqual from 'lodash/isEqual'
+import useImmediateUpdateEffect from './useImmediateUpdateEffect'
+import useMountEffect from './useMountEffect'
+import useEventCallback from './useEventCallback'
+import { useRef } from 'react'
+
+type Deps = [Element | null | undefined, MutationObserverInit]
+
+const isDepsEqual: IsEqual<Deps> = (prev, next) =>
+  prev[0] === next[0] && isEqual(prev[1], next[1])
 
 /**
- * Efficiently observe size changes on an element. Depends on the `ResizeObserver` api,
- * and polyfills are needed in older browsers.
+ * Observe mutations on a DOM node or tree of DOM nodes.
+ * Depends on the `MutationObserver` api.
  *
  * ```ts
  * const [element, attachRef] = useCallbackRef(null);
@@ -25,45 +35,34 @@ function useMutationObserver(
   config: MutationObserverInit,
   callback: MutationCallback,
 ): void {
-  const {
-    attributeFilter,
-    attributeOldValue,
-    attributes,
-    characterData,
-    characterDataOldValue,
-    childList,
-    subtree,
-  } = config
+  const observerRef = useRef<MutationObserver | null>()
+  const fn = useEventCallback(callback)
 
-  useEffect(() => {
+  useMountEffect(() => {
     if (!element) return
 
-    const observer = new MutationObserver(callback)
+    observerRef.current = new MutationObserver(fn)
+  })
 
-    observer.observe(element, {
-      attributeFilter,
-      attributeOldValue,
-      attributes,
-      characterData,
-      characterDataOldValue,
-      childList,
-      subtree,
-    })
+  useCustomEffect(
+    () => {
+      if (!element) return
 
-    return () => {
-      observer.disconnect()
-    }
-  }, [
-    element,
-    callback,
-    attributeFilter?.join(','),
-    attributeOldValue,
-    attributes,
-    characterData,
-    characterDataOldValue,
-    childList,
-    subtree,
-  ])
+      const observer = observerRef.current || new MutationObserver(fn)
+      observer.observe(element, config)
+
+      return () => {
+        observer.disconnect()
+      }
+    },
+    [element, config],
+    {
+      isEqual: isDepsEqual,
+      // Intentionally done in render, otherwise observer will miss any
+      // changes made to the DOM during this update
+      effectHook: useImmediateUpdateEffect,
+    },
+  )
 }
 
 export default useMutationObserver
