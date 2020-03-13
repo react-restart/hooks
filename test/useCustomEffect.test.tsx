@@ -40,7 +40,7 @@ describe('useCustomEffect', () => {
     const spy = jest.fn()
     const hookSpy = jest.fn().mockImplementation(useImmediateUpdateEffect)
 
-    const [, wrapper] = renderHook(
+    renderHook(
       ({ value }) => {
         useCustomEffect(spy, [value], {
           isEqual: (next, prev) => next[0].foo === prev[0].foo,
@@ -50,6 +50,7 @@ describe('useCustomEffect', () => {
       { value: { foo: true } },
     )
 
+    // the update and unmount hook setup
     expect(hookSpy).toHaveBeenCalledTimes(1)
     // not called b/c useImmediateUpdateEffect doesn't run on initial render
     expect(spy).toHaveBeenCalledTimes(0)

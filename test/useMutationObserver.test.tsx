@@ -44,7 +44,7 @@ describe('useMutationObserver', () => {
     disconnentSpy?.mockRestore()
   })
 
-  it.only('should update config', async () => {
+  it('should update config', async () => {
     const teardown = jest.fn()
     const spy = jest.fn(() => teardown)
 
@@ -82,6 +82,7 @@ describe('useMutationObserver', () => {
       ],
       expect.anything(),
     )
+    expect(disconnentSpy).toBeCalledTimes(1)
 
     wrapper.unmount()
 

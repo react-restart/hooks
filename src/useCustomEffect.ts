@@ -1,4 +1,12 @@
-import { DependencyList, EffectCallback, useRef, useEffect } from 'react'
+import {
+  DependencyList,
+  EffectCallback,
+  useRef,
+  useEffect,
+  useDebugValue,
+} from 'react'
+import useWillUnmount from './useWillUnmount'
+import useMounted from './useMounted'
 
 export type EffectHook = (effect: EffectCallback, deps?: DependencyList) => void
 
@@ -7,6 +15,11 @@ export type IsEqual<TDeps> = (nextDeps: TDeps, prev: TDeps) => boolean
 export type CustomEffectOptions<TDeps> = {
   isEqual: IsEqual<TDeps>
   effectHook?: EffectHook
+}
+
+type CleanUp = {
+  (): void
+  cleanup?: ReturnType<EffectCallback>
 }
 
 /**
@@ -40,20 +53,39 @@ function useCustomEffect<TDeps extends DependencyList = DependencyList>(
   dependencies: TDeps,
   isEqualOrOptions: IsEqual<TDeps> | CustomEffectOptions<TDeps>,
 ) {
+  const isMounted = useMounted()
   const { isEqual, effectHook = useEffect } =
     typeof isEqualOrOptions === 'function'
       ? { isEqual: isEqualOrOptions }
       : isEqualOrOptions
 
-  const depsRef = useRef<TDeps | undefined>()
-  effectHook(() => {
-    const prev = depsRef.current
-    depsRef.current = dependencies
+  const dependenciesRef = useRef<TDeps>()
+  dependenciesRef.current = dependencies
 
-    if (!prev || !isEqual(dependencies, prev)) {
-      return effect()
+  const cleanupRef = useRef<CleanUp | null>(null)
+
+  effectHook(() => {
+    // If the ref the is `null` it's either the first effect or the last effect
+    // ran and was cleared, meaning _this_ update should run, b/c the equality
+    // check failed on in the cleanup of the last effect.
+    if (cleanupRef.current === null) {
+      const cleanup = effect()
+
+      cleanupRef.current = () => {
+        if (isMounted() && isEqual(dependenciesRef.current!, dependencies)) {
+          return
+        }
+
+        cleanupRef.current = null
+        if (cleanup) cleanup()
+      }
+      cleanupRef.current.cleanup = cleanup
     }
+
+    return cleanupRef.current ?? undefined
   })
+
+  useDebugValue(effect)
 }
 
 export default useCustomEffect
