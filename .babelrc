@@ -9,6 +9,15 @@
             "modules": false
           }
         ]
+      ],
+      "plugins": [
+        [
+          "babel-plugin-transform-rename-import",
+          {
+            "original": "lodash",
+            "replacement": "lodash-es"
+          }
+        ]
       ]
     },
     "test": {
