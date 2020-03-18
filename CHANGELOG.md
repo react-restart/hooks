@@ -1,3 +1,16 @@
+## [0.3.22](https://github.com/jquense/react-common-hooks/compare/v0.3.21...v0.3.22) (2020-03-18)
+
+
+### Features
+
+* **useImmediateUpdateEffect:** allow teardown from last effect like builtin effect hooks ([b85ad85](https://github.com/jquense/react-common-hooks/commit/b85ad852a0a9efed32183be8ce0b93386c46fe95))
+* add useCustomEffect ([76b18d0](https://github.com/jquense/react-common-hooks/commit/76b18d048d70beba574c70f54684fdf0b41eb4fc))
+* add useMutationObserver ([c9df89c](https://github.com/jquense/react-common-hooks/commit/c9df89cc5a1e1b83eb249e291b79a6bf3b32203b))
+
+
+
+
+
 ## [0.3.21](https://github.com/jquense/react-common-hooks/compare/v0.3.20...v0.3.21) (2020-02-25)
 
 
