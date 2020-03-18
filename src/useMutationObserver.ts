@@ -7,8 +7,15 @@ import { useRef } from 'react'
 
 type Deps = [Element | null | undefined, MutationObserverInit]
 
-const isDepsEqual: IsEqual<Deps> = (prev, next) =>
-  prev[0] === next[0] && isEqual(prev[1], next[1])
+function isDepsEqual(
+  [nextElement, nextConfig]: Deps,
+  [prevElement, prevConfig]: Deps,
+) {
+  return (
+    nextElement === prevElement &&
+    isEqual(nextConfig, prevConfig)
+  );
+}
 
 /**
  * Observe mutations on a DOM node or tree of DOM nodes.
