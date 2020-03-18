@@ -70,7 +70,7 @@ describe('useMutationObserver', () => {
     wrapper.setProps({ attributeFilter: undefined, role: 'button' })
 
     await Promise.resolve()
-
+    // console.log(spy.mock.calls[1][0][0].target)
     expect(spy).toHaveBeenCalledTimes(1)
 
     expect(spy).toHaveBeenCalledWith(

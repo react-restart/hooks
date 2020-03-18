@@ -10,9 +10,12 @@ import useMounted from './useMounted'
 
 export type EffectHook = (effect: EffectCallback, deps?: DependencyList) => void
 
-export type IsEqual<TDeps extends DependencyList> = (nextDeps: TDeps, prevDeps: TDeps) => boolean
+export type IsEqual<TDeps extends DependencyList> = (
+  nextDeps: TDeps,
+  prevDeps: TDeps,
+) => boolean
 
-export type CustomEffectOptions<TDeps> = {
+export type CustomEffectOptions<TDeps extends DependencyList> = {
   isEqual: IsEqual<TDeps>
   effectHook?: EffectHook
 }
@@ -79,10 +82,9 @@ function useCustomEffect<TDeps extends DependencyList = DependencyList>(
         cleanupRef.current = null
         if (cleanup) cleanup()
       }
-      cleanupRef.current.cleanup = cleanup
     }
 
-    return cleanupRef.current ?? undefined
+    return cleanupRef.current
   })
 
   useDebugValue(effect)

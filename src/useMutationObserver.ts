@@ -1,9 +1,7 @@
-import useCustomEffect, { IsEqual } from './useCustomEffect'
+import useCustomEffect from './useCustomEffect'
 import isEqual from 'lodash/isEqual'
 import useImmediateUpdateEffect from './useImmediateUpdateEffect'
-import useMountEffect from './useMountEffect'
 import useEventCallback from './useEventCallback'
-import { useRef } from 'react'
 
 type Deps = [Element | null | undefined, MutationObserverInit]
 
@@ -11,10 +9,7 @@ function isDepsEqual(
   [nextElement, nextConfig]: Deps,
   [prevElement, prevConfig]: Deps,
 ) {
-  return (
-    nextElement === prevElement &&
-    isEqual(nextConfig, prevConfig)
-  );
+  return nextElement === prevElement && isEqual(nextConfig, prevConfig)
 }
 
 /**
@@ -42,20 +37,18 @@ function useMutationObserver(
   config: MutationObserverInit,
   callback: MutationCallback,
 ): void {
-  const observerRef = useRef<MutationObserver | null>()
   const fn = useEventCallback(callback)
-
-  useMountEffect(() => {
-    if (!element) return
-
-    observerRef.current = new MutationObserver(fn)
-  })
 
   useCustomEffect(
     () => {
       if (!element) return
 
-      const observer = observerRef.current || new MutationObserver(fn)
+      // The behavior around reusing mutation observers is confusing
+      // observing again _should_ disable the last listener but doesn't
+      // seem to always be the case, maybe just in JSDOM? In any case the cost
+      // to redeclaring it is gonna be fairly low anyway, so make it simple
+      const observer = new MutationObserver(fn)
+
       observer.observe(element, config)
 
       return () => {
