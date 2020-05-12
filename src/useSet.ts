@@ -49,7 +49,7 @@ export class ObservableSet<V> extends Set<V> {
  *
  * @param init initial Set values
  */
-function useSet<V>(init?: Iterable<V>) {
+function useSet<V>(init?: Iterable<V>): ObservableSet<V> {
   const forceUpdate = useForceUpdate()
   return useStableMemo(() => new ObservableSet<V>(forceUpdate, init), [])
 }
