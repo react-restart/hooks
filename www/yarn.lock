@@ -1226,10 +1226,10 @@
   optionalDependencies:
     fibers "^5.0.0"
 
-"@docpocalypse/gatsby-theme@^0.11.25":
-  version "0.11.25"
-  resolved "https://registry.yarnpkg.com/@docpocalypse/gatsby-theme/-/gatsby-theme-0.11.25.tgz#2a4fb4517cef3d6c66fc91e3ca6cf753f680574f"
-  integrity sha512-olyXoPP7ABMqQCNA1xD1psSPrV6n3v3XIwuqJ7CDwQme/miCUifrIjeyG6YSHD2nHwXvedd/ZYJf3OFnto7Atw==
+"@docpocalypse/gatsby-theme@^0.11.26":
+  version "0.11.26"
+  resolved "https://registry.yarnpkg.com/@docpocalypse/gatsby-theme/-/gatsby-theme-0.11.26.tgz#d27c40fa463d8d0b37791643455ecff2cb6bc9ef"
+  integrity sha512-1EBfHWxsdZKTDohnVupSy8pCz1ab7+MvpY7RLMWGh1mWZqo7qNdjuAoRBn83gE0NIB7x/NWIJG7R5owC6x+rRw==
   dependencies:
     "@docpocalypse/code-live" "^0.4.18"
     "@docpocalypse/gatsby-theme-core" "^0.8.17"

@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  pathPrefix: '/hooks',
   siteMetadata: {
     title: '@restart/hooks',
     author: 'Jason Quense',
