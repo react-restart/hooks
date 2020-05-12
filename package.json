@@ -18,10 +18,12 @@
   },
   "homepage": "https://github.com/react-restart/hooks#readme",
   "scripts": {
+    "bootstrap": "yarn && yarn --cwd www",
     "test": "jest --coverage",
     "tdd": "jest --watch",
     "build:pick": "cherry-pick --name=@restart/hooks --cwd=lib --input-dir=../src --cjs-dir=cjs --esm-dir=esm",
     "build": "rimraf lib && 4c build src && yarn build:pick",
+    "deploy-docs": "yarn --cwd www build --prefix-paths && gh-pages -d www/public",
     "prepublishOnly": "yarn build"
   },
   "jest": {
@@ -65,6 +67,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.7.0",
+    "gh-pages": "^2.2.0",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.8",

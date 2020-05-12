@@ -11,7 +11,7 @@ module.exports = {
       options: {
         sources: [`${__dirname}/../src`],
         getImportName(docNode) {
-          return `import { ${docNode.name} } from '${docNode.packageName}'`
+          return `import ${docNode.name} from '${docNode.packageName}/${docNode.name}'`
         },
       },
     },
