@@ -28,8 +28,9 @@
   },
   "jest": {
     "preset": "@4c",
+    "rootDir": "./test",
     "setupFilesAfterEnv": [
-      "./test/setup.js"
+      "./setup.js"
     ]
   },
   "prettier": {
