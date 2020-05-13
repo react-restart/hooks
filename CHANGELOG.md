@@ -1,3 +1,14 @@
+## [0.3.23](https://github.com/jquense/react-common-hooks/compare/v0.3.22...v0.3.23) (2020-05-13)
+
+
+### Bug Fixes
+
+* improve initial state type ([#29](https://github.com/jquense/react-common-hooks/issues/29)) ([35613e4](https://github.com/jquense/react-common-hooks/commit/35613e4aac832f9a09bd63f441f7c43a0df01b8c))
+
+
+
+
+
 ## [0.3.22](https://github.com/jquense/react-common-hooks/compare/v0.3.21...v0.3.22) (2020-03-18)
 
 
