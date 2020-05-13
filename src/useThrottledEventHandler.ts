@@ -44,18 +44,21 @@ export default function useThrottledEventHandler<TEvent = SyntheticEvent>(
   const isMounted = useMounted()
   const eventHandler = useEventCallback(handler)
 
-  const nextPointRef = useRef<{ event: TEvent | null; handle: null | number }>({
+  const nextEventInfoRef = useRef<{
+    event: TEvent | null
+    handle: null | number
+  }>({
     event: null,
     handle: null,
   })
 
   const clear = () => {
-    cancelAnimationFrame(nextPointRef.current.handle!)
-    nextPointRef.current.handle = null
+    cancelAnimationFrame(nextEventInfoRef.current.handle!)
+    nextEventInfoRef.current.handle = null
   }
 
   const handlePointerMoveAnimation = () => {
-    const { current: next } = nextPointRef
+    const { current: next } = nextEventInfoRef
 
     if (next.handle && next.event) {
       if (isMounted()) {
@@ -78,9 +81,9 @@ export default function useThrottledEventHandler<TEvent = SyntheticEvent>(
       event = { ...event }
     }
 
-    nextPointRef.current.event = event
-    if (!nextPointRef.current.handle) {
-      nextPointRef.current.handle = requestAnimationFrame(
+    nextEventInfoRef.current.event = event
+    if (!nextEventInfoRef.current.handle) {
+      nextEventInfoRef.current.handle = requestAnimationFrame(
         handlePointerMoveAnimation,
       )
     }
