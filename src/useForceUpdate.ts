@@ -16,7 +16,7 @@ import { useReducer } from 'react'
  * return <button type="button" onClick={updateOnClick}>Hi there</button>
  * ```
  */
-export default function useForceUpdate() {
+export default function useForceUpdate(): () => void {
   // The toggling state value is designed to defeat React optimizations for skipping
   // updates when they are stricting equal to the last state value
   const [, dispatch] = useReducer((state: boolean) => !state, false)

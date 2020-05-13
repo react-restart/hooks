@@ -23,7 +23,7 @@ export type AsyncSetState<TState> = (
  *
  * @param initialState initialize with some state value same as `useState`
  */
-function useStateAsync<TState>(
+export default function useStateAsync<TState>(
   initialState: TState | (() => TState),
 ): [TState, AsyncSetState<TState>] {
   const [state, setState] = useState(initialState)
@@ -67,5 +67,3 @@ function useStateAsync<TState>(
   )
   return [state, setStateAsync]
 }
-
-export default useStateAsync
