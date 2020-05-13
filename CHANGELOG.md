@@ -1,3 +1,14 @@
+## [0.3.24](https://github.com/jquense/react-common-hooks/compare/v0.3.23...v0.3.24) (2020-05-13)
+
+
+### Features
+
+* add useThrottledEventHandler ([#30](https://github.com/jquense/react-common-hooks/issues/30)) ([f03d52b](https://github.com/jquense/react-common-hooks/commit/f03d52b096ed95f0614728acc243a2d0b6123970))
+
+
+
+
+
 ## [0.3.23](https://github.com/jquense/react-common-hooks/compare/v0.3.22...v0.3.23) (2020-05-13)
 
 
