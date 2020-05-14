@@ -46,8 +46,8 @@ export default function useImage(
 
     if (typeof imageOrUrl === 'string') {
       image = new Image()
-      image.src = imageOrUrl
       if (crossOrigin) image.crossOrigin = crossOrigin
+      image.src = imageOrUrl
     } else {
       image = imageOrUrl
 
