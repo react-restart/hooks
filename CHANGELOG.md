@@ -1,3 +1,14 @@
+## [0.3.25](https://github.com/jquense/react-common-hooks/compare/v0.3.24...v0.3.25) (2020-05-14)
+
+
+### Bug Fixes
+
+* set crossOrigin prior to src ([#31](https://github.com/jquense/react-common-hooks/issues/31)) ([1d585ec](https://github.com/jquense/react-common-hooks/commit/1d585eca5a062e70405f90fd1b4ffd469dd041be))
+
+
+
+
+
 ## [0.3.24](https://github.com/jquense/react-common-hooks/compare/v0.3.23...v0.3.24) (2020-05-13)
 
 
