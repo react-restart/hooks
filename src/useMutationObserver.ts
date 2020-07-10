@@ -1,5 +1,5 @@
 import useCustomEffect from './useCustomEffect'
-import isEqual from 'lodash/isEqual'
+import { dequal } from 'dequal'
 import useImmediateUpdateEffect from './useImmediateUpdateEffect'
 import useEventCallback from './useEventCallback'
 
@@ -9,7 +9,7 @@ function isDepsEqual(
   [nextElement, nextConfig]: Deps,
   [prevElement, prevConfig]: Deps,
 ) {
-  return nextElement === prevElement && isEqual(nextConfig, prevConfig)
+  return nextElement === prevElement && dequal(nextConfig, prevConfig)
 }
 
 /**

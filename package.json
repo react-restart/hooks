@@ -80,7 +80,6 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "lodash": "^4.17.20",
-    "lodash-es": "^4.17.20"
+    "dequal": "^2.0.2"
   }
 }
