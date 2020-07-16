@@ -80,7 +80,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lodash-es": "^4.17.15"
   },
   "readme": "ERROR: No README data found!",
