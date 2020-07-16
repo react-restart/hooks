@@ -82,7 +82,5 @@
   "dependencies": {
     "lodash": "^4.17.19",
     "lodash-es": "^4.17.15"
-  },
-  "readme": "ERROR: No README data found!",
-  "_id": "@restart/hooks@0.3.21"
+  }
 }
