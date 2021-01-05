@@ -1,3 +1,14 @@
+## [0.3.26](https://github.com/jquense/react-common-hooks/compare/v0.3.25...v0.3.26) (2021-01-05)
+
+
+### Bug Fixes
+
+* Allow React 17 as peer dependency ([#42](https://github.com/jquense/react-common-hooks/issues/42)) ([d0fea56](https://github.com/jquense/react-common-hooks/commit/d0fea56dda0ea7139eca4899ce67123e68dd43d2))
+
+
+
+
+
 ## [0.3.25](https://github.com/jquense/react-common-hooks/compare/v0.3.24...v0.3.25) (2020-05-14)
 
 
