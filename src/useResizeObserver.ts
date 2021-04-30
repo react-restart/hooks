@@ -17,10 +17,10 @@ function getResizeObserver() {
   // eslint-disable-next-line no-return-assign
   return (resizeObserver =
     resizeObserver ||
-    new window.ResizeObserver(entries => {
+    new window.ResizeObserver((entries: ResizeObserverEntry[]) => {
       entries.forEach(entry => {
         const handler = targetMap.get(entry.target)
-        if (handler) handler(entry.contentRect as any)
+        if (handler) handler(entry.contentRect)
       })
     }))
 }

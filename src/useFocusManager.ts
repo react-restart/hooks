@@ -73,7 +73,7 @@ export default function useFocusManager(
       if (willHandle && willHandle(focused, event) === false) return
 
       clearTimeout(handle.current)
-      handle.current = setTimeout(() => {
+      handle.current = window.setTimeout(() => {
         if (focused !== lastFocused.current) {
           if (didHandle) didHandle(focused, event)
 
