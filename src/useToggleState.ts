@@ -1,11 +1,11 @@
 import { useReducer, Reducer } from 'react'
 
 /**
- * Create a state setter pair for a boolean value that can be "switched"
+ * Create a state setter pair for a boolean value that can be "switched".
  * Unlike `useState(false)`, `useToggleState` will automatically flip the state
- * value when it's setter is called with no argument.
+ * value when its setter is called with no argument.
  *
- * @param initialState THe initial boolean value
+ * @param initialState The initial boolean value
  * @returns A tuple of the current state and a setter
  *
  * ```jsx
