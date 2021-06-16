@@ -17,7 +17,7 @@ function isDepsEqual(
  * Observe mutations on a DOM node or tree of DOM nodes.
  * Depends on the `MutationObserver` api.
  *
- * ```ts
+ * ```tsx
  * const [element, attachRef] = useCallbackRef(null);
  *
  * useMutationObserver(element, { subtree: true }, (records) => {
@@ -42,7 +42,7 @@ function useMutationObserver(
  * Observe mutations on a DOM node or tree of DOM nodes.
  * use a `MutationObserver` and return records as the are received.
  *
- * ```ts
+ * ```tsx
  * const [element, attachRef] = useCallbackRef(null);
  *
  * const records = useMutationObserver(element, { subtree: true });
