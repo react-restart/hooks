@@ -1,3 +1,24 @@
+## [0.3.27](https://github.com/jquense/react-common-hooks/compare/v0.3.26...v0.3.27) (2021-06-16)
+
+
+### Bug Fixes
+
+* **types:** fix ts errors ([#47](https://github.com/jquense/react-common-hooks/issues/47)) ([310e1ec](https://github.com/jquense/react-common-hooks/commit/310e1ec605835f245e0a6fa65c5ea9ce3a07d5ae))
+
+
+### Features
+
+* **useIntersectionObserver:** add more performant overload ([6c532d8](https://github.com/jquense/react-common-hooks/commit/6c532d8e1033579f23a6fec31c98be374d8ab4e1))
+* **useMutationObserver:** add overload to return records and trigger updates ([1eaa621](https://github.com/jquense/react-common-hooks/commit/1eaa621a5da1545345a7c8df79ca09ec16dcf435))
+* **useToggleState:** add useToggleState hook ([#48](https://github.com/jquense/react-common-hooks/issues/48)) ([5f95dd0](https://github.com/jquense/react-common-hooks/commit/5f95dd07dde261f73b8ff658f54dcae9b6034321))
+* add useDebouncedCallback hook ([05fb8da](https://github.com/jquense/react-common-hooks/commit/05fb8da28ddd8c3afdcdd5e2250b16b539edc4a3))
+* add useDebouncedState hook ([a87dd3b](https://github.com/jquense/react-common-hooks/commit/a87dd3b9788102106869bcada7b87dcf9eb984d2))
+* remove lodash ([#35](https://github.com/jquense/react-common-hooks/issues/35)) ([fefa63c](https://github.com/jquense/react-common-hooks/commit/fefa63c4d2115d7880423fe5d26d5413efdc7d58))
+
+
+
+
+
 ## [0.3.26](https://github.com/jquense/react-common-hooks/compare/v0.3.25...v0.3.26) (2021-01-05)
 
 
