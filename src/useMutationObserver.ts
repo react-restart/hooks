@@ -2,6 +2,7 @@ import useCustomEffect from './useCustomEffect'
 import { dequal } from 'dequal'
 import useImmediateUpdateEffect from './useImmediateUpdateEffect'
 import useEventCallback from './useEventCallback'
+import { useState } from 'react'
 
 type Deps = [Element | null | undefined, MutationObserverInit]
 
@@ -36,8 +37,35 @@ function useMutationObserver(
   element: Element | null | undefined,
   config: MutationObserverInit,
   callback: MutationCallback,
-): void {
-  const fn = useEventCallback(callback)
+): void
+/**
+ * Observe mutations on a DOM node or tree of DOM nodes.
+ * use a `MutationObserver` and return records as the are received.
+ *
+ * ```ts
+ * const [element, attachRef] = useCallbackRef(null);
+ *
+ * const records = useMutationObserver(element, { subtree: true });
+ *
+ * return (
+ *   <div ref={attachRef} />
+ * )
+ * ```
+ *
+ * @param element The DOM element to observe
+ * @param config The observer configuration
+ */
+function useMutationObserver(
+  element: Element | null | undefined,
+  config: MutationObserverInit,
+): MutationRecord[]
+function useMutationObserver(
+  element: Element | null | undefined,
+  config: MutationObserverInit,
+  callback?: MutationCallback,
+): MutationRecord[] | void {
+  const [records, setRecords] = useState<MutationRecord[] | null>(null)
+  const handler = useEventCallback(callback || setRecords)
 
   useCustomEffect(
     () => {
@@ -47,7 +75,7 @@ function useMutationObserver(
       // observing again _should_ disable the last listener but doesn't
       // seem to always be the case, maybe just in JSDOM? In any case the cost
       // to redeclaring it is gonna be fairly low anyway, so make it simple
-      const observer = new MutationObserver(fn)
+      const observer = new MutationObserver(handler)
 
       observer.observe(element, config)
 
@@ -63,6 +91,8 @@ function useMutationObserver(
       effectHook: useImmediateUpdateEffect,
     },
   )
+
+  return callback ? void 0 : records || []
 }
 
 export default useMutationObserver
