@@ -4,7 +4,7 @@ import useBreakpoint, {
 } from '../src/useBreakpoint'
 
 import React from 'react'
-import { mount } from 'enzyme'
+import { renderHook, act } from '@testing-library/react-hooks'
 
 interface Props {
   breakpoint: DefaultBreakpointMap
@@ -41,16 +41,12 @@ describe('useBreakpoint', () => {
   `(
     'should match: $expected with config: $config at window width: $width',
     ({ width, expected, config }) => {
-      let actual: boolean
-
       window.resizeTo(width, window.innerHeight)
 
-      const Wrapper = () => {
-        actual = useBreakpoint(config)
-        return null
-      }
-      mount(<Wrapper />).unmount()
-      expect(actual!).toEqual(expected)
+      const { result, unmount } = renderHook(() => useBreakpoint(config))
+
+      expect(result.current).toEqual(expected)
+      unmount()
     },
   )
 
@@ -61,11 +57,7 @@ describe('useBreakpoint', () => {
       md: 700,
     })
 
-    const Wrapper = () => {
-      useCustomBreakpoint('sm')
-      return null
-    }
-    mount(<Wrapper />).unmount()
+    renderHook(() => useCustomBreakpoint('sm'))
 
     expect(matchMediaSpy).toBeCalled()
     expect(matchMediaSpy.mock.calls[0][0]).toEqual(
@@ -80,11 +72,7 @@ describe('useBreakpoint', () => {
       md: '70rem',
     })
 
-    const Wrapper = () => {
-      useCustomBreakpoint('sm')
-      return null
-    }
-    mount(<Wrapper />).unmount()
+    renderHook(() => useCustomBreakpoint('sm'))
 
     expect(matchMediaSpy).toBeCalled()
     expect(matchMediaSpy.mock.calls[0][0]).toEqual(
@@ -98,11 +86,7 @@ describe('useBreakpoint', () => {
       md: 400,
     })
 
-    const Wrapper = () => {
-      useCustomBreakpoint({ sm: 'up', md: 'up' })
-      return null
-    }
-    mount(<Wrapper />).unmount()
+    renderHook(() => useCustomBreakpoint({ sm: 'up', md: 'up' }))
 
     expect(matchMediaSpy.mock.calls[0][0]).toEqual('(min-width: 400px)')
   })
