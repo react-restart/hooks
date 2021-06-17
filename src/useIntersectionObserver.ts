@@ -9,11 +9,15 @@ import useEventCallback from './useEventCallback'
  * a DOM Element that returns it's entries as they arrive.
  *
  * @param element The DOM element to observe
- * @param init IntersectionObserver options
+ * @param init IntersectionObserver options with a notable change,
+ * unlike a plain IntersectionObserver `root: null` means "not provided YET",
+ * and the hook will wait until it receives a non-null value to set up the observer.
+ * This change allows for easier syncing of element and root values in a React
+ * context.
  */
 function useIntersectionObserver<TElement extends Element>(
   element: TElement | null | undefined,
-  options: IntersectionObserverInit,
+  options?: IntersectionObserverInit,
 ): IntersectionObserverEntry[]
 /**
  * Setup an [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) on
@@ -22,16 +26,21 @@ function useIntersectionObserver<TElement extends Element>(
  *
  * @param element The DOM element to observe
  * @param callback A listener for intersection updates.
- * @param init IntersectionObserver options
+ * @param init IntersectionObserver options with a notable change,
+ * unlike a plain IntersectionObserver `root: null` means "not provided YET",
+ * and the hook will wait until it receives a non-null value to set up the observer.
+ * This change allows for easier syncing of element and root values in a React
+ * context.
+ *
  */
 function useIntersectionObserver<TElement extends Element>(
   element: TElement | null | undefined,
   callback: IntersectionObserverCallback,
-  options: IntersectionObserverInit,
+  options?: IntersectionObserverInit,
 ): void
 function useIntersectionObserver<TElement extends Element>(
   element: TElement | null | undefined,
-  callbackOrOptions: IntersectionObserverCallback | IntersectionObserverInit,
+  callbackOrOptions?: IntersectionObserverCallback | IntersectionObserverInit,
   maybeOptions?: IntersectionObserverInit,
 ): void | IntersectionObserverEntry[] {
   let callback: IntersectionObserverCallback | undefined
@@ -47,8 +56,10 @@ function useIntersectionObserver<TElement extends Element>(
 
   const handler = useEventCallback(callback || setEntry)
 
+  // We wait for element to exist before constructing
   const observer = useStableMemo(
     () =>
+      root !== null &&
       typeof IntersectionObserver !== 'undefined' &&
       new IntersectionObserver(handler, {
         threshold,
