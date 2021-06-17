@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-
-import { mount } from 'enzyme'
-
+import { renderHook, act } from '@testing-library/react-hooks'
 import useInterval from '../src/useInterval'
 
 describe('useTimeout', () => {
@@ -11,17 +9,21 @@ describe('useTimeout', () => {
     let spy = jest.fn()
 
     function Wrapper() {
-      useInterval(spy, 100);
+      useInterval(spy, 100)
 
       return <span />
     }
 
-    mount(<Wrapper />)
+    renderHook(() => useInterval(spy, 100))
 
     expect(spy).not.toHaveBeenCalled()
-    jest.runOnlyPendingTimers()
+    act(() => {
+      jest.runOnlyPendingTimers()
+    })
     expect(spy).toHaveBeenCalledTimes(1)
-    jest.runOnlyPendingTimers()
+    act(() => {
+      jest.runOnlyPendingTimers()
+    })
     expect(spy).toHaveBeenCalledTimes(2)
   })
 
@@ -29,13 +31,7 @@ describe('useTimeout', () => {
     jest.useFakeTimers()
     let spy = jest.fn()
 
-    function Wrapper() {
-      useInterval(spy, 100, false, true);
-
-      return <span />
-    }
-
-    mount(<Wrapper />)
+    renderHook(() => useInterval(spy, 100, false, true))
 
     expect(spy).toHaveBeenCalledTimes(1)
   })
@@ -44,13 +40,7 @@ describe('useTimeout', () => {
     jest.useFakeTimers()
     let spy = jest.fn()
 
-    function Wrapper() {
-      useInterval(spy, 100, true);
-
-      return <span />
-    }
-
-    mount(<Wrapper />)
+    renderHook(() => useInterval(spy, 100, true))
 
     jest.runOnlyPendingTimers()
     expect(spy).not.toHaveBeenCalled()
@@ -60,14 +50,9 @@ describe('useTimeout', () => {
     jest.useFakeTimers()
     let spy = jest.fn()
 
-    function Wrapper() {
-      useInterval(spy, 100);
+    const { unmount } = renderHook(() => useInterval(spy, 100))
 
-      return <span />
-    }
-
-    const wrapper = mount(<Wrapper />)
-    wrapper.unmount()
+    unmount()
 
     jest.runOnlyPendingTimers()
     expect(spy).not.toHaveBeenCalled()

@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react'
-import { mount } from 'enzyme'
-
+import { renderHook, act } from '@testing-library/react-hooks'
 import useAnimationFrame from '../src/useAnimationFrame'
 
 describe('useAnimationFrame', () => {
@@ -9,13 +7,13 @@ describe('useAnimationFrame', () => {
   beforeAll(() => {
     rafSpy = jest
       .spyOn(window, 'requestAnimationFrame')
-      .mockImplementation(cb => {
-        return setTimeout(() => cb(1))
+      .mockImplementation((cb) => {
+        return setTimeout(() => cb(1)) as any
       })
 
     rafCancelSpy = jest
       .spyOn(window, 'cancelAnimationFrame')
-      .mockImplementation(handle => {
+      .mockImplementation((handle) => {
         clearTimeout(handle)
       })
   })
@@ -29,17 +27,10 @@ describe('useAnimationFrame', () => {
     jest.useFakeTimers()
 
     let spy = jest.fn()
-    let animationFrame: ReturnType<typeof useAnimationFrame>
 
-    function Wrapper() {
-      animationFrame = useAnimationFrame()
+    const { result } = renderHook(useAnimationFrame)
 
-      return <span />
-    }
-
-    mount(<Wrapper />)
-
-    animationFrame!.request(spy)
+    act(() => result.current!.request(spy))
 
     expect(spy).not.toHaveBeenCalled()
 
@@ -52,20 +43,13 @@ describe('useAnimationFrame', () => {
     jest.useFakeTimers()
 
     let spy = jest.fn()
-    let animationFrame: ReturnType<typeof useAnimationFrame>
+    const { result } = renderHook(useAnimationFrame)
 
-    function Wrapper() {
-      animationFrame = useAnimationFrame()
+    act(() => {
+      result.current.request(spy)
 
-      return <span />
-    }
-
-    mount(<Wrapper />)
-
-    animationFrame!.request(spy)
-
-    animationFrame!.cancel()
-
+      result.current.cancel()
+    })
     jest.runAllTimers()
 
     expect(spy).toHaveBeenCalledTimes(0)
@@ -75,19 +59,11 @@ describe('useAnimationFrame', () => {
     jest.useFakeTimers()
 
     let spy = jest.fn()
-    let animationFrame: ReturnType<typeof useAnimationFrame>
+    const { result, unmount } = renderHook(useAnimationFrame)
 
-    function Wrapper() {
-      animationFrame = useAnimationFrame()
+    act(() => result.current!.request(spy))
 
-      return <span />
-    }
-
-    const wrapper = mount(<Wrapper />)
-
-    animationFrame!.request(spy)
-
-    wrapper.unmount()
+    unmount()
 
     jest.runAllTimers()
 

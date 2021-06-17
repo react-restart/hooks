@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { act } from 'react-dom/test-utils'
-
 import { mount } from 'enzyme'
 
 import useCallbackRef from '../src/useCallbackRef'

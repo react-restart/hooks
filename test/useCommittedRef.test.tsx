@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { mount } from 'enzyme'
+import { useEffect } from 'react'
+import { renderHook } from '@testing-library/react-hooks'
 import useCommittedRef from '../src/useCommittedRef'
 
 describe('useCommittedRef', () => {
@@ -16,9 +16,20 @@ describe('useCommittedRef', () => {
 
     const spyA = jest.fn()
     const spyB = jest.fn()
-    const wrapper = mount(<Foo fn={spyA} />)
 
-    wrapper.setProps({ fn: spyB })
+    const { rerender } = renderHook(
+      (fn) => {
+        const fnRef = useCommittedRef<any>(fn)
+
+        useEffect(() => {
+          fnRef.current()
+        })
+      },
+      { initialProps: spyA },
+    )
+
+    rerender(spyB)
+
     expect(spyA).toHaveBeenCalledTimes(1)
     expect(spyB).toHaveBeenCalledTimes(1)
   })
