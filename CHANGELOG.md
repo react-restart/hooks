@@ -1,3 +1,20 @@
+# [0.4.0](https://github.com/jquense/react-common-hooks/compare/v0.3.27...v0.4.0) (2021-06-17)
+
+
+### Features
+
+* **useIntersectionObserver:** allow lazy roots ([4c8b77a](https://github.com/jquense/react-common-hooks/commit/4c8b77acdabeef2e2eef199e0f418ee4117b6d08))
+* **useIntersectionObserver:** allow lazy roots ([#53](https://github.com/jquense/react-common-hooks/issues/53)) ([6b035cf](https://github.com/jquense/react-common-hooks/commit/6b035cf74868b381e23e69a144fd60ce06f72264))
+
+
+### BREAKING CHANGES
+
+* **useIntersectionObserver:** `null` in the native API means "the window", this is a departure to allow a consumer to hold off setting up the observer until the have a ref to the root. This was possible before by explicitly setting element to `null` until the root is available but still created an extra observer
+
+
+
+
+
 ## [0.3.27](https://github.com/jquense/react-common-hooks/compare/v0.3.26...v0.3.27) (2021-06-16)
 
 
