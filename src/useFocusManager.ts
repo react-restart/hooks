@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import useEventCallback from './useEventCallback'
 import useMounted from './useMounted'
 
@@ -52,6 +52,7 @@ export interface FocusController {
  *   </div>
  * ```
  *
+ * @returns a memoized FocusController containing event handlers
  */
 export default function useFocusManager(
   opts: FocusManagerOptions,
@@ -89,18 +90,24 @@ export default function useFocusManager(
   )
 
   const handleBlur = useCallback(
-    event => {
+    (event) => {
       if (!isDisabled()) handleFocusChange(false, event)
     },
     [handleFocusChange, isDisabled],
   )
 
   const handleFocus = useCallback(
-    event => {
+    (event) => {
       if (!isDisabled()) handleFocusChange(true, event)
     },
     [handleFocusChange, isDisabled],
   )
 
-  return { onBlur: handleBlur, onFocus: handleFocus }
+  return useMemo(
+    () => ({
+      onBlur: handleBlur,
+      onFocus: handleFocus,
+    }),
+    [handleBlur, handleFocus],
+  )
 }
