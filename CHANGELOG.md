@@ -1,3 +1,19 @@
+## [0.4.1](https://github.com/jquense/react-common-hooks/compare/v0.4.0...v0.4.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* **useFocusManager:** memo returned handlers ([410bd5a](https://github.com/jquense/react-common-hooks/commit/410bd5a10588754319a8d0a8717399aca85b1947))
+
+
+### Features
+
+* add useDebouncedValue ([362dedf](https://github.com/jquense/react-common-hooks/commit/362dedf9ace6244b4766a0128f3afe1c1305ffb6))
+
+
+
+
+
 # [0.4.0](https://github.com/jquense/react-common-hooks/compare/v0.3.27...v0.4.0) (2021-06-17)
 
 
