@@ -11,12 +11,15 @@ const matchers = new Map<string, RefCountedMediaQueryList>()
 
 const getMatcher = (
   query: string | null,
+  targetWindow: Window | undefined = typeof window === 'undefined'
+    ? undefined
+    : window,
 ): RefCountedMediaQueryList | undefined => {
-  if (!query || typeof window == 'undefined') return undefined
+  if (!query || !targetWindow) return undefined
 
   let mql = matchers.get(query)
   if (!mql) {
-    mql = window.matchMedia(query) as RefCountedMediaQueryList
+    mql = targetWindow.matchMedia(query) as RefCountedMediaQueryList
     mql.refCount = 0
     matchers.set(mql.media, mql)
   }
@@ -39,14 +42,18 @@ const getMatcher = (
  * will only create a matcher once under the hood.
  *
  * @param query A media query
+ * @param targetWindow The window to match against, uses the globally available one as a default.
  */
-export default function useMediaQuery(query: string | null) {
-  const mql = getMatcher(query)
+export default function useMediaQuery(
+  query: string | null,
+  targetWindow?: Window,
+) {
+  const mql = getMatcher(query, targetWindow)
 
   const [matches, setMatches] = useState(() => (mql ? mql.matches : false))
 
   useEffect(() => {
-    let mql = getMatcher(query)
+    let mql = getMatcher(query, targetWindow)
     if (!mql) {
       return setMatches(false)
     }
