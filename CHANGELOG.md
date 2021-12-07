@@ -1,3 +1,14 @@
+## [0.4.4](https://github.com/jquense/react-common-hooks/compare/v0.4.3...v0.4.4) (2021-12-07)
+
+
+### Bug Fixes
+
+* use targetWindow ([6c8fc0d](https://github.com/jquense/react-common-hooks/commit/6c8fc0d05ee94eda479dc11b4d1ee6ed4dbf8fc2))
+
+
+
+
+
 ## [0.4.3](https://github.com/jquense/react-common-hooks/compare/v0.4.2...v0.4.3) (2021-12-07)
 
 
