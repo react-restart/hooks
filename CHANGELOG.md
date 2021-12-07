@@ -1,3 +1,14 @@
+## [0.4.3](https://github.com/jquense/react-common-hooks/compare/v0.4.2...v0.4.3) (2021-12-07)
+
+
+### Bug Fixes
+
+* store matchers per window ([6509df8](https://github.com/jquense/react-common-hooks/commit/6509df84abf35cc20faceea3db8a37121e3b7a61))
+
+
+
+
+
 ## [0.4.2](https://github.com/jquense/react-common-hooks/compare/v0.4.1...v0.4.2) (2021-12-07)
 
 

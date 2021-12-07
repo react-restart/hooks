@@ -1,6 +1,6 @@
 {
   "name": "@restart/hooks",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "main": "lib/cjs/index.js",
   "types": "lib/cjs/index.d.ts",
   "module": "lib/esm/index.js",
