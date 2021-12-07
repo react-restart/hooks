@@ -4,18 +4,21 @@ import { useState } from 'react'
 interface RefCountedMediaQueryList extends MediaQueryList {
   refCount: number
 }
-
-const isBool = (a: any): a is boolean => typeof a === 'boolean'
-
-const matchers = new Map<string, RefCountedMediaQueryList>()
+const matchersByWindow = new WeakMap<
+  Window,
+  Map<string, RefCountedMediaQueryList>
+>()
 
 const getMatcher = (
   query: string | null,
-  targetWindow: Window | undefined = typeof window === 'undefined'
-    ? undefined
-    : window,
+  targetWindow?: Window,
 ): RefCountedMediaQueryList | undefined => {
   if (!query || !targetWindow) return undefined
+
+  const matchers =
+    matchersByWindow.get(window) || new Map<string, RefCountedMediaQueryList>()
+
+  matchersByWindow.set(targetWindow, matchers)
 
   let mql = matchers.get(query)
   if (!mql) {
@@ -46,7 +49,9 @@ const getMatcher = (
  */
 export default function useMediaQuery(
   query: string | null,
-  targetWindow?: Window,
+  targetWindow: Window | undefined = typeof window === 'undefined'
+    ? undefined
+    : window,
 ) {
   const mql = getMatcher(query, targetWindow)
 
@@ -57,6 +62,8 @@ export default function useMediaQuery(
     if (!mql) {
       return setMatches(false)
     }
+
+    let matchers = matchersByWindow.get(targetWindow!)
 
     const handleChange = () => {
       setMatches(mql!.matches)
@@ -71,7 +78,7 @@ export default function useMediaQuery(
       mql!.removeListener(handleChange)
       mql!.refCount--
       if (mql!.refCount <= 0) {
-        matchers.delete(mql!.media)
+        matchers?.delete(mql!.media)
       }
       mql = undefined
     }
