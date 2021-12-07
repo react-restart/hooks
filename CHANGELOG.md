@@ -1,3 +1,19 @@
+## [0.4.2](https://github.com/jquense/react-common-hooks/compare/v0.4.1...v0.4.2) (2021-12-07)
+
+
+### Bug Fixes
+
+* minor typo in useCommittedRef ([#59](https://github.com/jquense/react-common-hooks/issues/59)) ([0ceb834](https://github.com/jquense/react-common-hooks/commit/0ceb8347527e46dba115c62578a0485da8f46e22))
+
+
+### Features
+
+* allow specifying window with useMedia/useBreakpoint ([#61](https://github.com/jquense/react-common-hooks/issues/61)) ([bf9716d](https://github.com/jquense/react-common-hooks/commit/bf9716da21aff239baf02da11671cb5caf081ccf))
+
+
+
+
+
 ## [0.4.1](https://github.com/jquense/react-common-hooks/compare/v0.4.0...v0.4.1) (2021-09-27)
 
 
