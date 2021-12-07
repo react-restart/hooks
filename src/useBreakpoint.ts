@@ -76,8 +76,12 @@ export function createBreakpointHook<TKey extends string>(
    * ```
    * @param breakpointMap An object map of breakpoints and directions, queries are constructed using "and" to join
    * breakpoints together
+   * @param window Optionally specify the target window to match against (useful when rendering into iframes)
    */
-  function useBreakpoint(breakpointMap: BreakpointMap<TKey>): boolean
+  function useBreakpoint(
+    breakpointMap: BreakpointMap<TKey>,
+    window?: Window,
+  ): boolean
   /**
    * Match a single breakpoint exactly, up, or down.
    *
@@ -92,20 +96,26 @@ export function createBreakpointHook<TKey extends string>(
    *
    * @param breakpoint The breakpoint key
    * @param direction A direction 'up' for a max, 'down' for min, true to match only the breakpoint
+   * @param window Optionally specify the target window to match against (useful when rendering into iframes)
    */
   function useBreakpoint(
     breakpoint: TKey,
     direction?: BreakpointDirection,
+    window?: Window,
   ): boolean
   function useBreakpoint(
     breakpointOrMap: TKey | BreakpointMap<TKey>,
-    direction: BreakpointDirection = true,
+    direction?: BreakpointDirection | Window,
+    window?: Window,
   ): boolean {
     let breakpointMap: BreakpointMap<TKey>
 
     if (typeof breakpointOrMap === 'object') {
       breakpointMap = breakpointOrMap
+      window = direction as Window
+      direction = true
     } else {
+      direction = direction || true
       breakpointMap = { [breakpointOrMap]: direction } as Record<
         TKey,
         BreakpointDirection
@@ -130,7 +140,7 @@ export function createBreakpointHook<TKey extends string>(
       [JSON.stringify(breakpointMap)],
     )
 
-    return useMediaQuery(query)
+    return useMediaQuery(query, window)
   }
 
   return useBreakpoint
