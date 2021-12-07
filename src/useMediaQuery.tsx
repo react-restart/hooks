@@ -16,7 +16,8 @@ const getMatcher = (
   if (!query || !targetWindow) return undefined
 
   const matchers =
-    matchersByWindow.get(window) || new Map<string, RefCountedMediaQueryList>()
+    matchersByWindow.get(targetWindow) ||
+    new Map<string, RefCountedMediaQueryList>()
 
   matchersByWindow.set(targetWindow, matchers)
 
