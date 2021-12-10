@@ -1,3 +1,14 @@
+## [0.4.5](https://github.com/jquense/react-common-hooks/compare/v0.4.4...v0.4.5) (2021-12-10)
+
+
+### Features
+
+* add useUpdateLayoutEffect ([1914f7e](https://github.com/jquense/react-common-hooks/commit/1914f7e55449505e88e8e93a06ad71bd58b7e9a4))
+
+
+
+
+
 ## [0.4.4](https://github.com/jquense/react-common-hooks/compare/v0.4.3...v0.4.4) (2021-12-07)
 
 
