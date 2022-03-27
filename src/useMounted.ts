@@ -23,11 +23,11 @@ import { useRef, useEffect } from 'react'
 export default function useMounted(): () => boolean {
   const mounted = useRef(true)
   const isMounted = useRef(() => mounted.current)
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    mounted.current = true
+    return () => {
       mounted.current = false
-    },
-    [],
-  )
+    }
+  }, [])
   return isMounted.current
 }
