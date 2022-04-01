@@ -1,3 +1,14 @@
+## [0.4.6](https://github.com/jquense/react-common-hooks/compare/v0.4.5...v0.4.6) (2022-04-01)
+
+
+### Bug Fixes
+
+* **useMounted:** adjust to work with strict effects ([#70](https://github.com/jquense/react-common-hooks/issues/70)) ([8deba46](https://github.com/jquense/react-common-hooks/commit/8deba46157fd8d73194cbd6ad81e5a6d575bf5d4))
+
+
+
+
+
 ## [0.4.5](https://github.com/jquense/react-common-hooks/compare/v0.4.4...v0.4.5) (2021-12-10)
 
 
