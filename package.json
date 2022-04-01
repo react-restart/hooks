@@ -24,7 +24,8 @@
     "build:pick": "cherry-pick --name=@restart/hooks --cwd=lib --input-dir=../src --cjs-dir=cjs --esm-dir=esm",
     "build": "rimraf lib && 4c build src && yarn build:pick",
     "deploy-docs": "yarn --cwd www build --prefix-paths && gh-pages -d www/public",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "release": "rollout"
   },
   "jest": {
     "preset": "@4c",
