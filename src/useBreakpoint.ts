@@ -146,7 +146,7 @@ export function createBreakpointHook<TKey extends string>(
   return useBreakpoint
 }
 
-export type DefaultBreakpoints = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type DefaultBreakpoints = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 export type DefaultBreakpointMap = BreakpointMap<DefaultBreakpoints>
 
 const useBreakpoint = createBreakpointHook<DefaultBreakpoints>({
@@ -155,6 +155,7 @@ const useBreakpoint = createBreakpointHook<DefaultBreakpoints>({
   md: 768,
   lg: 992,
   xl: 1200,
+  xxl: 1400,
 })
 
 export default useBreakpoint
