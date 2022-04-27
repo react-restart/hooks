@@ -1,3 +1,14 @@
+## [0.4.7](https://github.com/jquense/react-common-hooks/compare/v0.4.6...v0.4.7) (2022-04-27)
+
+
+### Features
+
+* **useBreakpoint:** add xxl breakpoint ([#75](https://github.com/jquense/react-common-hooks/issues/75)) ([8021cea](https://github.com/jquense/react-common-hooks/commit/8021ceacaf34304e460193faf1ff8c5e31f43db1))
+
+
+
+
+
 ## [0.4.6](https://github.com/jquense/react-common-hooks/compare/v0.4.5...v0.4.6) (2022-04-01)
 
 
