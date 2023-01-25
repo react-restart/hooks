@@ -10,7 +10,7 @@ import useTimeout from './useTimeout'
  */
 export default function useDebouncedCallback<
   TCallback extends (...args: any[]) => any
->(fn: TCallback, delay: number): TCallback {
+>(fn: TCallback, delay: number): (...args: Parameters<TCallback>) => void {
   const timeout = useTimeout()
   return useCallback(
     (...args: any[]) => {
@@ -19,5 +19,5 @@ export default function useDebouncedCallback<
       }, delay)
     },
     [fn, delay],
-  ) as any
+  )
 }
