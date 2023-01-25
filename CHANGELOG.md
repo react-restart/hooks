@@ -1,3 +1,14 @@
+## [0.4.8](https://github.com/jquense/react-common-hooks/compare/v0.4.7...v0.4.8) (2023-01-25)
+
+
+### Bug Fixes
+
+* **useDebouncedCallback:** fix return type ([#85](https://github.com/jquense/react-common-hooks/issues/85)) ([f2e26a0](https://github.com/jquense/react-common-hooks/commit/f2e26a0cbf8753f3c5964452b05b50721e5b3ca3))
+
+
+
+
+
 ## [0.4.7](https://github.com/jquense/react-common-hooks/compare/v0.4.6...v0.4.7) (2022-04-27)
 
 
