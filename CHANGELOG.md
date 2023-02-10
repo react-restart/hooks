@@ -1,3 +1,14 @@
+## [0.4.9](https://github.com/jquense/react-common-hooks/compare/v0.4.8...v0.4.9) (2023-02-10)
+
+
+### Features
+
+* add exports field in package.json ([#88](https://github.com/jquense/react-common-hooks/issues/88)) ([1c325b0](https://github.com/jquense/react-common-hooks/commit/1c325b08a693ae9efa8cbfac6cc8d5884d2d238f))
+
+
+
+
+
 ## [0.4.8](https://github.com/jquense/react-common-hooks/compare/v0.4.7...v0.4.8) (2023-01-25)
 
 
