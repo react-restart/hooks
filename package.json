@@ -4,6 +4,18 @@
   "main": "lib/cjs/index.js",
   "types": "lib/cjs/index.d.ts",
   "module": "lib/esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./esm/index.d.ts",
+      "import": "./esm/index.js",
+      "require": "./cjs/index.js"
+    },
+    "./*": {
+      "types": "./esm/*.d.ts",
+      "import": "./esm/*.js",
+      "require": "./cjs/*.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jquense/react-common-hooks.git"
