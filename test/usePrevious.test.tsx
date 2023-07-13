@@ -1,22 +1,17 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import usePrevious from '../src/usePrevious'
+import { renderHook } from '@testing-library/react-hooks'
 
 describe('usePrevious', () => {
   it('should return a function that returns mount state', () => {
-    let prevFoo
+    const wrapper = renderHook(({ foo }) => usePrevious(foo), {
+      initialProps: { foo: true },
+    })
 
-    function Wrapper({ foo }) {
-      prevFoo = usePrevious(foo)
-      return <span />
-    }
+    expect(wrapper.result.current).toEqual(null)
 
-    const wrapper = mount(<Wrapper foo={true} />)
+    wrapper.rerender({ foo: false })
 
-    expect(prevFoo).toEqual(null)
-
-    wrapper.setProps({ foo: false })
-
-    expect(prevFoo).toEqual(true)
+    expect(wrapper.result.current).toEqual(true)
   })
 })

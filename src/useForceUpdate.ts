@@ -18,7 +18,7 @@ import { useReducer } from 'react'
  */
 export default function useForceUpdate(): () => void {
   // The toggling state value is designed to defeat React optimizations for skipping
-  // updates when they are stricting equal to the last state value
+  // updates when they are strictly equal to the last state value
   const [, dispatch] = useReducer((state: boolean) => !state, false)
   return dispatch as () => void
 }

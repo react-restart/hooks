@@ -1,18 +1,24 @@
-import { ReactWrapper, mount } from 'enzyme'
+import { renderHook as baseRenderHook } from '@testing-library/react-hooks'
 import React from 'react'
+
+type ReactWrapper<P> = {
+  setProps(props: Partial<P>): void
+  unmount(): void
+}
 
 export function renderHook<T extends (props: P) => any, P = any>(
   fn: T,
   initialProps?: P,
 ): [ReturnType<T>, ReactWrapper<P>] {
-  const result = Array(2) as any
+  const { rerender, result, unmount } = baseRenderHook(fn, { initialProps })
 
-  function Wrapper(props: any) {
-    result[0] = fn(props)
-    return <span />
-  }
-
-  result[1] = mount(<Wrapper {...initialProps} />)
-
-  return result
+  return [
+    result.current,
+    {
+      unmount,
+      setProps(props: P) {
+        rerender({ ...initialProps, ...props })
+      },
+    },
+  ]
 }

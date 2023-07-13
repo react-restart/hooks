@@ -1,8 +1,4 @@
-import Enzyme from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
 import matchMediaPolyfill from 'mq-polyfill'
-
-Enzyme.configure({ adapter: new Adapter() })
 
 // https://github.com/bigslycat/mq-polyfill
 
@@ -32,7 +28,7 @@ function onError(e) {
   actualErrors += 1
 }
 
-expect.errors = num => {
+expect.errors = (num) => {
   expectedErrors = num
 }
 

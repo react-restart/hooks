@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react'
-
-import { mount } from 'enzyme'
+import React from 'react'
 
 import useWillUnmount from '../src/useWillUnmount'
+import { renderHook } from '@testing-library/react-hooks'
 
 describe('useWillUnmount', () => {
   it('should return a function that returns mount state', () => {
     let spy = jest.fn()
 
-    function Wrapper() {
-      useWillUnmount(spy)
-      return <span />
-    }
-
-    const wrapper = mount(<Wrapper />)
+    const wrapper = renderHook(() => useWillUnmount(spy))
 
     expect(spy).not.toHaveBeenCalled()
 

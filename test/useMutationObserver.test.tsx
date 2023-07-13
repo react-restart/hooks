@@ -1,7 +1,7 @@
 import useMutationObserver from '../src/useMutationObserver'
 import useCallbackRef from '../src/useCallbackRef'
 import React from 'react'
-import { mount } from 'enzyme'
+import { act, render } from '@testing-library/react'
 
 describe('useMutationObserver', () => {
   it('should add a mutation observer', async () => {
@@ -16,11 +16,13 @@ describe('useMutationObserver', () => {
       return <div ref={attachRef} {...props} />
     }
 
-    const wrapper = mount(<Wrapper />)
+    const wrapper = render(<Wrapper />)
 
     expect(spy).toHaveBeenCalledTimes(0)
 
-    wrapper.setProps({ role: 'button' })
+    act(() => {
+      wrapper.rerender(<Wrapper role="button" />)
+    })
 
     await Promise.resolve()
 
@@ -50,7 +52,7 @@ describe('useMutationObserver', () => {
 
     disconnentSpy = jest.spyOn(MutationObserver.prototype, 'disconnect')
 
-    function Wrapper({ attributeFilter, ...props }) {
+    function Wrapper({ attributeFilter, ...props }: any) {
       const [el, attachRef] = useCallbackRef<HTMLElement>()
 
       useMutationObserver(el, { attributes: true, attributeFilter }, spy)
@@ -58,15 +60,17 @@ describe('useMutationObserver', () => {
       return <div ref={attachRef} {...props} />
     }
 
-    const wrapper = mount(<Wrapper attributeFilter={['data-name']} />)
+    const wrapper = render(<Wrapper attributeFilter={['data-name']} />)
 
-    wrapper.setProps({ role: 'presentation' })
+    wrapper.rerender(
+      <Wrapper attributeFilter={['data-name']} role="presentation" />,
+    )
 
     await Promise.resolve()
 
     expect(spy).toHaveBeenCalledTimes(0)
 
-    wrapper.setProps({ attributeFilter: undefined, role: 'button' })
+    wrapper.rerender(<Wrapper role="button" />)
 
     await Promise.resolve()
 

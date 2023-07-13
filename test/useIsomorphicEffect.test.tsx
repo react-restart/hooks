@@ -1,6 +1,6 @@
-import React, { useLayoutEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
-import { mount } from 'enzyme'
+import { renderHook } from '@testing-library/react-hooks'
 import useIsomorphicEffect from '../src/useIsomorphicEffect'
 
 describe('useIsomorphicEffect', () => {
@@ -9,12 +9,10 @@ describe('useIsomorphicEffect', () => {
 
     expect(useIsomorphicEffect).toEqual(useLayoutEffect)
 
-    const Wrapper = () => {
+    renderHook(() => {
       useIsomorphicEffect(spy)
-      return null
-    }
+    })
 
-    mount(<Wrapper />)
     expect(spy).toBeCalled()
   })
 })

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { act } from 'react-dom/test-utils'
-import { mount } from 'enzyme'
+import { render, act } from '@testing-library/react'
 
 import useCallbackRef from '../src/useCallbackRef'
 
@@ -20,18 +19,18 @@ describe('useCallbackRef', () => {
       return toggle ? <div ref={attachRef} /> : <span ref={attachRef} />
     }
 
-    const wrapper = mount(<Wrapper toggle={false} />)
+    const wrapper = render(<Wrapper toggle={false} />)
 
-    expect(wrapper.children().type()).toEqual('span')
+    expect(wrapper.container.getElementsByTagName('span')).toHaveLength(1)
     expect(effectSpy).toHaveBeenLastCalledWith(
       expect.objectContaining({ tagName: 'SPAN' }),
     )
 
     act(() => {
-      wrapper.setProps({ toggle: true })
+      wrapper.rerender(<Wrapper toggle={true} />)
     })
 
-    expect(wrapper.children().type()).toEqual('div')
+    expect(wrapper.container.getElementsByTagName('div')).toHaveLength(1)
     expect(effectSpy).toHaveBeenLastCalledWith(
       expect.objectContaining({ tagName: 'DIV' }),
     )

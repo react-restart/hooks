@@ -1,6 +1,5 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import { act } from 'react-dom/test-utils'
+import { render, act } from '@testing-library/react'
 import useDebouncedState from '../src/useDebouncedState'
 
 describe('useDebouncedState', () => {
@@ -15,8 +14,8 @@ describe('useDebouncedState', () => {
       return <span>{value}</span>
     }
 
-    const wrapper = mount(<Wrapper />)
-    expect(wrapper.text()).toBe('0')
+    const wrapper = render(<Wrapper />)
+    expect(wrapper.getByText('0')).toBeTruthy()
 
     outerSetValue((cur: number) => cur + 1)
     outerSetValue((cur: number) => cur + 1)
@@ -24,12 +23,11 @@ describe('useDebouncedState', () => {
     outerSetValue((cur: number) => cur + 1)
     outerSetValue((cur: number) => cur + 1)
 
-    expect(wrapper.text()).toBe('0')
+    expect(wrapper.getByText('0')).toBeTruthy()
 
     act(() => {
       jest.runOnlyPendingTimers()
     })
-    
-    expect(wrapper.text()).toBe('1')
+    expect(wrapper.getByText('1')).toBeTruthy()
   })
 })

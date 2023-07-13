@@ -1,59 +1,46 @@
-import { mount } from 'enzyme'
-import React, { useEffect, useState } from 'react'
-import { act } from 'react-dom/test-utils'
+import React, { useState } from 'react'
 import useSafeState from '../src/useSafeState'
 import useStateAsync from '../src/useStateAsync'
+import { act, renderHook } from '@testing-library/react-hooks'
 
 describe('useSafeState', () => {
   it('should work transparently', () => {
-    let state
+    const { result, unmount } = renderHook(() => useSafeState(useState(false)))
 
-    function Wrapper() {
-      state = useSafeState(useState(false))
-      return null
-    }
-
-    const wrapper = mount(<Wrapper />)
-
-    expect(state[0]).toEqual(false)
+    expect(result.current[0]).toEqual(false)
 
     act(() => {
-      state[1](true)
+      result.current[1](true)
     })
-    expect(state[0]).toEqual(true)
+    expect(result.current[0]).toEqual(true)
 
-    wrapper.unmount()
+    unmount()
 
     act(() => {
-      state[1](false)
+      result.current[1](false)
     })
-    expect(state[0]).toEqual(true)
+    expect(result.current[0]).toEqual(true)
   })
 
   it('should work with async setState', async () => {
-    let state
+    const { result, unmount } = renderHook(() =>
+      useSafeState(useStateAsync(false)),
+    )
 
-    function Wrapper() {
-      state = useSafeState(useStateAsync(false))
-      return null
-    }
-
-    const wrapper = mount(<Wrapper />)
-
-    expect(state[0]).toEqual(false)
+    expect(result.current[0]).toEqual(false)
 
     await act(async () => {
-      await state[1](true)
+      await result.current[1](true)
     })
 
-    expect(state[0]).toEqual(true)
+    expect(result.current[0]).toEqual(true)
 
-    wrapper.unmount()
+    unmount()
 
     await act(async () => {
-      await state[1](true)
+      await result.current[1](true)
     })
 
-    expect(state[0]).toEqual(true)
+    expect(result.current[0]).toEqual(true)
   })
 })

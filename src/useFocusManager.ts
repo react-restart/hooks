@@ -90,14 +90,14 @@ export default function useFocusManager(
   )
 
   const handleBlur = useCallback(
-    (event) => {
+    (event: React.FocusEvent) => {
       if (!isDisabled()) handleFocusChange(false, event)
     },
     [handleFocusChange, isDisabled],
   )
 
   const handleFocus = useCallback(
-    (event) => {
+    (event: React.FocusEvent) => {
       if (!isDisabled()) handleFocusChange(true, event)
     },
     [handleFocusChange, isDisabled],

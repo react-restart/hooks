@@ -5,7 +5,7 @@ type Mapper<TProps, TState> = (
   state: TState,
 ) => null | Partial<TState>
 
-export default function useMergeStateFromProps<TProps, TState>(
+export default function useMergeStateFromProps<TProps, TState extends {}>(
   props: TProps,
   gDSFP: Mapper<TProps, TState>,
   initialState: TState,

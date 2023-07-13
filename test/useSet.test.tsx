@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import { act } from 'react-dom/test-utils'
 
-import { mount } from 'enzyme'
-
 import useSet, { ObservableSet } from '../src/useSet'
+import { render } from '@testing-library/react'
 
 describe('useSet', () => {
   describe('ObservableSet', () => {
@@ -65,24 +64,24 @@ describe('useSet', () => {
       return <span>{JSON.stringify(Array.from(set))}</span>
     }
 
-    const wrapper = mount(<Wrapper />)
+    const wrapper = render(<Wrapper />)
 
     act(() => {
       set.add('foo')
     })
 
-    expect(wrapper.text()).toEqual('["foo"]')
+    expect(wrapper.getByText('["foo"]')).toBeTruthy()
 
     act(() => {
       set.add('bar')
     })
 
-    expect(wrapper.text()).toEqual('["foo","bar"]')
+    expect(wrapper.getByText('["foo","bar"]')).toBeTruthy()
 
     act(() => {
       set.clear()
     })
 
-    expect(wrapper.text()).toEqual('[]')
+    expect(wrapper.getByText('[]')).toBeTruthy()
   })
 })

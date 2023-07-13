@@ -1,7 +1,7 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import { useCallbackRef } from '../src'
 import useMergedRefs from '../src/useMergedRefs'
+import { render } from '@testing-library/react'
 
 describe('useMergedRefs', () => {
   it('should return a function that returns mount state', () => {
@@ -17,11 +17,7 @@ describe('useMergedRefs', () => {
       return <button ref={mergedRef} {...props} />
     })
 
-    // enzyme swallows the ref
-    function Wrapper() {
-      return <Button ref={outerRef} />
-    }
-    mount(<Wrapper />)
+    const result = render(<Button ref={outerRef} />)
 
     expect(innerRef!.tagName).toEqual('BUTTON')
     expect(outerRef.current!.tagName).toEqual('BUTTON')
