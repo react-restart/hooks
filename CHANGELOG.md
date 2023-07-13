@@ -1,3 +1,14 @@
+## [0.4.10](https://github.com/jquense/react-common-hooks/compare/v0.4.9...v0.4.10) (2023-07-13)
+
+
+### Features
+
+* **useFocusManager:** fire focused change immediately ([#92](https://github.com/jquense/react-common-hooks/issues/92)) ([7bb6d5a](https://github.com/jquense/react-common-hooks/commit/7bb6d5ae74c40ff80b2fa5db06e21b7e970f7455))
+
+
+
+
+
 ## [0.4.9](https://github.com/jquense/react-common-hooks/compare/v0.4.8...v0.4.9) (2023-02-10)
 
 
