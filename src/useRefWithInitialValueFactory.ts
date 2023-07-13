@@ -17,7 +17,7 @@ const dft: unique symbol = Symbol('default value sigil')
 export default function useRefWithInitialValueFactory<T>(
   initialValueFactory: () => T,
 ) {
-  const ref = useRef<T>(dft as any)
+  const ref = useRef<T>(dft as T)
   if (ref.current === dft) {
     ref.current = initialValueFactory()
   }
