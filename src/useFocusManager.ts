@@ -67,47 +67,49 @@ export default function useFocusManager(
   const onChange = useEventCallback(opts.onChange)
   const isDisabled = useEventCallback(opts.isDisabled)
 
+  const handleChange = useCallback(
+    (focused: boolean, event: React.FocusEvent) => {
+      if (focused !== lastFocused.current) {
+        didHandle?.(focused, event)
+
+        // only fire a change when unmounted if its a blur
+        if (isMounted() || !focused) {
+          lastFocused.current = focused
+          onChange?.(focused, event)
+        }
+      }
+    },
+    [isMounted, didHandle, onChange, lastFocused],
+  )
+
   const handleFocusChange = useCallback(
     (focused: boolean, event: React.FocusEvent) => {
+      if (isDisabled()) return
       if (event && event.persist) event.persist()
 
-      if (willHandle && willHandle(focused, event) === false) return
-
+      if (willHandle?.(focused, event) === false) {
+        return
+      }
       clearTimeout(handle.current)
-      handle.current = window.setTimeout(() => {
-        if (focused !== lastFocused.current) {
-          if (didHandle) didHandle(focused, event)
 
-          // only fire a change when unmounted if its a blur
-          if (isMounted() || !focused) {
-            lastFocused.current = focused
-            onChange && onChange(focused, event)
-          }
-        }
-      })
+      if (focused) {
+        handleChange(focused, event)
+      } else {
+        handle.current = window.setTimeout(() => handleChange(focused, event))
+      }
     },
-    [isMounted, willHandle, didHandle, onChange, lastFocused],
-  )
-
-  const handleBlur = useCallback(
-    (event: React.FocusEvent) => {
-      if (!isDisabled()) handleFocusChange(false, event)
-    },
-    [handleFocusChange, isDisabled],
-  )
-
-  const handleFocus = useCallback(
-    (event: React.FocusEvent) => {
-      if (!isDisabled()) handleFocusChange(true, event)
-    },
-    [handleFocusChange, isDisabled],
+    [willHandle, handleChange],
   )
 
   return useMemo(
     () => ({
-      onBlur: handleBlur,
-      onFocus: handleFocus,
+      onBlur: (event: React.FocusEvent) => {
+        handleFocusChange(false, event)
+      },
+      onFocus: (event: React.FocusEvent) => {
+        handleFocusChange(true, event)
+      },
     }),
-    [handleBlur, handleFocus],
+    [handleFocusChange],
   )
 }
