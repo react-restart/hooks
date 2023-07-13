@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { mount } from 'enzyme'
-import { act } from 'react-dom/test-utils'
+
 import useDebouncedValue from '../src/useDebouncedValue'
+import { act, render } from '@testing-library/react'
 
 describe('useDebouncedValue', () => {
   it('should return a function that debounces input callback', () => {
@@ -18,21 +18,22 @@ describe('useDebouncedValue', () => {
       return <span>{debouncedValue}</span>
     }
 
+    const { rerender, getByText } = render(<Wrapper value={0} />)
+
     act(() => {
-      const wrapper = mount(<Wrapper value={0} />)
-      expect(wrapper.text()).toBe('0')
+      expect(getByText('0')).toBeTruthy()
 
-      wrapper.setProps({ value: 1 })
-      wrapper.setProps({ value: 2 })
-      wrapper.setProps({ value: 3 })
-      wrapper.setProps({ value: 4 })
-      wrapper.setProps({ value: 5 })
+      rerender(<Wrapper value={1} />)
+      rerender(<Wrapper value={2} />)
+      rerender(<Wrapper value={3} />)
+      rerender(<Wrapper value={4} />)
+      rerender(<Wrapper value={5} />)
 
-      expect(wrapper.text()).toBe('0')
+      expect(getByText('0')).toBeTruthy()
 
       jest.runAllTimers()
 
-      expect(wrapper.text()).toBe('5')
+      expect(getByText('5')).toBeTruthy()
       expect(count).toBe(2)
     })
   })

@@ -1,31 +1,23 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import { act } from 'react-dom/test-utils'
 import useToggleState from '../src/useToggleState'
+import { act, renderHook } from '@testing-library/react-hooks'
 
 describe('useToggleState', () => {
   it('should toggle', () => {
-    let toggleState: ReturnType<typeof useToggleState>
+    let { result } = renderHook(() => useToggleState(false))
 
-    function Wrapper({ initial }: { initial?: boolean }) {
-      toggleState = useToggleState(initial)
-      return <span />
-    }
+    expect(result.current![0]).toEqual(false)
 
-    const wrapper = mount(<Wrapper />)
+    act(() => result.current[1]())
 
-    expect(toggleState![0]).toEqual(false)
+    expect(result.current![0]).toEqual(true)
 
-    act(() => toggleState[1]())
+    act(() => result.current[1](true))
 
-    expect(toggleState![0]).toEqual(true)
+    expect(result.current![0]).toEqual(true)
 
-    act(() => toggleState[1](true))
+    act(() => result.current[1]())
 
-    expect(toggleState![0]).toEqual(true)
-
-    act(() => toggleState[1]())
-
-    expect(toggleState![0]).toEqual(false)
+    expect(result.current![0]).toEqual(false)
   })
 })

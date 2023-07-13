@@ -1,23 +1,14 @@
-import React from 'react'
-import { act } from 'react-dom/test-utils'
-import { mount } from 'enzyme'
 import useMounted from '../src/useMounted'
+import { renderHook } from '@testing-library/react-hooks'
 
 describe('useMounted', () => {
   it('should return a function that returns mount state', () => {
-    let isMounted
+    const { result, unmount } = renderHook(useMounted)
 
-    function Wrapper() {
-      isMounted = useMounted()
-      return <span />
-    }
+    expect(result.current()).toEqual(true)
 
-    const wrapper = mount(<Wrapper />)
+    unmount()
 
-    expect(isMounted()).toEqual(true)
-
-    wrapper.unmount()
-
-    expect(isMounted()).toEqual(false)
+    expect(result.current()).toEqual(false)
   })
 })

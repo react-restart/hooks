@@ -1,19 +1,18 @@
-import { act } from 'react-dom/test-utils'
+import { act, renderHook } from '@testing-library/react-hooks'
 import useForceUpdate from '../src/useForceUpdate'
-import { renderHook } from './helpers'
 
 describe('useForceUpdate', () => {
   it('should return a function that returns mount state', () => {
     let count = 0
 
-    const [forceUpdate] = renderHook(() => {
+    const { result } = renderHook(() => {
       count++
       return useForceUpdate()
     })
 
     expect(count).toEqual(1)
     act(() => {
-      forceUpdate()
+      result.current()
     })
 
     expect(count).toEqual(2)

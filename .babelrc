@@ -9,10 +9,11 @@
             "modules": false
           }
         ]
+        
       ]
     },
     "test": {
-      "presets": [["@4c", { "development": true }]]
+      "presets": [["@4c", { "development": true }],  "@babel/typescript"]
     }
   }
 }

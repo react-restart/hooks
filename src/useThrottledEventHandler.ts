@@ -38,9 +38,9 @@ export type ThrottledHandler<TEvent> = ((event: TEvent) => void) & {
  * @returns The event handler with a `clear` method attached for clearing any in-flight handler calls
  *
  */
-export default function useThrottledEventHandler<TEvent = SyntheticEvent>(
-  handler: (event: TEvent) => void,
-): ThrottledHandler<TEvent> {
+export default function useThrottledEventHandler<
+  TEvent extends object = SyntheticEvent
+>(handler: (event: TEvent) => void): ThrottledHandler<TEvent> {
   const isMounted = useMounted()
   const eventHandler = useEventCallback(handler)
 

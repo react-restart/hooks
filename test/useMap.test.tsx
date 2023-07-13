@@ -1,8 +1,7 @@
+import { act, render } from '@testing-library/react'
 import useMap, { ObservableMap } from '../src/useMap'
 
 import React from 'react'
-import { act } from 'react-dom/test-utils'
-import { mount } from 'enzyme'
 
 describe('useMap', () => {
   describe('ObservableMap', () => {
@@ -65,24 +64,24 @@ describe('useMap', () => {
       return <span>{JSON.stringify(Array.from(map.entries()))}</span>
     }
 
-    const wrapper = mount(<Wrapper />)
+    const wrapper = render(<Wrapper />)
 
     act(() => {
       map.set('foo', true)
     })
 
-    expect(wrapper.text()).toEqual('[["foo",true]]')
+    expect(wrapper.getByText('[["foo",true]]')).toBeTruthy()
 
     act(() => {
       map.set('bar', true)
     })
 
-    expect(wrapper.text()).toEqual('[["foo",true],["bar",true]]')
+    expect(wrapper.getByText('[["foo",true],["bar",true]]')).toBeTruthy()
 
     act(() => {
       map.clear()
     })
 
-    expect(wrapper.text()).toEqual('[]')
+    expect(wrapper.getByText('[]')).toBeTruthy()
   })
 })

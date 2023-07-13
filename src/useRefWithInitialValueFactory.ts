@@ -1,10 +1,10 @@
 import { useRef } from 'react'
 
-const dft: any = Symbol('default value sigil')
+const dft: unique symbol = Symbol('default value sigil')
 
 /**
  * Exactly the same as `useRef` except that the initial value is set via a
- * factroy function. Useful when the default is relatively costly to construct.
+ * factory function. Useful when the default is relatively costly to construct.
  *
  *  ```ts
  *  const ref = useRefWithInitialValueFactory<ExpensiveValue>(() => constructExpensiveValue())
@@ -17,7 +17,7 @@ const dft: any = Symbol('default value sigil')
 export default function useRefWithInitialValueFactory<T>(
   initialValueFactory: () => T,
 ) {
-  const ref = useRef<T>(dft)
+  const ref = useRef<T>(dft as T)
   if (ref.current === dft) {
     ref.current = initialValueFactory()
   }
