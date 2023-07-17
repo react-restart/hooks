@@ -1,5 +1,4 @@
 import { renderHook as baseRenderHook } from '@testing-library/react-hooks'
-import React from 'react'
 
 type ReactWrapper<P> = {
   setProps(props: Partial<P>): void
