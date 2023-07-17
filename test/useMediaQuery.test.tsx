@@ -1,5 +1,5 @@
 import useMediaQuery from '../src/useMediaQuery'
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react'
 
 describe('useMediaQuery', () => {
   it('should match immediately if possible', () => {

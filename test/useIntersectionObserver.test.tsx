@@ -1,5 +1,5 @@
 import useIntersectionObserver from '../src/useIntersectionObserver'
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react'
 
 describe('useIntersectionObserver', () => {
   let observers: any[] = []

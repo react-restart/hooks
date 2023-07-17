@@ -1,5 +1,5 @@
 import useDebouncedCallback from '../src/useDebouncedCallback'
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react'
 
 describe('useDebouncedCallback', () => {
   it('should return a function that debounces input callback', () => {

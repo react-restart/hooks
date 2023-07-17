@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import useCommittedRef from '../src/useCommittedRef'
 
 describe('useCommittedRef', () => {

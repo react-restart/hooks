@@ -1,7 +1,7 @@
 import React from 'react'
 
 import useWillUnmount from '../src/useWillUnmount'
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 describe('useWillUnmount', () => {
   it('should return a function that returns mount state', () => {

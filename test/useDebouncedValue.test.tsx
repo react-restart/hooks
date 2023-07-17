@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import useDebouncedValue from '../src/useDebouncedValue'
 import { act, render } from '@testing-library/react'
@@ -28,13 +28,15 @@ describe('useDebouncedValue', () => {
       rerender(<Wrapper value={3} />)
       rerender(<Wrapper value={4} />)
       rerender(<Wrapper value={5} />)
-
-      expect(getByText('0')).toBeTruthy()
-
-      jest.runAllTimers()
-
-      expect(getByText('5')).toBeTruthy()
-      expect(count).toBe(2)
     })
+
+    expect(getByText('0')).toBeTruthy()
+
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(getByText('5')).toBeTruthy()
+    expect(count).toBe(2)
   })
 })

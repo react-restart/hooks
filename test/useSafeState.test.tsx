@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import useSafeState from '../src/useSafeState'
 import useStateAsync from '../src/useStateAsync'
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 
 describe('useSafeState', () => {
   it('should work transparently', () => {
@@ -23,24 +23,28 @@ describe('useSafeState', () => {
   })
 
   it('should work with async setState', async () => {
-    const { result, unmount } = renderHook(() =>
-      useSafeState(useStateAsync(false)),
-    )
+    const { result, unmount } = renderHook(() => useSafeState(useStateAsync(0)))
 
-    expect(result.current[0]).toEqual(false)
+    expect(result.current[0]).toEqual(0)
 
-    await act(async () => {
-      await result.current[1](true)
-    })
+    const incrementAsync = async () => {
+      let promise: Promise<any>
 
-    expect(result.current[0]).toEqual(true)
+      act(() => {
+        promise = result.current[1]((prev) => prev + 1)
+      })
+
+      await promise!
+    }
+
+    await incrementAsync()
+
+    expect(result.current[0]).toEqual(1)
 
     unmount()
 
-    await act(async () => {
-      await result.current[1](true)
-    })
+    await incrementAsync()
 
-    expect(result.current[0]).toEqual(true)
+    expect(result.current[0]).toEqual(1)
   })
 })

@@ -30,14 +30,14 @@ export default function useStateAsync<TState>(
   const resolvers = useRef<((state: TState) => void)[]>([])
 
   useEffect(() => {
-    resolvers.current.forEach(resolve => resolve(state))
+    resolvers.current.forEach((resolve) => resolve(state))
     resolvers.current.length = 0
   }, [state])
 
   const setStateAsync = useCallback(
     (update: Updater<TState> | TState) => {
       return new Promise<TState>((resolve, reject) => {
-        setState(prevState => {
+        setState((prevState) => {
           try {
             let nextState: TState
             // ugly instanceof for typescript
