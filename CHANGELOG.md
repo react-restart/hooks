@@ -1,3 +1,14 @@
+## [0.4.11](https://github.com/jquense/react-common-hooks/compare/v0.4.10...v0.4.11) (2023-07-17)
+
+
+### Bug Fixes
+
+* **useIsInitialRenderRef:** clarify usage and fix ordering ([437c417](https://github.com/jquense/react-common-hooks/commit/437c417806e501c17e89b7252168e790077bb322))
+
+
+
+
+
 ## [0.4.10](https://github.com/jquense/react-common-hooks/compare/v0.4.9...v0.4.10) (2023-07-13)
 
 
