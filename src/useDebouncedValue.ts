@@ -1,6 +1,12 @@
-import { delay } from 'lodash'
-import { useEffect, useDebugValue } from 'react'
+import { useEffect, useDebugValue, useRef } from 'react'
 import useDebouncedState from './useDebouncedState'
+import { UseDebouncedCallbackOptions } from './useDebouncedCallback'
+
+const defaultIsEqual = (a: any, b: any) => a === b
+
+export type UseDebouncedValueOptions = UseDebouncedCallbackOptions & {
+  isEqual?: (a: any, b: any) => boolean
+}
 
 /**
  * Debounce a value change by a specified number of milliseconds. Useful
@@ -8,17 +14,33 @@ import useDebouncedState from './useDebouncedState'
  * to defer changes until the changes reach some level of infrequency.
  *
  * @param value
- * @param delayMs
+ * @param waitOrOptions
  * @returns
  */
-function useDebouncedValue<TValue>(value: TValue, delayMs = 500): TValue {
-  const [debouncedValue, setDebouncedValue] = useDebouncedState(value, delayMs)
+function useDebouncedValue<TValue>(
+  value: TValue,
+  waitOrOptions: number | UseDebouncedValueOptions = 500,
+): TValue {
+  const previousValueRef = useRef<TValue | null>(value)
+
+  const isEqual =
+    typeof waitOrOptions === 'object'
+      ? waitOrOptions.isEqual || defaultIsEqual
+      : defaultIsEqual
+
+  const [debouncedValue, setDebouncedValue] = useDebouncedState(
+    value,
+    waitOrOptions,
+  )
 
   useDebugValue(debouncedValue)
 
   useEffect(() => {
-    setDebouncedValue(value)
-  }, [value, delayMs])
+    if (!isEqual || !isEqual(previousValueRef.current, value)) {
+      previousValueRef.current = value
+      setDebouncedValue(value)
+    }
+  })
 
   return debouncedValue
 }

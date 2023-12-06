@@ -1,23 +1,141 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import useTimeout from './useTimeout'
+import useMounted from './useMounted'
+
+export interface UseDebouncedCallbackOptions {
+  wait: number
+  leading?: boolean
+  trailing?: boolean
+  maxWait?: number
+}
 
 /**
  * Creates a debounced function that will invoke the input function after the
- * specified delay.
+ * specified wait.
  *
  * @param fn a function that will be debounced
- * @param delay The milliseconds delay before invoking the function
+ * @param waitOrOptions a wait in milliseconds or a debounce configuration
  */
 export default function useDebouncedCallback<
-  TCallback extends (...args: any[]) => any
->(fn: TCallback, delay: number): (...args: Parameters<TCallback>) => void {
+  TCallback extends (...args: any[]) => any,
+>(
+  fn: TCallback,
+  waitOrOptions: number | UseDebouncedCallbackOptions,
+): (...args: Parameters<TCallback>) => void {
+  const lastCallTimeRef = useRef<number | null>(null)
+  const lastInvokeTimeRef = useRef(0)
+
+  const isTimerSetRef = useRef(false)
+  const lastArgsRef = useRef<unknown[] | null>(null)
+
+  const {
+    wait,
+    maxWait,
+    leading = false,
+    trailing = true,
+  } = typeof waitOrOptions === 'number'
+    ? ({ wait: waitOrOptions } as UseDebouncedCallbackOptions)
+    : waitOrOptions
+
   const timeout = useTimeout()
-  return useCallback(
-    (...args: any[]) => {
-      timeout.set(() => {
-        fn(...args)
-      }, delay)
-    },
-    [fn, delay],
-  )
+
+  return useMemo(() => {
+    const hasMaxWait = !!maxWait
+
+    function leadingEdge(time: number) {
+      // Reset any `maxWait` timer.
+      lastInvokeTimeRef.current = time
+
+      // Start the timer for the trailing edge.
+      isTimerSetRef.current = true
+      timeout.set(timerExpired, wait)
+
+      // Invoke the leading edge.
+      if (leading) {
+        invokeFunc(time)
+      }
+    }
+
+    function trailingEdge(time: number) {
+      isTimerSetRef.current = false
+
+      // Only invoke if we have `lastArgs` which means `func` has been
+      // debounced at least once.
+      if (trailing && lastArgsRef.current) {
+        return invokeFunc(time)
+      }
+
+      lastArgsRef.current = null
+    }
+
+    function timerExpired() {
+      var time = Date.now()
+
+      if (shouldInvoke(time)) {
+        return trailingEdge(time)
+      }
+
+      const timeSinceLastCall = time - (lastCallTimeRef.current ?? 0)
+      const timeSinceLastInvoke = time - lastInvokeTimeRef.current
+      const timeWaiting = wait - timeSinceLastCall
+
+      // Restart the timer.
+      timeout.set(
+        timerExpired,
+        hasMaxWait
+          ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke)
+          : timeWaiting,
+      )
+    }
+
+    function invokeFunc(time: number) {
+      const args = lastArgsRef.current ?? []
+
+      lastArgsRef.current = null
+      lastInvokeTimeRef.current = time
+
+      return fn(...args)
+    }
+
+    function shouldInvoke(time: number) {
+      const timeSinceLastCall = time - (lastCallTimeRef.current ?? 0)
+      const timeSinceLastInvoke = time - lastInvokeTimeRef.current
+
+      // Either this is the first call, activity has stopped and we're at the
+      // trailing edge, the system time has gone backwards and we're treating
+      // it as the trailing edge, or we've hit the `maxWait` limit.
+      return (
+        lastCallTimeRef.current === null ||
+        timeSinceLastCall >= wait ||
+        timeSinceLastCall < 0 ||
+        (hasMaxWait && timeSinceLastInvoke >= maxWait)
+      )
+    }
+
+    return (...args: any[]) => {
+      const time = Date.now()
+      const isInvoking = shouldInvoke(time)
+
+      lastArgsRef.current = args
+      lastCallTimeRef.current = time
+
+      if (isInvoking) {
+        if (!isTimerSetRef.current) {
+          return leadingEdge(lastCallTimeRef.current)
+        }
+
+        if (hasMaxWait) {
+          // Handle invocations in a tight loop.
+          isTimerSetRef.current = true
+          setTimeout(timerExpired, wait)
+          return invokeFunc(lastCallTimeRef.current)
+        }
+      }
+
+      if (!isTimerSetRef.current) {
+        isTimerSetRef.current = true
+        setTimeout(timerExpired, wait)
+      }
+    }
+  }, [fn, wait, maxWait, leading, trailing])
 }

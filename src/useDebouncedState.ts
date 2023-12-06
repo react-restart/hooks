@@ -1,5 +1,7 @@
 import { useState, Dispatch, SetStateAction } from 'react'
-import useDebouncedCallback from './useDebouncedCallback'
+import useDebouncedCallback, {
+  UseDebouncedCallbackOptions,
+} from './useDebouncedCallback'
 
 /**
  * Similar to `useState`, except the setter function is debounced by
@@ -12,16 +14,16 @@ import useDebouncedCallback from './useDebouncedCallback'
  * ```
  *
  * @param initialState initial state value
- * @param delay The milliseconds delay before a new value is set
+ * @param delayOrOptions The milliseconds delay before a new value is set, or options object
  */
 export default function useDebouncedState<T>(
   initialState: T,
-  delay: number,
+  delayOrOptions: number | UseDebouncedCallbackOptions,
 ): [T, Dispatch<SetStateAction<T>>] {
   const [state, setState] = useState(initialState)
   const debouncedSetState = useDebouncedCallback<Dispatch<SetStateAction<T>>>(
     setState,
-    delay,
+    delayOrOptions,
   )
   return [state, debouncedSetState]
 }

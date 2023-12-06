@@ -73,6 +73,7 @@ export default function useTimeout() {
     return {
       set,
       clear,
+      handleRef,
     }
   }, [])
 }
