@@ -1,3 +1,14 @@
+## [0.4.13](https://github.com/jquense/react-common-hooks/compare/v0.4.12...v0.4.13) (2023-12-06)
+
+
+### Features
+
+* **useDebouncedCallback:** return value from debounced function ([d1ead47](https://github.com/jquense/react-common-hooks/commit/d1ead4728fb14949a00d937f72a0657e0552d5b9))
+
+
+
+
+
 ## [0.4.12](https://github.com/jquense/react-common-hooks/compare/v0.4.11...v0.4.12) (2023-12-06)
 
 
