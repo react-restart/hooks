@@ -1,3 +1,14 @@
+## [0.4.12](https://github.com/jquense/react-common-hooks/compare/v0.4.11...v0.4.12) (2023-12-06)
+
+
+### Features
+
+* add leading, and maxWait options to debounce hooks ([#97](https://github.com/jquense/react-common-hooks/issues/97)) ([c8d69b2](https://github.com/jquense/react-common-hooks/commit/c8d69b23dd22a802f1c918f791478e841a9d0b99))
+
+
+
+
+
 ## [0.4.11](https://github.com/jquense/react-common-hooks/compare/v0.4.10...v0.4.11) (2023-07-17)
 
 
