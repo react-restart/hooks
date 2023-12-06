@@ -133,6 +133,39 @@ describe('useDebouncedCallback', () => {
     expect(callback).toHaveBeenCalledTimes(2)
   })
 
+  it('Subsequent calls to the debounced function return the result of the last func invocation.', () => {
+    const callback = jest.fn(() => 42)
+
+    const { result } = renderHook(() => useDebouncedCallback(callback, 1000))
+
+    const retVal = result.current()
+    expect(callback).toHaveBeenCalledTimes(0)
+    expect(retVal).toBeUndefined()
+
+    act(() => {
+      jest.runAllTimers()
+    })
+    expect(callback).toHaveBeenCalledTimes(1)
+
+    const subsequentResult = result.current()
+
+    expect(callback).toHaveBeenCalledTimes(1)
+    expect(subsequentResult).toBe(42)
+  })
+
+  it('Returns the value when leading  immediately', () => {
+    const callback = jest.fn(() => 42)
+
+    const { result } = renderHook(() =>
+      useDebouncedCallback(callback, { wait: 1000, leading: true }),
+    )
+
+    const retVal = result.current()
+
+    expect(callback).toHaveBeenCalledTimes(1)
+    expect(retVal).toEqual(42)
+  })
+
   it("won't call both on the leading edge and on the trailing edge if leading and trailing are set up to true and function call is only once", () => {
     const callback = jest.fn()
 

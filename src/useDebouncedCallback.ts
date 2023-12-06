@@ -9,6 +9,11 @@ export interface UseDebouncedCallbackOptions {
   maxWait?: number
 }
 
+export interface UseDebouncedCallbackOptionsLeading
+  extends UseDebouncedCallbackOptions {
+  leading: true
+}
+
 /**
  * Creates a debounced function that will invoke the input function after the
  * specified wait.
@@ -16,14 +21,30 @@ export interface UseDebouncedCallbackOptions {
  * @param fn a function that will be debounced
  * @param waitOrOptions a wait in milliseconds or a debounce configuration
  */
-export default function useDebouncedCallback<
-  TCallback extends (...args: any[]) => any,
->(
+function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
+  fn: TCallback,
+  options: UseDebouncedCallbackOptionsLeading,
+): (...args: Parameters<TCallback>) => ReturnType<TCallback>
+
+/**
+ * Creates a debounced function that will invoke the input function after the
+ * specified wait.
+ *
+ * @param fn a function that will be debounced
+ * @param waitOrOptions a wait in milliseconds or a debounce configuration
+ */
+function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
   fn: TCallback,
   waitOrOptions: number | UseDebouncedCallbackOptions,
-): (...args: Parameters<TCallback>) => void {
+): (...args: Parameters<TCallback>) => ReturnType<TCallback> | undefined
+
+function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
+  fn: TCallback,
+  waitOrOptions: number | UseDebouncedCallbackOptions,
+): (...args: Parameters<TCallback>) => ReturnType<TCallback> | undefined {
   const lastCallTimeRef = useRef<number | null>(null)
   const lastInvokeTimeRef = useRef(0)
+  const returnValueRef = useRef<ReturnType<TCallback>>()
 
   const isTimerSetRef = useRef(false)
   const lastArgsRef = useRef<unknown[] | null>(null)
@@ -50,10 +71,11 @@ export default function useDebouncedCallback<
       isTimerSetRef.current = true
       timeout.set(timerExpired, wait)
 
-      // Invoke the leading edge.
-      if (leading) {
-        invokeFunc(time)
+      if (!leading) {
+        return returnValueRef.current
       }
+
+      return invokeFunc(time)
     }
 
     function trailingEdge(time: number) {
@@ -66,6 +88,7 @@ export default function useDebouncedCallback<
       }
 
       lastArgsRef.current = null
+      return returnValueRef.current
     }
 
     function timerExpired() {
@@ -94,7 +117,9 @@ export default function useDebouncedCallback<
       lastArgsRef.current = null
       lastInvokeTimeRef.current = time
 
-      return fn(...args)
+      const retValue = fn(...args)
+      returnValueRef.current = retValue
+      return retValue
     }
 
     function shouldInvoke(time: number) {
@@ -136,6 +161,10 @@ export default function useDebouncedCallback<
         isTimerSetRef.current = true
         setTimeout(timerExpired, wait)
       }
+
+      return returnValueRef.current
     }
   }, [fn, wait, maxWait, leading, trailing])
 }
+
+export default useDebouncedCallback

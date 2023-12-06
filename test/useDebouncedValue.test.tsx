@@ -53,8 +53,6 @@ describe('useDebouncedValue', () => {
       rerender(<Wrapper text={'Hello world'} />)
     })
 
-    // value should be set immediately by first leading call
-
     expect(getByText('Hello world')).toBeTruthy()
 
     act(() => {
