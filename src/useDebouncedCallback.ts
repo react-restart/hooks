@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef } from 'react'
 import useTimeout from './useTimeout'
 import useMounted from './useMounted'
+import useEventCallback from './useEventCallback'
 
 export interface UseDebouncedCallbackOptions {
   wait: number
@@ -18,6 +19,9 @@ export interface UseDebouncedCallbackOptionsLeading
  * Creates a debounced function that will invoke the input function after the
  * specified wait.
  *
+ * > Heads up! debounced functions are not pure since they are called in a timeout
+ * > Don't call them inside render.
+ *
  * @param fn a function that will be debounced
  * @param waitOrOptions a wait in milliseconds or a debounce configuration
  */
@@ -29,6 +33,9 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
 /**
  * Creates a debounced function that will invoke the input function after the
  * specified wait.
+ *
+ * > Heads up! debounced functions are not pure since they are called in a timeout
+ * > Don't call them inside render.
  *
  * @param fn a function that will be debounced
  * @param waitOrOptions a wait in milliseconds or a debounce configuration
@@ -48,6 +55,8 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
 
   const isTimerSetRef = useRef(false)
   const lastArgsRef = useRef<unknown[] | null>(null)
+
+  const handleCallback = useEventCallback(fn)
 
   const {
     wait,
@@ -117,7 +126,7 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
       lastArgsRef.current = null
       lastInvokeTimeRef.current = time
 
-      const retValue = fn(...args)
+      const retValue = handleCallback(...args)
       returnValueRef.current = retValue
       return retValue
     }
@@ -164,7 +173,7 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
 
       return returnValueRef.current
     }
-  }, [fn, wait, maxWait, leading, trailing])
+  }, [handleCallback, wait, maxWait, leading, trailing])
 }
 
 export default useDebouncedCallback
