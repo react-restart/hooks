@@ -1,3 +1,14 @@
+## [0.4.14](https://github.com/jquense/react-common-hooks/compare/v0.4.13...v0.4.14) (2023-12-07)
+
+
+### Bug Fixes
+
+* **useDebouncedCallback:** wrap handler in useEventCallback so it's not stale ([63f897a](https://github.com/jquense/react-common-hooks/commit/63f897aa6972f66fd5d076c5edb4da6cda5031c0))
+
+
+
+
+
 ## [0.4.13](https://github.com/jquense/react-common-hooks/compare/v0.4.12...v0.4.13) (2023-12-06)
 
 
