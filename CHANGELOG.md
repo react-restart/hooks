@@ -1,3 +1,14 @@
+## [0.4.15](https://github.com/jquense/react-common-hooks/compare/v0.4.14...v0.4.15) (2023-12-07)
+
+
+### Bug Fixes
+
+* **useDebouncedState:** Add factory function overload to type, clarify setter purity ([9aa18fb](https://github.com/jquense/react-common-hooks/commit/9aa18fb48d06ab2bd4d64b1b862a80d5d4d5cdd5))
+
+
+
+
+
 ## [0.4.14](https://github.com/jquense/react-common-hooks/compare/v0.4.13...v0.4.14) (2023-12-07)
 
 
