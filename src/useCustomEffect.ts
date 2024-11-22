@@ -5,7 +5,6 @@ import {
   useEffect,
   useDebugValue,
 } from 'react'
-import useWillUnmount from './useWillUnmount'
 import useMounted from './useMounted'
 
 export type EffectHook = (effect: EffectCallback, deps?: DependencyList) => void
