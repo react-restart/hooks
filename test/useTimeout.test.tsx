@@ -1,6 +1,6 @@
 import React from 'react'
 import useTimeout from '../src/useTimeout'
-import { render } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 
 describe('useTimeout', () => {
   it('should set a timeout', () => {
@@ -17,11 +17,15 @@ describe('useTimeout', () => {
 
     render(<Wrapper />)
 
-    timeout!.set(spy, 100)
+    act(() => {
+      timeout!.set(spy, 100)
+    })
 
     expect(spy).not.toHaveBeenCalled()
 
-    jest.runAllTimers()
+    act(() => {
+      jest.runAllTimers()
+    })
 
     expect(spy).toHaveBeenCalledTimes(1)
   })
@@ -40,11 +44,14 @@ describe('useTimeout', () => {
 
     render(<Wrapper />)
 
-    timeout!.set(spy, 100)
+    act(() => {
+      timeout!.set(spy, 100)
+    })
 
-    timeout!.clear()
-
-    jest.runAllTimers()
+    act(() => {
+      timeout!.clear()
+      jest.runAllTimers()
+    })
 
     expect(spy).toHaveBeenCalledTimes(0)
   })
@@ -63,11 +70,15 @@ describe('useTimeout', () => {
 
     const wrapper = render(<Wrapper />)
 
-    timeout!.set(spy, 100)
+    act(() => {
+      timeout!.set(spy, 100)
+    })
 
     wrapper.unmount()
 
-    jest.runAllTimers()
+    act(() => {
+      jest.runAllTimers()
+    })
 
     expect(spy).toHaveBeenCalledTimes(0)
   })
@@ -88,14 +99,18 @@ describe('useTimeout', () => {
 
     const MAX = 2 ** 31 - 1
 
-    timeout!.set(spy, MAX + 100)
+    act(() => {
+      timeout!.set(spy, MAX + 100)
+    })
 
     // some time to check that it didn't overflow and fire immediately
     jest.advanceTimersByTime(100)
 
     expect(spy).toHaveBeenCalledTimes(0)
 
-    jest.runAllTimers()
+    act(() => {
+      jest.runAllTimers()
+    })
 
     expect(spy).toHaveBeenCalledTimes(1)
   })

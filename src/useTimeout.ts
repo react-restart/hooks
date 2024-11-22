@@ -1,6 +1,5 @@
-import { MutableRefObject, useMemo, useRef } from 'react'
+import { MutableRefObject, useEffect, useMemo, useRef, useState } from 'react'
 import useMounted from './useMounted'
-import useWillUnmount from './useWillUnmount'
 
 /*
  * Browsers including Internet Explorer, Chrome, Safari, and Firefox store the
@@ -28,11 +27,13 @@ function setChainedTimeout(
         )
 }
 
+type TimeoutState = {
+  fn: () => void
+  delayMs: number
+}
 /**
  * Returns a controller object for setting a timeout that is properly cleaned up
  * once the component unmounts. New timeouts cancel and replace existing ones.
- *
- *
  *
  * ```tsx
  * const { set, clear } = useTimeout();
@@ -47,33 +48,60 @@ function setChainedTimeout(
  * ```
  */
 export default function useTimeout() {
+  const [timeout, setTimeoutState] = useState<TimeoutState | null>(null)
   const isMounted = useMounted()
 
   // types are confused between node and web here IDK
-  const handleRef = useRef<any>()
+  const handleRef = useRef<any>(null)
 
-  useWillUnmount(() => clearTimeout(handleRef.current))
-
-  return useMemo(() => {
-    const clear = () => clearTimeout(handleRef.current)
-
-    function set(fn: () => void, delayMs = 0): void {
-      if (!isMounted()) return
-
-      clear()
-
-      if (delayMs <= MAX_DELAY_MS) {
-        // For simplicity, if the timeout is short, just set a normal timeout.
-        handleRef.current = setTimeout(fn, delayMs)
-      } else {
-        setChainedTimeout(handleRef, fn, Date.now() + delayMs)
-      }
+  useEffect(() => {
+    if (!timeout) {
+      return
     }
 
+    const { fn, delayMs } = timeout
+
+    function task() {
+      if (isMounted()) {
+        setTimeoutState(null)
+      }
+      fn()
+    }
+
+    if (delayMs <= MAX_DELAY_MS) {
+      // For simplicity, if the timeout is short, just set a normal timeout.
+      handleRef.current = setTimeout(task, delayMs)
+    } else {
+      setChainedTimeout(handleRef, task, Date.now() + delayMs)
+    }
+    const handle = handleRef.current
+
+    return () => {
+      // this should be a no-op since they are either the same or `handle`
+      // already expired but no harm in calling twice
+      if (handleRef.current !== handle) {
+        clearTimeout(handle)
+      }
+
+      clearTimeout(handleRef.current)
+      handleRef.current === null
+    }
+  }, [timeout])
+
+  const [returnValue] = useState(() => {
     return {
-      set,
-      clear,
+      set(fn: () => void, delayMs = 0): void {
+        if (!isMounted()) return
+
+        setTimeoutState({ fn, delayMs })
+      },
+      clear() {
+        setTimeoutState(null)
+      },
+      isPending: !!timeout,
       handleRef,
     }
-  }, [])
+  })
+
+  return returnValue
 }
