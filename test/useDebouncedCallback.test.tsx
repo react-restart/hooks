@@ -8,6 +8,12 @@ describe('useDebouncedCallback', () => {
     jest.useFakeTimers()
   })
 
+  afterEach(() => {
+    act(() => {
+      jest.runAllTimers()
+    })
+  })
+
   it('should return a function that debounces input callback', () => {
     const callback = jest.fn()
 
@@ -21,7 +27,9 @@ describe('useDebouncedCallback', () => {
 
     expect(callback).not.toHaveBeenCalled()
 
-    jest.runOnlyPendingTimers()
+    act(() => {
+      jest.runOnlyPendingTimers()
+    })
 
     expect(callback).toHaveBeenCalledTimes(1)
     expect(callback).toHaveBeenCalledWith(3)
@@ -47,7 +55,6 @@ describe('useDebouncedCallback', () => {
     act(() => {
       jest.runOnlyPendingTimers()
     })
-
     expect(callback).toHaveBeenCalledTimes(1)
   })
 
@@ -90,16 +97,13 @@ describe('useDebouncedCallback', () => {
       result.current()
       result.current()
       result.current()
-
-      setTimeout(() => {
-        result.current()
-      }, 1001)
     })
 
     expect(callback).toHaveBeenCalledTimes(1)
 
     act(() => {
       jest.advanceTimersByTime(1001)
+      result.current()
     })
 
     expect(callback).toHaveBeenCalledTimes(3)
@@ -137,17 +141,25 @@ describe('useDebouncedCallback', () => {
     const callback = jest.fn(() => 42)
 
     const { result } = renderHook(() => useDebouncedCallback(callback, 1000))
+    let retVal
 
-    const retVal = result.current()
+    act(() => {
+      retVal = result.current()
+    })
+
     expect(callback).toHaveBeenCalledTimes(0)
     expect(retVal).toBeUndefined()
 
     act(() => {
       jest.runAllTimers()
     })
+
     expect(callback).toHaveBeenCalledTimes(1)
 
-    const subsequentResult = result.current()
+    let subsequentResult
+    act(() => {
+      subsequentResult = result.current()
+    })
 
     expect(callback).toHaveBeenCalledTimes(1)
     expect(subsequentResult).toBe(42)
@@ -160,7 +172,10 @@ describe('useDebouncedCallback', () => {
       useDebouncedCallback(callback, { wait: 1000, leading: true }),
     )
 
-    const retVal = result.current()
+    let retVal
+    act(() => {
+      retVal = result.current()
+    })
 
     expect(callback).toHaveBeenCalledTimes(1)
     expect(retVal).toEqual(42)

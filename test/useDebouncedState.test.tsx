@@ -17,11 +17,13 @@ describe('useDebouncedState', () => {
     const wrapper = render(<Wrapper />)
     expect(wrapper.getByText('0')).toBeTruthy()
 
-    outerSetValue((cur: number) => cur + 1)
-    outerSetValue((cur: number) => cur + 1)
-    outerSetValue((cur: number) => cur + 1)
-    outerSetValue((cur: number) => cur + 1)
-    outerSetValue((cur: number) => cur + 1)
+    act(() => {
+      outerSetValue((cur: number) => cur + 1)
+      outerSetValue((cur: number) => cur + 1)
+      outerSetValue((cur: number) => cur + 1)
+      outerSetValue((cur: number) => cur + 1)
+      outerSetValue((cur: number) => cur + 1)
+    })
 
     expect(wrapper.getByText('0')).toBeTruthy()
 

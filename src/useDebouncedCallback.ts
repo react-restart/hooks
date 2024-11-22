@@ -1,7 +1,7 @@
 import { useMemo, useRef } from 'react'
 import useTimeout from './useTimeout'
 import useEventCallback from './useEventCallback'
-import useWillUnmount from './useWillUnmount'
+import useMounted from './useMounted'
 
 export interface UseDebouncedCallbackOptions {
   wait: number
@@ -70,11 +70,6 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
     : waitOrOptions
 
   const timeout = useTimeout()
-
-  useWillUnmount(() => {
-    clearTimeout(timerRef.current)
-    isTimerSetRef.current = false
-  })
 
   return useMemo(() => {
     const hasMaxWait = !!maxWait
@@ -168,14 +163,14 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
         if (hasMaxWait) {
           // Handle invocations in a tight loop.
           isTimerSetRef.current = true
-          timerRef.current = setTimeout(timerExpired, wait)
+          timeout.set(timerExpired, wait)
           return invokeFunc(lastCallTimeRef.current)
         }
       }
 
       if (!isTimerSetRef.current) {
         isTimerSetRef.current = true
-        timerRef.current = setTimeout(timerExpired, wait)
+        timerRef.current = timeout.set(timerExpired, wait)
       }
 
       return returnValueRef.current
