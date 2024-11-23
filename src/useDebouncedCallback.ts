@@ -1,7 +1,6 @@
 import { useMemo, useRef } from 'react'
 import useTimeout from './useTimeout'
 import useEventCallback from './useEventCallback'
-import useMounted from './useMounted'
 
 export interface UseDebouncedCallbackOptions {
   wait: number
@@ -55,8 +54,6 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
 
   const isTimerSetRef = useRef(false)
   const lastArgsRef = useRef<unknown[] | null>(null)
-  // Use any to bypass type issue with setTimeout.
-  const timerRef = useRef<any>(0)
 
   const handleCallback = useEventCallback(fn)
 
@@ -170,7 +167,7 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
 
       if (!isTimerSetRef.current) {
         isTimerSetRef.current = true
-        timerRef.current = timeout.set(timerExpired, wait)
+        timeout.set(timerExpired, wait)
       }
 
       return returnValueRef.current
