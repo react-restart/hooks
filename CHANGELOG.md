@@ -1,3 +1,29 @@
+# [0.5.0](https://github.com/jquense/react-common-hooks/compare/v0.4.16...v0.5.0) (2024-11-25)
+
+
+* A number of StrictMode fixes and updates (#99) ([1511129](https://github.com/jquense/react-common-hooks/commit/1511129898f9b95659bab7f964fe33528d04b938)), closes [#99](https://github.com/jquense/react-common-hooks/issues/99)
+
+
+### BREAKING CHANGES
+
+* no longer supports `cancelPrevious` this is always true
+
+* fix:(useDebouncedCallback): Clean up timeout logic in strict mode
+
+* chore: deprecate useWillUnmount
+
+This hook is not possible in StrictMode, and can cause bugs
+
+* fix(useForceUpdate): ensure that chained calls produce an update
+
+* Update useCustomEffect.ts
+
+* address feedback
+
+
+
+
+
 ## [0.4.16](https://github.com/jquense/react-common-hooks/compare/v0.4.15...v0.4.16) (2024-02-10)
 
 
