@@ -1,7 +1,5 @@
-import { useRef } from 'react'
+import { useEffect, useState } from 'react'
 import useMounted from './useMounted'
-import useStableMemo from './useStableMemo'
-import useWillUnmount from './useWillUnmount'
 
 export interface UseAnimationFrameReturn {
   cancel(): void
@@ -11,15 +9,12 @@ export interface UseAnimationFrameReturn {
    * Previously registered callbacks will be cancelled
    */
   request(callback: FrameRequestCallback): void
-
-  /**
-   * Request for the provided callback to be called on the next animation frame.
-   * Previously registered callbacks can be cancelled by providing `cancelPrevious`
-   */
-  request(cancelPrevious: boolean, callback: FrameRequestCallback): void
+}
+type AnimationFrameState = {
+  fn: FrameRequestCallback
 }
 /**
- * Returns a controller object for requesting and cancelling an animation freame that is properly cleaned up
+ * Returns a controller object for requesting and cancelling an animation frame that is properly cleaned up
  * once the component unmounts. New requests cancel and replace existing ones.
  *
  * ```ts
@@ -45,32 +40,32 @@ export interface UseAnimationFrameReturn {
  */
 export default function useAnimationFrame(): UseAnimationFrameReturn {
   const isMounted = useMounted()
-  const handle = useRef<number | undefined>()
 
-  const cancel = () => {
-    if (handle.current != null) {
-      cancelAnimationFrame(handle.current)
+  const [animationFrame, setAnimationFrameState] =
+    useState<AnimationFrameState | null>(null)
+
+  useEffect(() => {
+    if (!animationFrame) {
+      return
     }
-  }
 
-  useWillUnmount(cancel)
+    const { fn } = animationFrame
+    const handle = requestAnimationFrame(fn)
+    return () => {
+      cancelAnimationFrame(handle)
+    }
+  }, [animationFrame])
 
-  return useStableMemo(
-    () => ({
-      request(
-        cancelPrevious: boolean | FrameRequestCallback,
-        fn?: FrameRequestCallback,
-      ) {
-        if (!isMounted()) return
+  const [returnValue] = useState(() => ({
+    request(callback: FrameRequestCallback) {
+      if (!isMounted()) return
+      setAnimationFrameState({ fn: callback })
+    },
+    cancel: () => {
+      if (!isMounted()) return
+      setAnimationFrameState(null)
+    },
+  }))
 
-        if (cancelPrevious) cancel()
-
-        handle.current = requestAnimationFrame(
-          fn || (cancelPrevious as FrameRequestCallback),
-        )
-      },
-      cancel,
-    }),
-    [],
-  )
+  return returnValue
 }
