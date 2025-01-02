@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
+import { MutableRefObject, useEffect, useMemo, useRef, useState } from 'react'
 import useMounted from './useMounted'
 
 /*
@@ -88,7 +88,9 @@ export default function useTimeout() {
     }
   }, [timeout])
 
-  const [returnValue] = useState(() => {
+  const isPending = !!timeout
+
+  return useMemo(() => {
     return {
       set(fn: () => void, delayMs = 0): void {
         if (!isMounted()) return
@@ -98,10 +100,8 @@ export default function useTimeout() {
       clear() {
         setTimeoutState(null)
       },
-      isPending: !!timeout,
+      isPending,
       handleRef,
     }
-  })
-
-  return returnValue
+  }, [isPending, setTimeoutState, handleRef, isMounted])
 }
