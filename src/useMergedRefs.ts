@@ -6,8 +6,8 @@ type Ref<T> = React.MutableRefObject<T> | CallbackRef<T>
 const toFnRef = <T>(ref?: Ref<T> | null) =>
   !ref || typeof ref === 'function'
     ? ref
-    : (value: T) => {
-        ref.current = value
+    : (value: T | null) => {
+        ref.current = value as T
       }
 
 export function mergeRefs<T>(refA?: Ref<T> | null, refB?: Ref<T> | null) {

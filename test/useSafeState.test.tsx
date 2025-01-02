@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import useSafeState from '../src/useSafeState'
 import useStateAsync from '../src/useStateAsync'
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook, waitFor } from '@testing-library/react'
 
 describe('useSafeState', () => {
   it('should work transparently', () => {
@@ -29,18 +29,22 @@ describe('useSafeState', () => {
 
     expect(result.current[0]).toEqual(false)
 
-    await act(async () => {
-      await result.current[1](true)
+    act(() => {
+      result.current[1](true)
+    })
+
+    await waitFor(() => {
+      expect(result.current[0]).toEqual(true)
     })
 
     expect(result.current[0]).toEqual(true)
 
     unmount()
 
-    await act(async () => {
-      await result.current[1](true)
-    })
+    act(() => result.current[1](true))
 
-    expect(result.current[0]).toEqual(true)
+    await waitFor(() => {
+      expect(result.current[0]).toEqual(true)
+    })
   })
 })

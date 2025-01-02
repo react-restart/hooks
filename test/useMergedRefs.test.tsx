@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCallbackRef } from '../src'
+import useCallbackRef from '../src/useCallbackRef'
 import useMergedRefs from '../src/useMergedRefs'
 import { render } from '@testing-library/react'
 

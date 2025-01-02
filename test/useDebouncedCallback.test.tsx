@@ -1,7 +1,7 @@
 /*! tests an impl adapted from https://github.com/xnimorz/use-debounce/blob/master/test/useDebouncedCallback.test.tsx itself adapted from lodash*/
 
 import useDebouncedCallback from '../src/useDebouncedCallback'
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act, waitFor } from '@testing-library/react'
 
 describe('useDebouncedCallback', () => {
   beforeEach(() => {
@@ -228,7 +228,7 @@ describe('useDebouncedCallback', () => {
     expect(callback).toHaveBeenCalledTimes(2)
   })
 
-  it('will call callback if maxWait time exceed', () => {
+  it('will call callback if maxWait time exceed', async () => {
     const callback = jest.fn()
 
     const { result } = renderHook(() =>
@@ -249,10 +249,9 @@ describe('useDebouncedCallback', () => {
 
     act(() => {
       result.current()
-
       jest.advanceTimersByTime(400)
     })
 
-    expect(callback).toHaveBeenCalledTimes(1)
+    await waitFor(() => expect(callback).toHaveBeenCalledTimes(1))
   })
 })

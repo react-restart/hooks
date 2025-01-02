@@ -1,7 +1,5 @@
-import React from 'react'
-import useStateAsync, { AsyncSetState } from '../src/useStateAsync'
-import { renderHook, act } from '@testing-library/react-hooks'
-import { render, act as renderAct } from '@testing-library/react'
+import useStateAsync from '../src/useStateAsync'
+import { renderHook, act } from '@testing-library/react'
 
 describe('useStateAsync', () => {
   it('should increment counter', async () => {
@@ -10,9 +8,12 @@ describe('useStateAsync', () => {
     expect.assertions(4)
 
     const incrementAsync = async () => {
-      await act(async () => {
-        await result.current[1]((prev) => prev + 1)
+      let promise
+      act(() => {
+        promise = result.current[1]((prev) => prev + 1)
       })
+
+      await promise
     }
 
     expect(result.current![0]).toEqual(0)
@@ -24,19 +25,20 @@ describe('useStateAsync', () => {
     expect(result.current![0]).toEqual(2)
 
     await incrementAsync()
+
     expect(result.current![0]).toEqual(3)
   })
 
   it('should reject on error', async () => {
     const { result } = renderHook(() => useStateAsync<number>(1))
 
-    await act(async () => {
-      const p = result.current[1](() => {
+    let promise = act(() =>
+      result.current[1](() => {
         throw new Error('yo')
-      })
+      }),
+    )
 
-      await expect(p).rejects.toThrow('yo')
-    })
+    await expect(promise).rejects.toThrow('yo')
   })
 
   it('should resolve even if no update happens', async () => {
@@ -46,7 +48,7 @@ describe('useStateAsync', () => {
 
     expect(result.current![0]).toEqual(1)
 
-    await renderAct(() => expect(result.current[1](1)).resolves.toEqual(1))
+    await act(() => expect(result.current[1](1)).resolves.toEqual(1))
 
     expect(result.current![0]).toEqual(1)
   })

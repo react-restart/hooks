@@ -1,6 +1,6 @@
 import React from 'react'
 import useToggleState from '../src/useToggleState'
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 
 describe('useToggleState', () => {
   it('should toggle', () => {

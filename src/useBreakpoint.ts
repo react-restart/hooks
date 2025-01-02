@@ -124,19 +124,18 @@ export function createBreakpointHook<TKey extends string>(
 
     let query = useMemo(
       () =>
-        Object.entries(breakpointMap).reduce(
-          (query, [key, direction]: [TKey, BreakpointDirection]) => {
-            if (direction === 'up' || direction === true) {
-              query = and(query, getMinQuery(key))
-            }
-            if (direction === 'down' || direction === true) {
-              query = and(query, getMaxQuery(key))
-            }
+        Object.entries(breakpointMap).reduce((query, entry) => {
+          const [key, direction] = entry as [TKey, BreakpointDirection]
 
-            return query
-          },
-          '',
-        ),
+          if (direction === 'up' || direction === true) {
+            query = and(query, getMinQuery(key))
+          }
+          if (direction === 'down' || direction === true) {
+            query = and(query, getMaxQuery(key))
+          }
+
+          return query
+        }, ''),
       [JSON.stringify(breakpointMap)],
     )
 

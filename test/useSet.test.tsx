@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
-import { act } from 'react-dom/test-utils'
+import React from 'react'
 
 import useSet, { ObservableSet } from '../src/useSet'
-import { render } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 
 describe('useSet', () => {
   describe('ObservableSet', () => {

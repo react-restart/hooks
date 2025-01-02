@@ -1,5 +1,5 @@
 import useMounted from '../src/useMounted'
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 describe('useMounted', () => {
   it('should return a function that returns mount state', () => {

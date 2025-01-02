@@ -3,7 +3,7 @@ import useBreakpoint, {
   createBreakpointHook,
 } from '../src/useBreakpoint'
 
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 interface Props {
   breakpoint: DefaultBreakpointMap

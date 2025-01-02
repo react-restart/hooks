@@ -14,6 +14,8 @@ export interface UseDebouncedCallbackOptionsLeading
   leading: true
 }
 
+const EMPTY: unique symbol = Symbol('EMPTY')
+
 /**
  * Creates a debounced function that will invoke the input function after the
  * specified wait.
@@ -50,7 +52,7 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
 ): (...args: Parameters<TCallback>) => ReturnType<TCallback> | undefined {
   const lastCallTimeRef = useRef<number | null>(null)
   const lastInvokeTimeRef = useRef(0)
-  const returnValueRef = useRef<ReturnType<TCallback>>()
+  const returnValueRef = useRef<ReturnType<TCallback> | typeof EMPTY>(EMPTY)
 
   const isTimerSetRef = useRef(false)
   const lastArgsRef = useRef<unknown[] | null>(null)
@@ -80,7 +82,9 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
       timeout.set(timerExpired, wait)
 
       if (!leading) {
-        return returnValueRef.current
+        return returnValueRef.current === EMPTY
+          ? undefined
+          : returnValueRef.current
       }
 
       return invokeFunc(time)
@@ -96,7 +100,9 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
       }
 
       lastArgsRef.current = null
-      return returnValueRef.current
+      return returnValueRef.current === EMPTY
+        ? undefined
+        : returnValueRef.current
     }
 
     function timerExpired() {
@@ -109,6 +115,8 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
       const timeSinceLastCall = time - (lastCallTimeRef.current ?? 0)
       const timeSinceLastInvoke = time - lastInvokeTimeRef.current
       const timeWaiting = wait - timeSinceLastCall
+
+      // console.log('g', Math.min(timeWaiting, maxWait - timeSinceLastInvoke))
 
       // Restart the timer.
       timeout.set(
@@ -170,7 +178,9 @@ function useDebouncedCallback<TCallback extends (...args: any[]) => any>(
         timeout.set(timerExpired, wait)
       }
 
-      return returnValueRef.current
+      return returnValueRef.current === EMPTY
+        ? undefined
+        : returnValueRef.current
     }
   }, [handleCallback, wait, maxWait, leading, trailing])
 }

@@ -36,6 +36,7 @@ describe('useTimeout', () => {
     jest.useFakeTimers()
 
     let spy = jest.fn()
+
     let timeout!: ReturnType<typeof useTimeout>
 
     function Wrapper() {
@@ -54,9 +55,9 @@ describe('useTimeout', () => {
 
     act(() => {
       timeout!.clear()
-      jest.runAllTimers()
     })
 
+    jest.runAllTimers()
     expect(timeout.isPending).toBe(false)
     expect(spy).toHaveBeenCalledTimes(0)
   })

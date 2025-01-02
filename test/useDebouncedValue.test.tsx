@@ -1,43 +1,46 @@
 import React, { useEffect, useState } from 'react'
 
 import useDebouncedValue from '../src/useDebouncedValue'
-import { act, render } from '@testing-library/react'
+import { act, render, renderHook, waitFor } from '@testing-library/react'
 
 describe('useDebouncedValue', () => {
   beforeEach(() => {
     jest.useFakeTimers()
   })
 
-  it('should return a function that debounces input callback', () => {
+  it('should return a function that debounces input callback', async () => {
     let count = 0
-    function Wrapper({ value }) {
-      const debouncedValue = useDebouncedValue(value, 500)
 
-      useEffect(() => {
-        count++
-      }, [debouncedValue])
+    const { rerender, result } = renderHook(
+      ({ value }) => {
+        const debouncedValue = useDebouncedValue(value, 500)
 
-      return <span>{debouncedValue}</span>
-    }
+        useEffect(() => {
+          count++
+        }, [debouncedValue])
 
-    const { rerender, getByText } = render(<Wrapper value={0} />)
+        return debouncedValue
+      },
+      { initialProps: { value: 0 } },
+    )
 
     act(() => {
-      expect(getByText('0')).toBeTruthy()
+      expect(result.current).toBe(0)
 
-      rerender(<Wrapper value={1} />)
-      rerender(<Wrapper value={2} />)
-      rerender(<Wrapper value={3} />)
-      rerender(<Wrapper value={4} />)
-      rerender(<Wrapper value={5} />)
+      rerender({ value: 1 })
+      rerender({ value: 2 })
+      rerender({ value: 3 })
+      rerender({ value: 4 })
+      rerender({ value: 5 })
 
-      expect(getByText('0')).toBeTruthy()
+      expect(result.current).toBe(0)
 
       jest.runAllTimers()
-
-      expect(getByText('5')).toBeTruthy()
-      expect(count).toBe(2)
     })
+
+    await waitFor(() => expect(result.current).toBe(5))
+
+    expect(count).toBe(2)
   })
 
   it('will update value immediately if leading is set to true', () => {

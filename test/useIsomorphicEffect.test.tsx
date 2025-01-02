@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react'
 
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import useIsomorphicEffect from '../src/useIsomorphicEffect'
 
 describe('useIsomorphicEffect', () => {
