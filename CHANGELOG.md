@@ -1,3 +1,14 @@
+## [0.5.1](https://github.com/jquense/react-common-hooks/compare/v0.5.0...v0.5.1) (2025-01-02)
+
+
+### Bug Fixes
+
+* **useTimeout:** isPending never updates ([51e14ec](https://github.com/jquense/react-common-hooks/commit/51e14ec0d40c70b4cf09ce02b58beaa740b6b0cf))
+
+
+
+
+
 # [0.5.0](https://github.com/jquense/react-common-hooks/compare/v0.4.16...v0.5.0) (2024-11-25)
 
 
