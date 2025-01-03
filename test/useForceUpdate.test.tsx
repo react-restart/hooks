@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
+import { describe, it, expect } from 'vitest'
 import useForceUpdate from '../src/useForceUpdate.js'
 
 describe('useForceUpdate', () => {

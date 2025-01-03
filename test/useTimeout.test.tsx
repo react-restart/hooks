@@ -1,12 +1,12 @@
-import React from 'react'
+import { describe, it, vi, expect } from 'vitest'
 import useTimeout from '../src/useTimeout.js'
 import { render, act } from '@testing-library/react'
 
 describe('useTimeout', () => {
   it('should set a timeout', () => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
 
-    let spy = jest.fn()
+    let spy = vi.fn()
     let timeout!: ReturnType<typeof useTimeout>
 
     function Wrapper() {
@@ -25,7 +25,7 @@ describe('useTimeout', () => {
     expect(spy).not.toHaveBeenCalled()
 
     act(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     expect(timeout.isPending).toBe(false)
@@ -33,9 +33,9 @@ describe('useTimeout', () => {
   })
 
   it('should clear a timeout', () => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
 
-    let spy = jest.fn()
+    let spy = vi.fn()
 
     let timeout!: ReturnType<typeof useTimeout>
 
@@ -57,15 +57,15 @@ describe('useTimeout', () => {
       timeout!.clear()
     })
 
-    jest.runAllTimers()
+    vi.runAllTimers()
     expect(timeout.isPending).toBe(false)
     expect(spy).toHaveBeenCalledTimes(0)
   })
 
   it('should clear a timeout on unmount', () => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
 
-    let spy = jest.fn()
+    let spy = vi.fn()
     let timeout: ReturnType<typeof useTimeout>
 
     function Wrapper() {
@@ -83,16 +83,16 @@ describe('useTimeout', () => {
     wrapper.unmount()
 
     act(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     expect(spy).toHaveBeenCalledTimes(0)
   })
 
   it('should handle very large timeouts', () => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
 
-    let spy = jest.fn()
+    let spy = vi.fn()
     let timeout: ReturnType<typeof useTimeout>
 
     function Wrapper() {
@@ -110,12 +110,12 @@ describe('useTimeout', () => {
     })
 
     // some time to check that it didn't overflow and fire immediately
-    jest.advanceTimersByTime(100)
+    vi.advanceTimersByTime(100)
 
     expect(spy).toHaveBeenCalledTimes(0)
 
     act(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     expect(spy).toHaveBeenCalledTimes(1)

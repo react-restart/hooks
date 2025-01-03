@@ -1,12 +1,13 @@
+import { act, render } from '@testing-library/react'
+import { describe, it, Mock, MockInstance, vi, expect, afterEach } from 'vitest'
+
 import useMutationObserver from '../src/useMutationObserver.js'
 import useCallbackRef from '../src/useCallbackRef.js'
-import React from 'react'
-import { act, render } from '@testing-library/react'
 
 describe('useMutationObserver', () => {
   it('should add a mutation observer', async () => {
-    const teardown = jest.fn()
-    const spy = jest.fn(() => teardown)
+    const teardown = vi.fn()
+    const spy = vi.fn(() => teardown)
 
     function Wrapper(props) {
       const [el, attachRef] = useCallbackRef<HTMLElement>()
@@ -41,16 +42,16 @@ describe('useMutationObserver', () => {
     wrapper.unmount()
   })
 
-  let disconnentSpy: jest.SpyInstance<void, []>
+  let disconnentSpy: MockInstance<() => void>
   afterEach(() => {
     disconnentSpy?.mockRestore()
   })
 
   it('should update config', async () => {
-    const teardown = jest.fn()
-    const spy = jest.fn(() => teardown)
+    const teardown = vi.fn()
+    const spy = vi.fn(() => teardown)
 
-    disconnentSpy = jest.spyOn(MutationObserver.prototype, 'disconnect')
+    disconnentSpy = vi.spyOn(MutationObserver.prototype, 'disconnect')
 
     function Wrapper({ attributeFilter, ...props }: any) {
       const [el, attachRef] = useCallbackRef<HTMLElement>()

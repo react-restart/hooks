@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { describe, it, vi, expect, beforeEach } from 'vitest'
+import { act, render, renderHook, waitFor } from '@testing-library/react'
 
 import useDebouncedValue from '../src/useDebouncedValue.js'
-import { act, render, renderHook, waitFor } from '@testing-library/react'
 
 describe('useDebouncedValue', () => {
   beforeEach(() => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
+
+    return () => {
+      vi.useRealTimers()
+    }
   })
 
   it('should return a function that debounces input callback', async () => {
@@ -24,21 +29,23 @@ describe('useDebouncedValue', () => {
       { initialProps: { value: 0 } },
     )
 
-    act(() => {
-      expect(result.current).toBe(0)
+    expect(result.current).toBe(0)
 
+    act(() => {
       rerender({ value: 1 })
       rerender({ value: 2 })
       rerender({ value: 3 })
       rerender({ value: 4 })
       rerender({ value: 5 })
-
-      expect(result.current).toBe(0)
-
-      jest.runAllTimers()
     })
 
-    await waitFor(() => expect(result.current).toBe(5))
+    expect(result.current).toBe(0)
+
+    act(() => {
+      vi.advanceTimersByTime(10000)
+    })
+
+    expect(result.current).toBe(5)
 
     expect(count).toBe(2)
   })
@@ -66,14 +73,14 @@ describe('useDebouncedValue', () => {
     expect(getByText('Hello world')).toBeTruthy()
 
     act(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     expect(getByText('Hello again')).toBeTruthy()
   })
 
   it('should use isEqual function if supplied', () => {
-    const isEqual = jest.fn((_left: string, _right: string): boolean => true)
+    const isEqual = vi.fn((_left: string, _right: string): boolean => true)
 
     function Wrapper({ text }) {
       const value = useDebouncedValue(text, { wait: 1000, isEqual })
@@ -87,7 +94,7 @@ describe('useDebouncedValue', () => {
     act(() => {
       rerender(<Wrapper text="Test" />)
 
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     expect(isEqual).toHaveBeenCalledTimes(2)

@@ -1,10 +1,11 @@
 import useImmediateUpdateEffect from '../src/useImmediateUpdateEffect.js'
+import { describe, it, vi, expect } from 'vitest'
 import { renderHook } from './helpers.js'
 
 describe('useImmediateUpdateEffect', () => {
   it('should run update after value changes', () => {
-    const teardown = jest.fn()
-    const spy = jest.fn().mockImplementation(() => teardown)
+    const teardown = vi.fn()
+    const spy = vi.fn().mockImplementation(() => teardown)
 
     const [, wrapper] = renderHook(
       ({ value }) => {

@@ -1,13 +1,14 @@
+import { describe, it, vi, expect } from 'vitest'
 import useCustomEffect from '../src/useCustomEffect.js'
 import useImmediateUpdateEffect from '../src/useImmediateUpdateEffect.js'
 import { renderHook } from './helpers.js'
 
 describe('useCustomEffect', () => {
   it('should run custom isEqual logic', () => {
-    const teardown = jest.fn()
+    const teardown = vi.fn()
 
-    const spy = jest.fn().mockImplementation(() => teardown)
-    const isEqual = jest.fn((next, prev) => next[0].foo === prev[0].foo)
+    const spy = vi.fn().mockImplementation(() => teardown)
+    const isEqual = vi.fn((next, prev) => next[0].foo === prev[0].foo)
 
     const [, wrapper] = renderHook(
       ({ value }) => {
@@ -37,8 +38,8 @@ describe('useCustomEffect', () => {
   })
 
   it('should accept different hooks', () => {
-    const spy = jest.fn()
-    const hookSpy = jest.fn().mockImplementation(useImmediateUpdateEffect)
+    const spy = vi.fn()
+    const hookSpy = vi.fn().mockImplementation(useImmediateUpdateEffect)
 
     renderHook(
       ({ value }) => {

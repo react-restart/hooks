@@ -1,5 +1,7 @@
-import useStateAsync from '../src/useStateAsync.js'
+import { describe, it, expect } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
+
+import useStateAsync from '../src/useStateAsync.js'
 
 describe('useStateAsync', () => {
   it('should increment counter', async () => {
@@ -60,13 +62,16 @@ describe('useStateAsync', () => {
 
     expect(result.current![0]).toEqual(0)
 
-    const setAndAssert = async (n: number) => {
+    const setAndAssert = (n: number) =>
       expect(result.current[1](n)).resolves.toEqual(2)
-    }
 
-    await act(async () => {
-      await Promise.all([setAndAssert(1), setAndAssert(1), setAndAssert(2)])
+    let promise
+
+    act(() => {
+      promise = Promise.all([setAndAssert(1), setAndAssert(1), setAndAssert(2)])
     })
+
+    await promise
 
     expect(result.current![0]).toEqual(2)
   })

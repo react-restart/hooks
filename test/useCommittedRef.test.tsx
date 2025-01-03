@@ -1,21 +1,12 @@
 import { useEffect } from 'react'
 import { renderHook } from '@testing-library/react'
 import useCommittedRef from '../src/useCommittedRef.js'
+import { describe, it, vi, expect } from 'vitest'
 
 describe('useCommittedRef', () => {
   it('should use fresh value', () => {
-    function Foo({ fn }) {
-      const fnRef = useCommittedRef(fn)
-
-      useEffect(() => {
-        fnRef.current()
-      })
-
-      return null
-    }
-
-    const spyA = jest.fn()
-    const spyB = jest.fn()
+    const spyA = vi.fn()
+    const spyB = vi.fn()
 
     const { rerender } = renderHook(
       (fn) => {

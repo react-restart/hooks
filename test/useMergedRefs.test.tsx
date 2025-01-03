@@ -1,4 +1,5 @@
 import React from 'react'
+import { describe, it, expect } from 'vitest'
 import useCallbackRef from '../src/useCallbackRef.js'
 import useMergedRefs from '../src/useMergedRefs.js'
 import { render } from '@testing-library/react'

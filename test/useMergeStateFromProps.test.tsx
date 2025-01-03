@@ -1,4 +1,4 @@
-import React from 'react'
+import { describe, it, expect } from 'vitest'
 import useMergeStateFromProps from '../src/useMergeStateFromProps.js'
 import { render } from '@testing-library/react'
 
@@ -53,7 +53,7 @@ describe('useMergeStateFromProps', () => {
     function Foo(props: { foo: any }) {
       const [state, setState] = useMergeStateFromProps<Props, State>(
         props,
-        (nextProps, prevState, prevProps: any) => {
+        (nextProps, prevState) => {
           if (nextProps.foo === prevState.lastFoo) return null
 
           return { bar: 3, lastFoo: nextProps.foo }

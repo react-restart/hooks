@@ -1,10 +1,10 @@
-import React from 'react'
 import { render, act } from '@testing-library/react'
 import useDebouncedState from '../src/useDebouncedState.js'
+import { describe, it, vi, expect } from 'vitest'
 
 describe('useDebouncedState', () => {
   it('should return a function that debounces input callback', () => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
 
     let outerSetValue
 
@@ -28,7 +28,7 @@ describe('useDebouncedState', () => {
     expect(wrapper.getByText('0')).toBeTruthy()
 
     act(() => {
-      jest.runOnlyPendingTimers()
+      vi.runOnlyPendingTimers()
     })
     expect(wrapper.getByText('1')).toBeTruthy()
   })

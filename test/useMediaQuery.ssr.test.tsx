@@ -1,8 +1,8 @@
 /**
- * @jest-environment node
+ * @vitest-environment node
  */
 
-import React from 'react'
+import { describe, it, vi, expect } from 'vitest'
 import { renderToString } from 'react-dom/server'
 import useMediaQuery from '../src/useMediaQuery.js'
 

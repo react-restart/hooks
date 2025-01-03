@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react'
+import { describe, it, expect } from 'vitest'
 import useIsInitialRenderRef from '../src/useIsInitialRenderRef.js'
 import { useLayoutEffect } from 'react'
 

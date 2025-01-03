@@ -2,7 +2,7 @@
   "extends": "..",
   "compilerOptions": {
     "rootDir": "..",
-    "types": ["jest"],
+    "noEmit": true,
     "noImplicitAny": false
   },
   "include": [".", "../src"]

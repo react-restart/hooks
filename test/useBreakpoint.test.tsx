@@ -3,6 +3,7 @@ import useBreakpoint, {
   createBreakpointHook,
 } from '../src/useBreakpoint.js'
 
+import { describe, it, vi, expect, afterEach, beforeEach } from 'vitest'
 import { renderHook } from '@testing-library/react'
 
 interface Props {
@@ -10,10 +11,10 @@ interface Props {
 }
 
 describe('useBreakpoint', () => {
-  let matchMediaSpy: jest.SpyInstance<MediaQueryList, [string]>
+  let matchMediaSpy
 
   beforeEach(() => {
-    matchMediaSpy = jest.spyOn(window, 'matchMedia')
+    matchMediaSpy = vi.spyOn(window, 'matchMedia')
     window.resizeTo(1024, window.innerHeight)
   })
 

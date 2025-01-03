@@ -1,4 +1,4 @@
-import React from 'react'
+import { describe, it, vi, expect } from 'vitest'
 import useToggleState from '../src/useToggleState.js'
 import { act, renderHook } from '@testing-library/react'
 

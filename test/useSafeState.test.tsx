@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { describe, it, expect } from 'vitest'
+import { act, renderHook, waitFor } from '@testing-library/react'
+
 import useSafeState from '../src/useSafeState.js'
 import useStateAsync from '../src/useStateAsync.js'
-import { act, renderHook, waitFor } from '@testing-library/react'
 
 describe('useSafeState', () => {
   it('should work transparently', () => {
