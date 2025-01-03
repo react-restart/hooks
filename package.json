@@ -4,13 +4,13 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./esm/index.d.ts",
-      "import": "./esm/index.js",
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
       "require": "./cjs/index.js"
     },
     "./*": {
-      "types": "./esm/*.d.ts",
-      "import": "./esm/*.js",
+      "types": "./lib/*.d.ts",
+      "import": "./lib/*.js",
       "require": "./cjs/*.js"
     }
   },
@@ -54,8 +54,7 @@
     "trailingComma": "all"
   },
   "publishConfig": {
-    "access": "public",
-    "directory": "lib"
+    "access": "public"
   },
   "release": {
     "conventionalCommits": true
