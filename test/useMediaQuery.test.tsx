@@ -1,5 +1,6 @@
-import useMediaQuery from '../src/useMediaQuery'
-import { renderHook, act } from '@testing-library/react-hooks'
+import useMediaQuery from '../src/useMediaQuery.js'
+import { describe, it, expect } from 'vitest'
+import { renderHook, act } from '@testing-library/react'
 
 describe('useMediaQuery', () => {
   it('should match immediately if possible', () => {
@@ -20,7 +21,7 @@ describe('useMediaQuery', () => {
 
   it('should clear if no media is passed', () => {
     const wrapper = renderHook(useMediaQuery, {
-      initialProps: null,
+      initialProps: null as string | null,
     })
 
     expect(wrapper.result.current).toEqual(false)

@@ -30,7 +30,7 @@ export default function useStableMemo<T>(
 ): T {
   let isValid: boolean = true
 
-  const valueRef = useRef<DepsCache<T>>()
+  const valueRef = useRef<DepsCache<T>>(undefined)
   // initial hook call
   if (!valueRef.current) {
     valueRef.current = {

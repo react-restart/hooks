@@ -1,4 +1,4 @@
-import useMergeState, { MergeStateSetter } from './useMergeState'
+import useMergeState, { MergeStateSetter } from './useMergeState.js'
 
 type Mapper<TProps, TState> = (
   props: TProps,

@@ -1,6 +1,7 @@
-import React from 'react'
-import usePrevious from '../src/usePrevious'
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
+import { describe, it, expect } from 'vitest'
+
+import usePrevious from '../src/usePrevious.js'
 
 describe('usePrevious', () => {
   it('should return a function that returns mount state', () => {

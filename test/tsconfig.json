@@ -1,7 +1,8 @@
 {
-  "extends": "@4c/tsconfig/web",
+  "extends": "..",
   "compilerOptions": {
-    "types": ["jest"],
+    "rootDir": "..",
+    "noEmit": true,
     "noImplicitAny": false
   },
   "include": [".", "../src"]

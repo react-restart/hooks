@@ -1,5 +1,5 @@
-import useForceUpdate from './useForceUpdate'
-import useStableMemo from './useStableMemo'
+import useForceUpdate from './useForceUpdate.js'
+import useStableMemo from './useStableMemo.js'
 
 export class ObservableSet<V> extends Set<V> {
   private readonly listener: (map: ObservableSet<V>) => void

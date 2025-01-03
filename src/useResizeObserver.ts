@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useEffect from './useIsomorphicEffect'
+import useEffect from './useIsomorphicEffect.js'
 
 export interface Rect {
   width: number
@@ -18,7 +18,7 @@ function getResizeObserver() {
   return (resizeObserver =
     resizeObserver ||
     new window.ResizeObserver((entries: ResizeObserverEntry[]) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         const handler = targetMap.get(entry.target)
         if (handler) handler(entry.contentRect)
       })
@@ -55,7 +55,7 @@ export default function useResizeObserver<TElement extends Element>(
 
     setRect(element.getBoundingClientRect())
 
-    targetMap.set(element, rect => {
+    targetMap.set(element, (rect) => {
       setRect(rect)
     })
 

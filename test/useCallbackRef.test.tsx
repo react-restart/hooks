@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { render, act } from '@testing-library/react'
 
-import useCallbackRef from '../src/useCallbackRef'
+import { describe, it, vi, expect } from 'vitest'
+import useCallbackRef from '../src/useCallbackRef.js'
 
 describe('useCallbackRef', () => {
   it('should update value and be fresh in an effect', () => {
-    const effectSpy = jest.fn()
+    const effectSpy = vi.fn()
 
     function Wrapper({ toggle }) {
       const [ref, attachRef] = useCallbackRef<

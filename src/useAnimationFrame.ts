@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import useMounted from './useMounted'
+import useMounted from './useMounted.js'
 
 export interface UseAnimationFrameReturn {
   cancel(): void

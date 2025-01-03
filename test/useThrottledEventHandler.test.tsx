@@ -1,9 +1,11 @@
-import useThrottledEventHandler from '../src/useThrottledEventHandler'
-import { renderHook } from './helpers'
+import { describe, it, vi, expect } from 'vitest'
+import { renderHook } from './helpers.js'
+import useThrottledEventHandler from '../src/useThrottledEventHandler.js'
+import { waitFor } from '@testing-library/dom'
 
 describe('useThrottledEventHandler', () => {
-  it('should throttle and use return the most recent event', done => {
-    const spy = jest.fn()
+  it('should throttle and use return the most recent event', async () => {
+    const spy = vi.fn()
 
     const [handler, wrapper] = renderHook(() =>
       useThrottledEventHandler<MouseEvent>(spy),
@@ -19,25 +21,27 @@ describe('useThrottledEventHandler', () => {
 
     expect(spy).not.toHaveBeenCalled()
 
-    setTimeout(() => {
+    await waitFor(() => {
       expect(spy).toHaveBeenCalledTimes(1)
+    })
 
-      expect(spy).toHaveBeenCalledWith(events[events.length - 1])
+    expect(spy).toHaveBeenCalledWith(events[events.length - 1])
 
-      wrapper.unmount()
+    wrapper.unmount()
 
-      handler(new MouseEvent('pointermove'))
+    handler(new MouseEvent('pointermove'))
 
+    return new Promise<void>((resolve) => {
       setTimeout(() => {
         expect(spy).toHaveBeenCalledTimes(1)
 
-        done()
+        resolve()
       }, 20)
-    }, 20)
+    })
   })
 
-  it('should clear pending handler calls', done => {
-    const spy = jest.fn()
+  it('should clear pending handler calls', async () => {
+    const spy = vi.fn()
 
     const [handler, wrapper] = renderHook(() =>
       useThrottledEventHandler<MouseEvent>(spy),
@@ -52,9 +56,8 @@ describe('useThrottledEventHandler', () => {
 
     handler.clear()
 
-    setTimeout(() => {
+    await waitFor(() => {
       expect(spy).toHaveBeenCalledTimes(0)
-      done()
-    }, 20)
+    })
   })
 })

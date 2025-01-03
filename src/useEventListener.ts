@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import useEventCallback from './useEventCallback'
+import useEventCallback from './useEventCallback.js'
 
 type EventHandler<T, K extends keyof DocumentEventMap> = (
   this: T,
@@ -18,14 +18,14 @@ type EventHandler<T, K extends keyof DocumentEventMap> = (
  */
 export default function useEventListener<
   T extends Element | Document | Window,
-  K extends keyof DocumentEventMap
+  K extends keyof DocumentEventMap,
 >(
   eventTarget: T | (() => T),
   event: K,
   listener: EventHandler<T, K>,
   capture: boolean | AddEventListenerOptions = false,
 ) {
-  const handler = useEventCallback(listener)
+  const handler = useEventCallback(listener) as EventListener
 
   useEffect(() => {
     const target =

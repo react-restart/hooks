@@ -1,3 +1,3 @@
-import useUpdateImmediateEffect from './useUpdateImmediateEffect'
+import useUpdateImmediateEffect from './useUpdateImmediateEffect.js'
 
 export default useUpdateImmediateEffect

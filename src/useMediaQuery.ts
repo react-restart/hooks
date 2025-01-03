@@ -1,4 +1,4 @@
-import useEffect from './useIsomorphicEffect'
+import useEffect from './useIsomorphicEffect.js'
 import { useState } from 'react'
 
 interface RefCountedMediaQueryList extends MediaQueryList {

@@ -1,10 +1,10 @@
 /**
- * @jest-environment node
+ * @vitest-environment node
  */
 
-import React from 'react'
 import { renderToString } from 'react-dom/server'
-import useBreakpoint from '../src/useBreakpoint'
+import useBreakpoint from '../src/useBreakpoint.js'
+import { describe, it, expect } from 'vitest'
 
 describe('useBreakpoint (ssr)', () => {
   it('should match immediately if possible', () => {

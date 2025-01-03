@@ -1,6 +1,6 @@
 import { useEffect, useDebugValue, useRef } from 'react'
-import useDebouncedState from './useDebouncedState'
-import { UseDebouncedCallbackOptions } from './useDebouncedCallback'
+import useDebouncedState from './useDebouncedState.js'
+import { UseDebouncedCallbackOptions } from './useDebouncedCallback.js'
 
 const defaultIsEqual = (a: any, b: any) => a === b
 

@@ -1,17 +1,18 @@
-import useIntersectionObserver from '../src/useIntersectionObserver'
-import { renderHook, act } from '@testing-library/react-hooks'
+import useIntersectionObserver from '../src/useIntersectionObserver.js'
+import { describe, it, vi, beforeEach, afterEach, Mock, expect } from 'vitest'
+import { renderHook, act } from '@testing-library/react'
 
 describe('useIntersectionObserver', () => {
   let observers: any[] = []
   beforeEach(() => {
     ;(window as any).IntersectionObserver = class IntersectionObserverMock {
-      observe: jest.Mock<any, any>
-      unobserve: jest.Mock<any, any>
-      args: [IntersectionObserverCallback, IntersectionObserverEntryInit]
+      observe: Mock<any>
+      unobserve: Mock<any>
+      args: [IntersectionObserverCallback, IntersectionObserverInit]
       constructor(handler: any, init: any) {
         this.args = [handler, init]
-        this.observe = jest.fn()
-        this.unobserve = jest.fn()
+        this.observe = vi.fn()
+        this.unobserve = vi.fn()
         observers.push(this)
       }
     }
@@ -62,7 +63,7 @@ describe('useIntersectionObserver', () => {
 
     const { result, rerender } = renderHook(
       (root: any) => useIntersectionObserver(element, { root }),
-      { initialProps: null },
+      { initialProps: null as null | HTMLElement },
     )
 
     expect(observers).toHaveLength(0)
@@ -74,7 +75,7 @@ describe('useIntersectionObserver', () => {
   })
 
   it('should accept a callback', async () => {
-    const spy = jest.fn()
+    const spy = vi.fn()
     const element = document.createElement('span')
 
     const { result } = renderHook(() => useIntersectionObserver(element, spy))

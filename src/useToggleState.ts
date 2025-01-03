@@ -24,8 +24,8 @@ import { useReducer, Reducer } from 'react'
  * ```
  */
 export default function useToggleState(initialState: boolean = false) {
-  return useReducer<Reducer<boolean, boolean | undefined>>(
+  return useReducer(
     (state: boolean, action?: boolean) => (action == null ? !state : action),
     initialState,
-  ) as [boolean, (value?: boolean) => void]
+  ) as unknown as [boolean, (value?: boolean) => void]
 }
