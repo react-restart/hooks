@@ -1,6 +1,6 @@
 import React from 'react'
 
-import useWillUnmount from '../src/useWillUnmount'
+import useWillUnmount from '../src/useWillUnmount.js'
 import { renderHook } from '@testing-library/react'
 
 describe('useWillUnmount', () => {

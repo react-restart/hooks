@@ -1,4 +1,4 @@
-import useStateAsync from '../src/useStateAsync'
+import useStateAsync from '../src/useStateAsync.js'
 import { renderHook, act } from '@testing-library/react'
 
 describe('useStateAsync', () => {

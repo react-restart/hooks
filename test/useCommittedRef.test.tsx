@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { renderHook } from '@testing-library/react'
-import useCommittedRef from '../src/useCommittedRef'
+import useCommittedRef from '../src/useCommittedRef.js'
 
 describe('useCommittedRef', () => {
   it('should use fresh value', () => {

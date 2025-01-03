@@ -1,4 +1,4 @@
-import useMounted from '../src/useMounted'
+import useMounted from '../src/useMounted.js'
 import { renderHook } from '@testing-library/react'
 
 describe('useMounted', () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import useMergeStateFromProps from '../src/useMergeStateFromProps'
+import useMergeStateFromProps from '../src/useMergeStateFromProps.js'
 import { render } from '@testing-library/react'
 
 describe('useMergeStateFromProps', () => {

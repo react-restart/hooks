@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import useSafeState from '../src/useSafeState'
-import useStateAsync from '../src/useStateAsync'
+import useSafeState from '../src/useSafeState.js'
+import useStateAsync from '../src/useStateAsync.js'
 import { act, renderHook, waitFor } from '@testing-library/react'
 
 describe('useSafeState', () => {

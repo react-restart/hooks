@@ -1,4 +1,4 @@
-import useEventListener from './useEventListener'
+import useEventListener from './useEventListener.js'
 import { useCallback } from 'react'
 
 type DocumentEventHandler<K extends keyof DocumentEventMap> = (

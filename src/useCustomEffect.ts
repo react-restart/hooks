@@ -5,7 +5,7 @@ import {
   useEffect,
   useDebugValue,
 } from 'react'
-import useMounted from './useMounted'
+import useMounted from './useMounted.js'
 
 export type EffectHook = (effect: EffectCallback, deps?: DependencyList) => void
 

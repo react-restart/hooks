@@ -3,12 +3,13 @@ import { useMemo } from 'react'
 type CallbackRef<T> = (ref: T | null) => void
 type Ref<T> = React.MutableRefObject<T> | CallbackRef<T>
 
-const toFnRef = <T>(ref?: Ref<T> | null) =>
-  !ref || typeof ref === 'function'
+function toFnRef<T>(ref?: Ref<T> | null) {
+  return !ref || typeof ref === 'function'
     ? ref
     : (value: T | null) => {
         ref.current = value as T
       }
+}
 
 export function mergeRefs<T>(refA?: Ref<T> | null, refB?: Ref<T> | null) {
   const a = toFnRef(refA)

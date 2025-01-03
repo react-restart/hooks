@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, act } from '@testing-library/react'
-import useDebouncedState from '../src/useDebouncedState'
+import useDebouncedState from '../src/useDebouncedState.js'
 
 describe('useDebouncedState', () => {
   it('should return a function that debounces input callback', () => {

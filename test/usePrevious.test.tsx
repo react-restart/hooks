@@ -1,5 +1,4 @@
-import React from 'react'
-import usePrevious from '../src/usePrevious'
+import usePrevious from '../src/usePrevious.js'
 import { renderHook } from '@testing-library/react'
 
 describe('usePrevious', () => {

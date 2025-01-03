@@ -1,6 +1,6 @@
 /*! tests an impl adapted from https://github.com/xnimorz/use-debounce/blob/master/test/useDebouncedCallback.test.tsx itself adapted from lodash*/
 
-import useDebouncedCallback from '../src/useDebouncedCallback'
+import useDebouncedCallback from '../src/useDebouncedCallback.js'
 import { renderHook, act, waitFor } from '@testing-library/react'
 
 describe('useDebouncedCallback', () => {

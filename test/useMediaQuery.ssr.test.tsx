@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import useMediaQuery from '../src/useMediaQuery'
+import useMediaQuery from '../src/useMediaQuery.js'
 
 describe('useMediaQuery (ssr)', () => {
   it('should match immediately if possible', () => {

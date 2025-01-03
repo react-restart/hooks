@@ -1,6 +1,6 @@
-import useCustomEffect from '../src/useCustomEffect'
-import useImmediateUpdateEffect from '../src/useImmediateUpdateEffect'
-import { renderHook } from './helpers'
+import useCustomEffect from '../src/useCustomEffect.js'
+import useImmediateUpdateEffect from '../src/useImmediateUpdateEffect.js'
+import { renderHook } from './helpers.js'
 
 describe('useCustomEffect', () => {
   it('should run custom isEqual logic', () => {

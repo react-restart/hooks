@@ -1,5 +1,5 @@
-import useUpdateEffect from '../src/useUpdateEffect'
-import { renderHook } from './helpers'
+import useUpdateEffect from '../src/useUpdateEffect.js'
+import { renderHook } from './helpers.js'
 
 describe('useUpdateEffect', () => {
   it('should run update after value changes', () => {

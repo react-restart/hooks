@@ -1,7 +1,7 @@
 import useBreakpoint, {
   DefaultBreakpointMap,
   createBreakpointHook,
-} from '../src/useBreakpoint'
+} from '../src/useBreakpoint.js'
 
 import { renderHook } from '@testing-library/react'
 

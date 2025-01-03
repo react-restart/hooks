@@ -1,5 +1,5 @@
-import useForceUpdate from './useForceUpdate'
-import useStableMemo from './useStableMemo'
+import useForceUpdate from './useForceUpdate.js'
+import useStableMemo from './useStableMemo.js'
 
 export class ObservableMap<K, V> extends Map<K, V> {
   private readonly listener: (map: ObservableMap<K, V>) => void

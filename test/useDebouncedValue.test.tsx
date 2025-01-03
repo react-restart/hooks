@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import useDebouncedValue from '../src/useDebouncedValue'
+import useDebouncedValue from '../src/useDebouncedValue.js'
 import { act, render, renderHook, waitFor } from '@testing-library/react'
 
 describe('useDebouncedValue', () => {

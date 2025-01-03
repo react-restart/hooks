@@ -1,5 +1,5 @@
 import { act, render } from '@testing-library/react'
-import useMap, { ObservableMap } from '../src/useMap'
+import useMap, { ObservableMap } from '../src/useMap.js'
 
 import React from 'react'
 

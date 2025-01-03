@@ -1,6 +1,6 @@
 import { useRef, SyntheticEvent } from 'react'
-import useMounted from './useMounted'
-import useEventCallback from './useEventCallback'
+import useMounted from './useMounted.js'
+import useEventCallback from './useEventCallback.js'
 
 const isSyntheticEvent = (event: any): event is SyntheticEvent =>
   typeof event.persist === 'function'
@@ -39,7 +39,7 @@ export type ThrottledHandler<TEvent> = ((event: TEvent) => void) & {
  *
  */
 export default function useThrottledEventHandler<
-  TEvent extends object = SyntheticEvent
+  TEvent extends object = SyntheticEvent,
 >(handler: (event: TEvent) => void): ThrottledHandler<TEvent> {
   const isMounted = useMounted()
   const eventHandler = useEventCallback(handler)

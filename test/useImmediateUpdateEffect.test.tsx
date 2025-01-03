@@ -1,5 +1,5 @@
-import useImmediateUpdateEffect from '../src/useImmediateUpdateEffect'
-import { renderHook } from './helpers'
+import useImmediateUpdateEffect from '../src/useImmediateUpdateEffect.js'
+import { renderHook } from './helpers.js'
 
 describe('useImmediateUpdateEffect', () => {
   it('should run update after value changes', () => {

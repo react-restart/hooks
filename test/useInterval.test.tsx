@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
 import { renderHook, act } from '@testing-library/react'
-import useInterval from '../src/useInterval'
+import useInterval from '../src/useInterval.js'
 
 describe('useTimeout', () => {
   it('should set an interval', () => {

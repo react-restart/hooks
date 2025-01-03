@@ -1,6 +1,6 @@
 import { useMemo, useRef } from 'react'
-import useTimeout from './useTimeout'
-import useEventCallback from './useEventCallback'
+import useTimeout from './useTimeout.js'
+import useEventCallback from './useEventCallback.js'
 
 export interface UseDebouncedCallbackOptions {
   wait: number

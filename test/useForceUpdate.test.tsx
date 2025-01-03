@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import useForceUpdate from '../src/useForceUpdate'
+import useForceUpdate from '../src/useForceUpdate.js'
 
 describe('useForceUpdate', () => {
   it('should return a function that returns mount state', () => {

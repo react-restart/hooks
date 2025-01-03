@@ -2,10 +2,10 @@
   "compilerOptions": {
     "rootDir": "src",
     "skipLibCheck": true,
-    "moduleResolution": "bundler",
     "lib": ["esnext", "dom"],
     "target": "esnext",
-    "module": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,

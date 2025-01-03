@@ -1,4 +1,4 @@
-import useUpdatedRef from './useUpdatedRef'
+import useUpdatedRef from './useUpdatedRef.js'
 import { useEffect } from 'react'
 
 /**

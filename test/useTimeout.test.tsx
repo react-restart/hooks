@@ -1,5 +1,5 @@
 import React from 'react'
-import useTimeout from '../src/useTimeout'
+import useTimeout from '../src/useTimeout.js'
 import { render, act } from '@testing-library/react'
 
 describe('useTimeout', () => {

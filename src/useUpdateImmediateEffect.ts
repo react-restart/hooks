@@ -1,6 +1,6 @@
 import { DependencyList, useRef, EffectCallback } from 'react'
-import useStableMemo from './useStableMemo'
-import useWillUnmount from './useWillUnmount'
+import useStableMemo from './useStableMemo.js'
+import useWillUnmount from './useWillUnmount.js'
 
 /**
  * An _immediate_ effect that runs an effect callback when its dependency array
@@ -23,7 +23,7 @@ function useUpdateImmediateEffect(
   deps: DependencyList,
 ) {
   const firstRef = useRef(true)
-  const tearDown = useRef<ReturnType<EffectCallback>>()
+  const tearDown = useRef<ReturnType<EffectCallback>>(undefined)
 
   useWillUnmount(() => {
     if (tearDown.current) tearDown.current()

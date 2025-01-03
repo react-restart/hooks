@@ -1,6 +1,7 @@
 {
   "name": "@restart/hooks",
   "version": "0.5.1",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./esm/index.d.ts",
@@ -31,9 +32,9 @@
     "test": "jest --coverage",
     "tdd": "jest --watch",
     "build": "rimraf lib cjs && concurrently --names 'esm,cjs' 'yarn build:esm' 'yarn build:cjs' && concurrently --names 'esm types,cjs types' 'yarn build:esm:types' 'yarn build:cjs:types'",
-    "build:esm": "babel src --env-name esm --out-dir lib --extensions '.ts,.tsx' --ignore='**/*.d.ts'",
+    "build:esm": "babel src --env-name esm --out-dir lib --extensions '.ts' --ignore='**/*.d.ts'",
     "build:esm:types": "tsc -p . --emitDeclarationOnly --declaration --outDir lib",
-    "build:cjs": "babel src --out-dir cjs --extensions '.ts,.tsx'  --ignore='**/*.d.ts'",
+    "build:cjs": "babel src --out-dir cjs --extensions '.ts'  --ignore='**/*.d.ts' && echo '{\"type\": \"commonjs\"}' > cjs/package.json",
     "build:cjs:types": "tsc -p . --emitDeclarationOnly --declaration --outDir cjs --module commonjs --moduleResolution node",
     "deploy-docs": "yarn --cwd www build --prefix-paths && gh-pages -d www/public",
     "prepublishOnly": "yarn build",

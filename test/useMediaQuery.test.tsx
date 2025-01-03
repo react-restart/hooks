@@ -1,4 +1,4 @@
-import useMediaQuery from '../src/useMediaQuery'
+import useMediaQuery from '../src/useMediaQuery.js'
 import { renderHook, act } from '@testing-library/react'
 
 describe('useMediaQuery', () => {

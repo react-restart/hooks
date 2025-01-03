@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import useEventCallback from './useEventCallback'
+import useEventCallback from './useEventCallback.js'
 
 type EventHandler<T, K extends keyof DocumentEventMap> = (
   this: T,

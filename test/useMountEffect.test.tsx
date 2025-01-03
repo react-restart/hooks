@@ -1,5 +1,5 @@
-import useMountEffect from '../src/useMountEffect'
-import { renderHook } from './helpers'
+import useMountEffect from '../src/useMountEffect.js'
+import { renderHook } from './helpers.js'
 
 describe('useMountEffect', () => {
   it('should run update only on mount', () => {

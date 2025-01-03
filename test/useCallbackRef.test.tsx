@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { render, act } from '@testing-library/react'
 
-import useCallbackRef from '../src/useCallbackRef'
+import useCallbackRef from '../src/useCallbackRef.js'
 
 describe('useCallbackRef', () => {
   it('should update value and be fresh in an effect', () => {

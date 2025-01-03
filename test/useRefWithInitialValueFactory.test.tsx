@@ -1,5 +1,5 @@
-import useRefWithInitialValueFactory from '../src/useRefWithInitialValueFactory'
-import { renderHook } from './helpers'
+import useRefWithInitialValueFactory from '../src/useRefWithInitialValueFactory.js'
+import { renderHook } from './helpers.js'
 
 describe('useRefWithInitialValueFactory', () => {
   it('should set a ref value using factory once', () => {

@@ -1,8 +1,8 @@
-import useThrottledEventHandler from '../src/useThrottledEventHandler'
-import { renderHook } from './helpers'
+import useThrottledEventHandler from '../src/useThrottledEventHandler.js'
+import { renderHook } from './helpers.js'
 
 describe('useThrottledEventHandler', () => {
-  it('should throttle and use return the most recent event', done => {
+  it('should throttle and use return the most recent event', (done) => {
     const spy = jest.fn()
 
     const [handler, wrapper] = renderHook(() =>
@@ -36,7 +36,7 @@ describe('useThrottledEventHandler', () => {
     }, 20)
   })
 
-  it('should clear pending handler calls', done => {
+  it('should clear pending handler calls', (done) => {
     const spy = jest.fn()
 
     const [handler, wrapper] = renderHook(() =>

@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import useBreakpoint from '../src/useBreakpoint'
+import useBreakpoint from '../src/useBreakpoint.js'
 
 describe('useBreakpoint (ssr)', () => {
   it('should match immediately if possible', () => {

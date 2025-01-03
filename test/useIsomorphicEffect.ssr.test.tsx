@@ -5,7 +5,7 @@
 import React, { useEffect } from 'react'
 
 import { renderToString } from 'react-dom/server'
-import useIsomorphicEffect from '../src/useIsomorphicEffect'
+import useIsomorphicEffect from '../src/useIsomorphicEffect.js'
 
 describe('useIsomorphicEffect (ssr)', () => {
   it('should not run or warn', () => {

@@ -1,5 +1,5 @@
-import useMutationObserver from '../src/useMutationObserver'
-import useCallbackRef from '../src/useCallbackRef'
+import useMutationObserver from '../src/useMutationObserver.js'
+import useCallbackRef from '../src/useCallbackRef.js'
 import React from 'react'
 import { act, render } from '@testing-library/react'
 

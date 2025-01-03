@@ -1,6 +1,6 @@
 import React from 'react'
 
-import useSet, { ObservableSet } from '../src/useSet'
+import useSet, { ObservableSet } from '../src/useSet.js'
 import { render, act } from '@testing-library/react'
 
 describe('useSet', () => {

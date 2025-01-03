@@ -1,5 +1,5 @@
-import useUpdateLayoutEffect from '../src/useUpdateLayoutEffect'
-import { renderHook } from './helpers'
+import useUpdateLayoutEffect from '../src/useUpdateLayoutEffect.js'
+import { renderHook } from './helpers.js'
 
 describe('useUpdateLayoutEffect', () => {
   it('should run update after value changes', () => {

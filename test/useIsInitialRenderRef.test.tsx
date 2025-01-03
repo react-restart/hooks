@@ -1,5 +1,5 @@
-import { act, renderHook } from '@testing-library/react'
-import useIsInitialRenderRef from '../src/useIsInitialRenderRef'
+import { renderHook } from '@testing-library/react'
+import useIsInitialRenderRef from '../src/useIsInitialRenderRef.js'
 import { useLayoutEffect } from 'react'
 
 describe('useIsInitialRenderRef', () => {

@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react'
-import useAnimationFrame from '../src/useAnimationFrame'
+import useAnimationFrame from '../src/useAnimationFrame.js'
 
 describe('useAnimationFrame', () => {
   let rafSpy, rafCancelSpy

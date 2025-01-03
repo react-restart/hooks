@@ -1,4 +1,4 @@
-import useMediaQuery from './useMediaQuery'
+import useMediaQuery from './useMediaQuery.js'
 import { useMemo } from 'react'
 
 export type BreakpointDirection = 'up' | 'down' | true

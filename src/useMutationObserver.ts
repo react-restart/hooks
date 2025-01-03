@@ -1,7 +1,7 @@
-import useCustomEffect from './useCustomEffect'
+import useCustomEffect from './useCustomEffect.js'
 import { dequal } from 'dequal'
-import useImmediateUpdateEffect from './useImmediateUpdateEffect'
-import useEventCallback from './useEventCallback'
+import useImmediateUpdateEffect from './useImmediateUpdateEffect.js'
+import useEventCallback from './useEventCallback.js'
 import { useState } from 'react'
 
 type Deps = [Element | null | undefined, MutationObserverInit]
@@ -88,7 +88,7 @@ function useMutationObserver(
       isEqual: isDepsEqual,
       // Intentionally done in render, otherwise observer will miss any
       // changes made to the DOM during this update
-      effectHook: useImmediateUpdateEffect,
+      effectHook: useImmediateUpdateEffect as any,
     },
   )
 
