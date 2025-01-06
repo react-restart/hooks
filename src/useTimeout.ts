@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect, useMemo, useRef, useState } from 'react'
-import useMounted from './useMounted'
+import useMounted from './useMounted.js'
 
 /*
  * Browsers including Internet Explorer, Chrome, Safari, and Firefox store the

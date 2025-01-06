@@ -1,12 +1,12 @@
 import { useEffect, useCallback, useRef } from 'react'
-import useCommittedRef from './useCommittedRef'
+import useCommittedRef from './useCommittedRef.js'
 
 export default function useEventCallback<
-  TCallback extends (...args: any[]) => any
+  TCallback extends (...args: any[]) => any,
 >(fn?: TCallback | null): TCallback {
   const ref = useCommittedRef(fn)
   return useCallback(
-    function(...args: any[]) {
+    function (...args: any[]) {
       return ref.current && ref.current(...args)
     },
     [ref],

@@ -1,43 +1,53 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { describe, it, vi, expect, beforeEach } from 'vitest'
+import { act, render, renderHook, waitFor } from '@testing-library/react'
 
-import useDebouncedValue from '../src/useDebouncedValue'
-import { act, render } from '@testing-library/react'
+import useDebouncedValue from '../src/useDebouncedValue.js'
 
 describe('useDebouncedValue', () => {
   beforeEach(() => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
+
+    return () => {
+      vi.useRealTimers()
+    }
   })
 
-  it('should return a function that debounces input callback', () => {
+  it('should return a function that debounces input callback', async () => {
     let count = 0
-    function Wrapper({ value }) {
-      const debouncedValue = useDebouncedValue(value, 500)
 
-      useEffect(() => {
-        count++
-      }, [debouncedValue])
+    const { rerender, result } = renderHook(
+      ({ value }) => {
+        const debouncedValue = useDebouncedValue(value, 500)
 
-      return <span>{debouncedValue}</span>
-    }
+        useEffect(() => {
+          count++
+        }, [debouncedValue])
 
-    const { rerender, getByText } = render(<Wrapper value={0} />)
+        return debouncedValue
+      },
+      { initialProps: { value: 0 } },
+    )
+
+    expect(result.current).toBe(0)
 
     act(() => {
-      expect(getByText('0')).toBeTruthy()
-
-      rerender(<Wrapper value={1} />)
-      rerender(<Wrapper value={2} />)
-      rerender(<Wrapper value={3} />)
-      rerender(<Wrapper value={4} />)
-      rerender(<Wrapper value={5} />)
-
-      expect(getByText('0')).toBeTruthy()
-
-      jest.runAllTimers()
-
-      expect(getByText('5')).toBeTruthy()
-      expect(count).toBe(2)
+      rerender({ value: 1 })
+      rerender({ value: 2 })
+      rerender({ value: 3 })
+      rerender({ value: 4 })
+      rerender({ value: 5 })
     })
+
+    expect(result.current).toBe(0)
+
+    act(() => {
+      vi.advanceTimersByTime(10000)
+    })
+
+    expect(result.current).toBe(5)
+
+    expect(count).toBe(2)
   })
 
   it('will update value immediately if leading is set to true', () => {
@@ -63,14 +73,14 @@ describe('useDebouncedValue', () => {
     expect(getByText('Hello world')).toBeTruthy()
 
     act(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     expect(getByText('Hello again')).toBeTruthy()
   })
 
   it('should use isEqual function if supplied', () => {
-    const isEqual = jest.fn((_left: string, _right: string): boolean => true)
+    const isEqual = vi.fn((_left: string, _right: string): boolean => true)
 
     function Wrapper({ text }) {
       const value = useDebouncedValue(text, { wait: 1000, isEqual })
@@ -84,7 +94,7 @@ describe('useDebouncedValue', () => {
     act(() => {
       rerender(<Wrapper text="Test" />)
 
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     expect(isEqual).toHaveBeenCalledTimes(2)

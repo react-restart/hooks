@@ -1,5 +1,6 @@
-import { act, renderHook } from '@testing-library/react-hooks'
-import useForceUpdate from '../src/useForceUpdate'
+import { act, renderHook } from '@testing-library/react'
+import { describe, it, expect } from 'vitest'
+import useForceUpdate from '../src/useForceUpdate.js'
 
 describe('useForceUpdate', () => {
   it('should return a function that returns mount state', () => {

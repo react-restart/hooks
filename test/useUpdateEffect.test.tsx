@@ -1,10 +1,12 @@
-import useUpdateEffect from '../src/useUpdateEffect'
-import { renderHook } from './helpers'
+import { describe, it, vi, expect } from 'vitest'
+import { renderHook } from './helpers.js'
+
+import useUpdateEffect from '../src/useUpdateEffect.js'
 
 describe('useUpdateEffect', () => {
   it('should run update after value changes', () => {
-    const teardown = jest.fn()
-    const spy = jest.fn(() => teardown)
+    const teardown = vi.fn()
+    const spy = vi.fn(() => teardown)
 
     const [, wrapper] = renderHook(
       ({ value }) => {

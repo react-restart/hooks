@@ -1,6 +1,7 @@
 import React from 'react'
-import { useCallbackRef } from '../src'
-import useMergedRefs from '../src/useMergedRefs'
+import { describe, it, expect } from 'vitest'
+import useCallbackRef from '../src/useCallbackRef.js'
+import useMergedRefs from '../src/useMergedRefs.js'
 import { render } from '@testing-library/react'
 
 describe('useMergedRefs', () => {
@@ -8,7 +9,7 @@ describe('useMergedRefs', () => {
     let innerRef: HTMLButtonElement
     const outerRef = React.createRef<HTMLButtonElement>()
 
-    const Button = React.forwardRef((props, ref) => {
+    const Button = React.forwardRef<HTMLButtonElement, any>((props, ref) => {
       const [buttonEl, attachRef] = useCallbackRef<HTMLButtonElement>()
       innerRef = buttonEl!
 

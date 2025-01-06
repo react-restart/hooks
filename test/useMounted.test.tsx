@@ -1,5 +1,7 @@
-import useMounted from '../src/useMounted'
-import { renderHook } from '@testing-library/react-hooks'
+import { describe, it, vi, expect } from 'vitest'
+import { renderHook } from '@testing-library/react'
+
+import useMounted from '../src/useMounted.js'
 
 describe('useMounted', () => {
   it('should return a function that returns mount state', () => {

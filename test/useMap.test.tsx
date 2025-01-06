@@ -1,7 +1,6 @@
 import { act, render } from '@testing-library/react'
-import useMap, { ObservableMap } from '../src/useMap'
-
-import React from 'react'
+import { describe, it, vi, expect } from 'vitest'
+import useMap, { ObservableMap } from '../src/useMap.js'
 
 describe('useMap', () => {
   describe('ObservableMap', () => {
@@ -40,7 +39,7 @@ describe('useMap', () => {
     })
 
     it('should be observable', () => {
-      const spy = jest.fn()
+      const spy = vi.fn()
       const map = new ObservableMap(spy)
 
       map.set('foo', true)

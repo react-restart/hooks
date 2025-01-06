@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import useCommittedRef from './useCommittedRef'
+import useCommittedRef from './useCommittedRef.js'
 
 function useRafInterval(fn: () => void, ms: number): void
 function useRafInterval(

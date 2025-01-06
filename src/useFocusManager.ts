@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react'
-import useEventCallback from './useEventCallback'
-import useMounted from './useMounted'
+import useEventCallback from './useEventCallback.js'
+import useMounted from './useMounted.js'
 
 export interface FocusManagerOptions {
   /**
@@ -59,8 +59,8 @@ export default function useFocusManager(
 ): FocusController {
   const isMounted = useMounted()
 
-  const lastFocused = useRef<boolean | undefined>()
-  const handle = useRef<number | undefined>()
+  const lastFocused = useRef<boolean | undefined>(undefined)
+  const handle = useRef<number | undefined>(undefined)
 
   const willHandle = useEventCallback(opts.willHandle)
   const didHandle = useEventCallback(opts.didHandle)

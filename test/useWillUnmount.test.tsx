@@ -1,11 +1,11 @@
-import React from 'react'
+import { describe, it, vi, expect } from 'vitest'
+import { renderHook } from '@testing-library/react'
 
-import useWillUnmount from '../src/useWillUnmount'
-import { renderHook } from '@testing-library/react-hooks'
+import useWillUnmount from '../src/useWillUnmount.js'
 
 describe('useWillUnmount', () => {
   it('should return a function that returns mount state', () => {
-    let spy = jest.fn()
+    let spy = vi.fn()
 
     const wrapper = renderHook(() => useWillUnmount(spy))
 

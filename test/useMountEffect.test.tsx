@@ -1,10 +1,12 @@
-import useMountEffect from '../src/useMountEffect'
-import { renderHook } from './helpers'
+import { renderHook } from './helpers.js'
+import { describe, it, vi, expect } from 'vitest'
+
+import useMountEffect from '../src/useMountEffect.js'
 
 describe('useMountEffect', () => {
   it('should run update only on mount', () => {
-    const teardown = jest.fn()
-    const spy = jest.fn(() => teardown)
+    const teardown = vi.fn()
+    const spy = vi.fn(() => teardown)
 
     const [, wrapper] = renderHook(
       () => {

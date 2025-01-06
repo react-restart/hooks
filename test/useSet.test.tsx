@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
-import { act } from 'react-dom/test-utils'
+import { describe, it, vi, expect } from 'vitest'
+import { render, act } from '@testing-library/react'
 
-import useSet, { ObservableSet } from '../src/useSet'
-import { render } from '@testing-library/react'
+import useSet, { ObservableSet } from '../src/useSet.js'
 
 describe('useSet', () => {
   describe('ObservableSet', () => {
@@ -40,7 +39,7 @@ describe('useSet', () => {
     })
 
     it('should be observable', () => {
-      const spy = jest.fn()
+      const spy = vi.fn()
       const set = new ObservableSet(spy)
 
       set.add('foo')

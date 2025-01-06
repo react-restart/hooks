@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useCallback } from 'react'
-import useMounted from './useMounted'
-import { AsyncSetState } from './useStateAsync'
+import useMounted from './useMounted.js'
+import { AsyncSetState } from './useStateAsync.js'
 
 type StateSetter<TState> = Dispatch<SetStateAction<TState>>
 

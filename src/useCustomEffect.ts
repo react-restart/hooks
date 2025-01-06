@@ -5,7 +5,7 @@ import {
   useEffect,
   useDebugValue,
 } from 'react'
-import useMounted from './useMounted'
+import useMounted from './useMounted.js'
 
 export type EffectHook = (effect: EffectCallback, deps?: DependencyList) => void
 
@@ -61,7 +61,7 @@ function useCustomEffect<TDeps extends DependencyList = DependencyList>(
       ? { isEqual: isEqualOrOptions }
       : isEqualOrOptions
 
-  const dependenciesRef = useRef<TDeps>()
+  const dependenciesRef = useRef<TDeps | null>(null)
   dependenciesRef.current = dependencies
 
   const cleanupRef = useRef<CleanUp | null>(null)

@@ -1,4 +1,8 @@
 import matchMediaPolyfill from 'mq-polyfill'
+import { cleanup } from '@testing-library/react'
+import { afterEach } from 'vitest'
+
+afterEach(cleanup)
 
 // https://github.com/bigslycat/mq-polyfill
 
@@ -18,35 +22,3 @@ if (typeof window !== 'undefined') {
     }).dispatchEvent(new this.Event('resize'))
   }
 }
-
-let expectedErrors = 0
-let actualErrors = 0
-function onError(e) {
-  if (expectedErrors) {
-    e.preventDefault()
-  }
-  actualErrors += 1
-}
-
-expect.errors = (num) => {
-  expectedErrors = num
-}
-
-beforeEach(() => {
-  expectedErrors = 0
-  actualErrors = 0
-  if (typeof window !== 'undefined') {
-    window.addEventListener('error', onError)
-  }
-})
-
-afterEach(() => {
-  if (typeof window !== 'undefined') {
-    window.removeEventListener('error', onError)
-  }
-  if (expectedErrors) {
-    expect(actualErrors).toBe(expectedErrors)
-  }
-
-  expectedErrors = 0
-})

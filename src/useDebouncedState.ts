@@ -1,7 +1,7 @@
 import { useState, Dispatch, SetStateAction } from 'react'
 import useDebouncedCallback, {
   UseDebouncedCallbackOptions,
-} from './useDebouncedCallback'
+} from './useDebouncedCallback.js'
 
 /**
  * Similar to `useState`, except the setter function is debounced by

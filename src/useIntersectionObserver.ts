@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import useStableMemo from './useStableMemo'
-import useEffect from './useIsomorphicEffect'
-import useEventCallback from './useEventCallback'
+import useStableMemo from './useStableMemo.js'
+import useEffect from './useIsomorphicEffect.js'
+import useEventCallback from './useEventCallback.js'
 
 /**
  * Setup an [`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) on
