@@ -3,17 +3,22 @@
   "version": "0.5.1",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./lib/index.d.ts",
-      "import": "./lib/index.js",
-      "require": "./cjs/index.js"
-    },
     "./*": {
-      "types": "./lib/*.d.ts",
-      "import": "./lib/*.js",
-      "require": "./cjs/*.js"
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      },
+      "import": {
+        "types": "./lib/index.d.ts",
+        "default": "./lib/index.js"
+      }
     }
   },
+  "files": [
+    "cjs",
+    "lib",
+    "CHANGELOG.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-restart/hooks.git"
@@ -29,8 +34,8 @@
   "homepage": "https://github.com/react-restart/hooks#readme",
   "scripts": {
     "bootstrap": "yarn && yarn --cwd www",
-    "test": "jest --coverage",
-    "tdd": "jest --watch",
+    "test": "vitest run --coverage",
+    "tdd": "vitest",
     "build": "rimraf lib cjs && concurrently --names 'esm,cjs' 'yarn build:esm' 'yarn build:cjs' && concurrently --names 'esm types,cjs types' 'yarn build:esm:types' 'yarn build:cjs:types'",
     "build:esm": "babel src --env-name esm --out-dir lib --extensions '.ts' --ignore='**/*.d.ts'",
     "build:esm:types": "tsc -p . --emitDeclarationOnly --declaration --outDir lib",
@@ -74,6 +79,7 @@
     "@testing-library/react": "^16.1.0",
     "@types/lodash": "^4.14.195",
     "@types/react": "^19.0.2",
+    "@vitest/coverage-v8": "2.1.8",
     "babel-plugin-transform-rename-import": "^2.3.0",
     "cherry-pick": "^0.5.0",
     "codecov": "^3.8.3",
