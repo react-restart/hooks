@@ -1,6 +1,6 @@
 {
   "name": "@restart/hooks",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "type": "module",
   "exports": {
     "./*.js": {

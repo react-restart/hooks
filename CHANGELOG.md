@@ -1,3 +1,14 @@
+## [0.6.1](https://github.com/react-restart/hooks/compare/v0.6.0...v0.6.1) (2025-01-07)
+
+
+### Bug Fixes
+
+* exports definition ([523780d](https://github.com/react-restart/hooks/commit/523780d5bd7ce9647753c284d84f4f59e624af70))
+
+
+
+
+
 # [0.6.0](https://github.com/react-restart/hooks/compare/v0.5.1...v0.6.0) (2025-01-07)
 
 
