@@ -1,3 +1,17 @@
+# [0.6.0](https://github.com/react-restart/hooks/compare/v0.5.1...v0.6.0) (2025-01-07)
+
+
+* build!: Update build, export real ESM (#100) ([9e272d3](https://github.com/react-restart/hooks/commit/9e272d3c5e89c7cd6547c6c66afac6b800b6c7ff)), closes [#100](https://github.com/react-restart/hooks/issues/100)
+
+
+### BREAKING CHANGES
+
+* exports native esm modules and removes the index file in favor of sub imports
+
+
+
+
+
 ## [0.5.1](https://github.com/jquense/react-common-hooks/compare/v0.5.0...v0.5.1) (2025-01-02)
 
 
