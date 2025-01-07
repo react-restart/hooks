@@ -3,7 +3,7 @@
   "version": "0.6.1",
   "type": "module",
   "exports": {
-    "./*.js": {
+    "./*": {
       "require": {
         "types": "./cjs/*.d.ts",
         "default": "./cjs/*.js"
