@@ -3,14 +3,14 @@
   "version": "0.6.0",
   "type": "module",
   "exports": {
-    "./*": {
+    "./*.js": {
       "require": {
-        "types": "./cjs/index.d.ts",
-        "default": "./cjs/index.js"
+        "types": "./cjs/*.d.ts",
+        "default": "./cjs/*.js"
       },
       "import": {
-        "types": "./lib/index.d.ts",
-        "default": "./lib/index.js"
+        "types": "./lib/*.d.ts",
+        "default": "./lib/*.js"
       }
     }
   },
