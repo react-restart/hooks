@@ -27,11 +27,11 @@ export function mergeRefs<T>(refA?: Ref<T> | null, refB?: Ref<T> | null) {
   const refASetter = toFnRef(refA)
   const refBSetter = toFnRef(refB)
 
-  if (isReact19) {
-    return (value: T | null) => {
-      const cleanupA = refASetter?.(value)
-      const cleanupB = refBSetter?.(value)
+  return (value: T | null) => {
+    const cleanupA = refASetter?.(value)
+    const cleanupB = refBSetter?.(value)
 
+    if (isReact19) {
       return () => {
         cleanUp(cleanupA, refASetter)
         cleanUp(cleanupB, refBSetter)
