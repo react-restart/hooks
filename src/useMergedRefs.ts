@@ -1,22 +1,42 @@
-import { useMemo } from 'react'
+import { RefCallback, useMemo, version } from 'react'
+
+const isReact19 = parseInt(version.split('.')[0]!, 10) >= 19
 
 type CallbackRef<T> = (ref: T | null) => void
 type Ref<T> = React.MutableRefObject<T> | CallbackRef<T>
 
 function toFnRef<T>(ref?: Ref<T> | null) {
-  return !ref || typeof ref === 'function'
-    ? ref
-    : (value: T | null) => {
-        ref.current = value as T
-      }
+  if (!ref || typeof ref === 'function') {
+    return ref
+  }
+
+  return (value: T | null) => {
+    ref.current = value as T
+  }
+}
+
+function cleanUp<T>(cleanup: unknown, ref: RefCallback<T> | null | undefined) {
+  if (typeof cleanup === 'function') {
+    cleanup()
+  } else if (ref) {
+    ref(null)
+  }
 }
 
 export function mergeRefs<T>(refA?: Ref<T> | null, refB?: Ref<T> | null) {
-  const a = toFnRef(refA)
-  const b = toFnRef(refB)
+  const refASetter = toFnRef(refA)
+  const refBSetter = toFnRef(refB)
+
   return (value: T | null) => {
-    if (a) a(value)
-    if (b) b(value)
+    const cleanupA = refASetter?.(value)
+    const cleanupB = refBSetter?.(value)
+
+    if (isReact19) {
+      return () => {
+        cleanUp(cleanupA, refASetter)
+        cleanUp(cleanupB, refBSetter)
+      }
+    }
   }
 }
 
@@ -36,7 +56,10 @@ export function mergeRefs<T>(refA?: Ref<T> | null, refB?: Ref<T> | null) {
  * @param refB A Callback or mutable Ref
  * @category refs
  */
-function useMergedRefs<T>(refA?: Ref<T> | null, refB?: Ref<T> | null) {
+function useMergedRefs<T>(
+  refA?: Ref<T | null> | null,
+  refB?: Ref<T | null> | null,
+) {
   return useMemo(() => mergeRefs(refA, refB), [refA, refB])
 }
 
