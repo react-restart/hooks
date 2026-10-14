@@ -83,7 +83,7 @@ export default function useMediaQuery(
       }
       mql = undefined
     }
-  }, [query])
+  }, [query, targetWindow])
 
   return matches
 }
